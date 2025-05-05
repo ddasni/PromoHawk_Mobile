@@ -11,8 +11,8 @@
         android:id="@+id/imageView2"
         android:layout_width="247dp"
         android:layout_height="139dp"
-        android:layout_marginStart="82dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
@@ -25,7 +25,7 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
+        android:text="Email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -37,7 +37,7 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
+        android:text="Senha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText" />
 
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:text="CheckBox"
+        android:text="Permanecer conectado"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
 
@@ -55,9 +55,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="25dp"
-        android:text="TextView"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="26dp"
+        android:text="Esqueceu a senha?"
         app:layout_constraintStart_toEndOf="@+id/checkBox"
         app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
 
@@ -67,17 +67,17 @@
         android:layout_height="60dp"
         android:layout_marginStart="144dp"
         android:layout_marginTop="71dp"
-        android:text="Button"
+        android:text="Entrar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="92dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="97dp"
-        android:text="TextView"
+        android:layout_width="127dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="88dp"
+        android:text="não tem uma conta?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
@@ -85,9 +85,9 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="116dp"
-        android:text="TextView"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="104dp"
+        android:text="Cadastre"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
