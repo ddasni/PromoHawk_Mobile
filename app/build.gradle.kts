@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.example.promohawk"
-    compileSdk = 34
+    compileSdk =35
 
     defaultConfig {
         applicationId = "com.example.promohawk"
         minSdk = 21
-        targetSdk = 33
+        targetSdk =35
         versionCode = 1
         versionName = "1.0"
 
@@ -29,6 +29,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {
