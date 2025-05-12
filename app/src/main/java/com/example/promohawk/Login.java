@@ -63,6 +63,8 @@ public class Login extends AppCompatActivity {
         btnEsqueceuSenha.setOnClickListener(v -> {
             Intent intent = new Intent(Login.this, RecuperarSenha.class);
             startActivity(intent);
+
+
         });
     }
 }

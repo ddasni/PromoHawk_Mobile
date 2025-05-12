@@ -28,8 +28,8 @@ public class Cadastro extends AppCompatActivity {
         editSenha = findViewById(R.id.EditSenhaC);
         editConfirmarSenha = findViewById(R.id.EditSenhaC1);
         btnCadastrar = findViewById(R.id.btnEntrar1);
-        txtLogin = findViewById(R.id.txtLogin1);
-        txtNs = findViewById(R.id.txtNs); // ignorado
+        txtNs = findViewById(R.id.txtLogin1);
+        txtLogin = findViewById(R.id.txtNs); // ignorado
 
         // Aplica limites de caracteres
         editNomeUsuario.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50)});
