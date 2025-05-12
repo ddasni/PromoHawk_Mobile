@@ -1,92 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="24dp"
     tools:context=".Login">
 
+    <!-- Logo -->
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="247dp"
-        android:layout_height="139dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="76dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:contentDescription="Logo"
+        android:scaleType="fitCenter"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
-
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="228dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="52dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/logo"
+        android:layout_marginTop="48dp"/>
 
+    <!-- Email -->
     <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="228dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Senha"
+        android:id="@+id/editEmail"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:backgroundTint="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/imageView2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"/>
 
+    <!-- Senha -->
+    <EditText
+        android:id="@+id/editSenha"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:backgroundTint="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/editEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Permanecer conectado -->
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
         android:text="Permanecer conectado"
+        app:layout_constraintTop_toBottomOf="@id/editSenha"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        android:layout_marginTop="12dp"/>
 
+    <!-- Esqueceu senha -->
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/btnEsqueceuSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="56dp"
         android:text="Esqueceu a senha?"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="@id/checkBox"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Botão Entrar -->
     <Button
-        android:id="@+id/button"
-        android:layout_width="240dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="20dp"
+        android:id="@+id/btnEntrar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="Entrar"
+        app:layout_constraintTop_toBottomOf="@id/checkBox"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"/>
 
+    <!-- Texto auxiliar -->
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="127dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="36dp"
-        android:text="não tem uma conta?"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="590dp" />
-
-    <TextView
-        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="13dp"
-        android:text="Cadastre"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        android:text="Não tem uma conta?"
+        app:layout_constraintTop_toBottomOf="@id/btnEntrar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Botão cadastrar -->
+    <TextView
+        android:id="@+id/btnCadastrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastre-se"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/btnEntrar"
+        app:layout_constraintStart_toEndOf="@id/textView2"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
