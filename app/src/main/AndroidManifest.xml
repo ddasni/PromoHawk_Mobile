@@ -13,6 +13,33 @@
         android:theme="@style/Theme.Promohawk"
         tools:targetApi="31">
         <activity
+            android:name=".Suporte"
+            android:exported="false" />
+        <activity
+            android:name=".Seguranca"
+            android:exported="false" />
+        <activity
+            android:name=".Enderecos"
+            android:exported="false" />
+        <activity
+            android:name=".Pagamentos"
+            android:exported="false" />
+        <activity
+            android:name=".Historico"
+            android:exported="false" />
+        <activity
+            android:name=".Usuario"
+            android:exported="false" />
+        <activity
+            android:name=".Favoritos"
+            android:exported="false" />
+        <activity
+            android:name=".Perfil"
+            android:exported="false" />
+        <activity
+            android:name=".Config"
+            android:exported="false" />
+        <activity
             android:name=".RecuperarSenha"
             android:exported="false" />
         <activity

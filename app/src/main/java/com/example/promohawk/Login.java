@@ -45,7 +45,7 @@ public class Login extends AppCompatActivity {
 
             // Verificando se o login é correto
             if (email.equals("usuario@email.com") && senha.equals("123456")) {
-                Intent intent = new Intent(Login.this, Home.class);
+                Intent intent = new Intent(Login.this, Config.class);
                 startActivity(intent);
                 finish();
             } else {

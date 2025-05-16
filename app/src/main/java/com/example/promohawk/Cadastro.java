@@ -63,8 +63,9 @@ public class Cadastro extends AppCompatActivity {
             }
 
             // Se tudo estiver certo, só então vai para a tela de verificação
-            Intent intent = new Intent(Cadastro.this, Home.class);
+            Intent intent = new Intent(Cadastro.this, Config.class);
             startActivity(intent);
+            finish();
         });
 
         txtLogin.setOnClickListener(v -> {
