@@ -8,6 +8,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.models.SlideModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Home extends AppCompatActivity {
 
     @Override
@@ -15,10 +21,22 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        // Obtendo a referência para o ImageSlider
+        ImageSlider imageSlider = findViewById(R.id.slider);
+
+        // Criando a lista de imagens para o slider
+        List<SlideModel> slideModels = new ArrayList<>();
+
+        // Adicionando imagens locais
+        slideModels.add(new SlideModel(R.drawable.img_1));
+
+        // Adicionando imagens com URLs
+        slideModels.add(new SlideModel("https://picsum.photos/id/237/200/300"));
+        slideModels.add(new SlideModel("https://picsum.photos/seed/picsum/200/300"));
+        slideModels.add(new SlideModel("https://picsum.photos/200/300?grayscale"));
+        slideModels.add(new SlideModel("https://picsum.photos/200/300/?blur"));
+
+        // Definindo a lista de imagens no ImageSlider com a opção centerCrop
+        imageSlider.setImageList(slideModels, true);  // 'true' significa centerCrop
     }
 }
