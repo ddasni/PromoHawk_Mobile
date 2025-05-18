@@ -1,14 +1,18 @@
 package com.example.promohawk;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Calendar;
 
 public class Cadastro extends AppCompatActivity {
 
@@ -39,6 +43,62 @@ public class Cadastro extends AppCompatActivity {
         editSenha.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
         editConfirmarSenha.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
 
+        // TextWatcher para formatar data no formato DD/MM/YYYY automaticamente
+        editData.addTextChangedListener(new TextWatcher() {
+            private String current = "";
+            private String ddmmyyyy = "";
+            private boolean isUpdating = false;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isUpdating) {
+                    isUpdating = false;
+                    return;
+                }
+
+                String clean = s.toString().replaceAll("[^\\d]", "");
+
+                StringBuilder formatted = new StringBuilder();
+
+                int length = clean.length();
+
+                if (length > 0) {
+                    // Dia
+                    String day = clean.substring(0, Math.min(2, length));
+                    int dayInt = Integer.parseInt(day);
+                    if (dayInt > 31) day = "31";
+                    formatted.append(day);
+                    if (day.length() == 2 && length > 2) formatted.append("/");
+                }
+
+                if (length > 2) {
+                    // Mês
+                    String month = clean.substring(2, Math.min(4, length));
+                    int monthInt = Integer.parseInt(month);
+                    if (monthInt > 12) month = "12";
+                    formatted.append(month);
+                    if (month.length() == 2 && length > 4) formatted.append("/");
+                }
+
+                if (length > 4) {
+                    // Ano
+                    String year = clean.substring(4, Math.min(8, length));
+                    formatted.append(year);
+                }
+
+                isUpdating = true;
+                editData.setText(formatted.toString());
+                editData.setSelection(formatted.length());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
+
         btnCadastrar.setOnClickListener(v -> {
             String nome = editNomeUsuario.getText().toString().trim();
             String email = editEmail.getText().toString().trim();
@@ -62,7 +122,7 @@ public class Cadastro extends AppCompatActivity {
                 return;
             }
 
-            // Se tudo estiver certo, só então vai para a tela de verificação
+            // Se tudo estiver certo, vai para a tela de verificação
             Intent intent = new Intent(Cadastro.this, Config.class);
             startActivity(intent);
             finish();

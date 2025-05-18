@@ -1,30 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F7F7"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#FFFFFF">
 
     <TextView
-        android:id="@+id/tvTituloFavoritos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Meus Favoritos"
+        android:text="Produtos"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:textColor="#333"
         android:paddingBottom="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFavoritos"
+        android:id="@+id/rvProdutos"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:paddingBottom="16dp"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

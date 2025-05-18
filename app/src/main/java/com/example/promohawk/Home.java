@@ -31,7 +31,7 @@ public class Home extends AppCompatActivity {
         slideModels.add(new SlideModel(R.drawable.img_1));
 
         // Adicionando imagens com URLs
-        slideModels.add(new SlideModel("https://picsum.photos/id/237/200/300"));
+        slideModels.add(new SlideModel("img_1.png"));
         slideModels.add(new SlideModel("https://picsum.photos/seed/picsum/200/300"));
         slideModels.add(new SlideModel("https://picsum.photos/200/300?grayscale"));
         slideModels.add(new SlideModel("https://picsum.photos/200/300/?blur"));

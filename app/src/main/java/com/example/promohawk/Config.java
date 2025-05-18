@@ -47,11 +47,11 @@ public class Config extends AppCompatActivity {
         btnSuporte = findViewById(R.id.btnSuporte);
 
         btnPerfil.setOnClickListener(v -> startActivity(new Intent(this, Perfil.class)));
-        btnFavoritos.setOnClickListener(v -> startActivity(new Intent(this, Favoritos.class)));
-        btnConta.setOnClickListener(v -> startActivity(new Intent(this, Usuario.class)));
-        btnHistorico.setOnClickListener(v -> startActivity(new Intent(this, Historico.class)));
-        btnPagamentos.setOnClickListener(v -> startActivity(new Intent(this, Pagamentos.class)));
-        btnEnderecos.setOnClickListener(v -> startActivity(new Intent(this, Enderecos.class)));
+        btnFavoritos.setOnClickListener(v -> startActivity(new Intent(this, Favoritos.class))); //Favoritos
+        btnConta.setOnClickListener(v -> startActivity(new Intent(this, Usuario.class))); //usuario
+        btnHistorico.setOnClickListener(v -> startActivity(new Intent(this, Historico.class))); //Historico
+        btnPagamentos.setOnClickListener(v -> startActivity(new Intent(this, Pagamentos.class))); //Pagamentos
+        btnEnderecos.setOnClickListener(v -> startActivity(new Intent(this, produtos.class)));// Endereços
         btnSeguranca.setOnClickListener(v -> startActivity(new Intent(this, Seguranca.class)));
         btnSuporte.setOnClickListener(v -> startActivity(new Intent(this, Suporte.class)));
     }
