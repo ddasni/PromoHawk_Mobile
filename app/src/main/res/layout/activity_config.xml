@@ -80,30 +80,6 @@
                 android:layout_marginTop="8dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPagamentos"
-                style="@style/MeuBotao"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="💳 Métodos de Pagamento"
-                android:layout_marginTop="8dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEnderecos"
-                style="@style/MeuBotao"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="📦 Endereços de Entrega"
-                android:layout_marginTop="8dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSeguranca"
-                style="@style/MeuBotao"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="🔒 Segurança"
-                android:layout_marginTop="8dp" />
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSuporte"
                 style="@style/MeuBotao"
                 android:layout_width="match_parent"

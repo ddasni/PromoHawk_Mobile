@@ -14,7 +14,7 @@ public class Config extends AppCompatActivity {
     private ImageView imgPerfil;
     private ImageButton btnVoltar;
     private MaterialButton btnPerfil, btnFavoritos, btnConta, btnHistorico,
-            btnPagamentos, btnEnderecos, btnSeguranca, btnSuporte;
+             btnSuporte;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +41,12 @@ public class Config extends AppCompatActivity {
         btnFavoritos = findViewById(R.id.btnFavoritos);
         btnConta = findViewById(R.id.btnConta);
         btnHistorico = findViewById(R.id.btnHistorico);
-        btnPagamentos = findViewById(R.id.btnPagamentos);
-        btnEnderecos = findViewById(R.id.btnEnderecos);
-        btnSeguranca = findViewById(R.id.btnSeguranca);
         btnSuporte = findViewById(R.id.btnSuporte);
 
         btnPerfil.setOnClickListener(v -> startActivity(new Intent(this, Perfil.class)));
         btnFavoritos.setOnClickListener(v -> startActivity(new Intent(this, Favoritos.class))); //Favoritos
         btnConta.setOnClickListener(v -> startActivity(new Intent(this, Usuario.class))); //usuario
         btnHistorico.setOnClickListener(v -> startActivity(new Intent(this, Historico.class))); //Historico
-        btnPagamentos.setOnClickListener(v -> startActivity(new Intent(this, Pagamentos.class))); //Pagamentos
-        btnEnderecos.setOnClickListener(v -> startActivity(new Intent(this, produtos.class)));// Endereços
-        btnSeguranca.setOnClickListener(v -> startActivity(new Intent(this, Seguranca.class)));
         btnSuporte.setOnClickListener(v -> startActivity(new Intent(this, Suporte.class)));
     }
 }

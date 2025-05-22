@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
+    android:background="@android:color/white"
     tools:context=".Cadastro">
 
 
@@ -124,7 +125,7 @@
 
     <!-- Já tem uma conta -->
     <TextView
-        android:id="@+id/txtLogin1"
+        android:id="@+id/txtletras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Já tem uma conta?"
@@ -137,14 +138,14 @@
 
     <!-- Link para login -->
     <TextView
-        android:id="@+id/txtNs"
+        android:id="@+id/txtLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Faça login"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/txtLogin1"
+        app:layout_constraintTop_toBottomOf="@id/txtletras"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
