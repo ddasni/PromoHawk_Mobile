@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/bg_gradient_rounded"
+
+    tools:context=".Config_interna">
+
+    <!-- Topo com botão voltar -->
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:gravity="center_vertical"
+android:paddingBottom="16dp">
+
+<ImageView
+    android:id="@+id/botaoVoltar"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:src="@drawable/flecha_esquerda_negra"
+    android:contentDescription="Voltar" />
+</LinearLayout>
+
+    <!-- Conteúdo fixo abaixo do topo -->
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical">
+
+<!-- Segurança e Privacidade -->
+<LinearLayout
+    android:id="@+id/SegurancaPriv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="20dp"
+    android:background="@drawable/card_background"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="6dp">
+
+    <ImageView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/seguranca" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="20dp"
+        android:text="Segurança e Privacidade"
+        android:textSize="18sp"
+        android:textColor="#222222"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/direira_pra_la" />
+</LinearLayout>
+
+<!-- Notificações -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="20dp"
+    android:background="@drawable/card_background"
+    android:elevation="6dp">
+
+    <ImageView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/notificaca" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="20dp"
+        android:text="Notificações"
+        android:textSize="18sp"
+        android:textColor="#222222"
+        android:textStyle="bold" />
+
+    <Switch
+        android:id="@+id/switchNotificacoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+</LinearLayout>
+
+<!-- Termos de Uso -->
+<LinearLayout
+    android:id="@+id/layoutTermos"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/card_background"
+    android:elevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/iiiiii" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="20dp"
+            android:text="Termos de Uso e Política"
+            android:textSize="18sp"
+            android:textColor="#222222"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textoTermos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Esses são os termos de uso e política da Promohawk..."
+        android:visibility="gone"
+        android:textSize="15sp"
+        android:paddingTop="12dp"
+        android:textColor="#666666" />
+</LinearLayout>
+
+<!-- Sair da Conta -->
+<LinearLayout
+    android:id="@+id/Sair_tudo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="20dp"
+    android:elevation="6dp">
+
+    <ImageView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/sai_fora"
+        app:tint="@android:color/holo_red_dark" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="20dp"
+        android:text="Sair da Conta"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:ignore="RtlSymmetry" />
+</LinearLayout>
+
+</LinearLayout>
+
+    </LinearLayout>

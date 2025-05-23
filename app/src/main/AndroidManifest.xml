@@ -30,7 +30,7 @@
             android:name=".Historico"
             android:exported="false" />
         <activity
-            android:name=".Usuario"
+            android:name=".Config_interna"
             android:exported="false" />
         <activity
             android:name=".Favoritos"

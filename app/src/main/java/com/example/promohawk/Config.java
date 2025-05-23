@@ -1,14 +1,10 @@
 package com.example.promohawk;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.button.MaterialButton;
-
 public class Config extends AppCompatActivity {
 
     private ImageView imgPerfil;
@@ -45,7 +41,7 @@ public class Config extends AppCompatActivity {
 
         btnPerfil.setOnClickListener(v -> startActivity(new Intent(this, Perfil.class)));
         btnFavoritos.setOnClickListener(v -> startActivity(new Intent(this, Favoritos.class))); //Favoritos
-        btnConta.setOnClickListener(v -> startActivity(new Intent(this, Usuario.class))); //usuario
+        btnConta.setOnClickListener(v -> startActivity(new Intent(this, Config_interna.class))); //usuario
         btnHistorico.setOnClickListener(v -> startActivity(new Intent(this, Historico.class))); //Historico
         btnSuporte.setOnClickListener(v -> startActivity(new Intent(this, Suporte.class)));
     }

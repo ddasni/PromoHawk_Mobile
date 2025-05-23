@@ -7,6 +7,7 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ApiService {
-    @POST("/registrar") // ajuste se o endpoint for diferente
+    @POST("users")
     Call<Void> registrar(@Body CadastroRequest request);
 }
+

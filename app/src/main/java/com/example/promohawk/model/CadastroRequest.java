@@ -1,21 +1,19 @@
 package com.example.promohawk.model;
 
 public class CadastroRequest {
+    private String username;
     private String nome;
-    private String email;
-    private String senha;
     private String telefone;
-    private String data;
-    private  String confirmarSenha;
+    private String email;
+    private String password;
 
-    public CadastroRequest(String nome, String email, String senha, String telefone, String confirmarSenha, String data) {
+    public CadastroRequest(String nome, String email, String password, String telefone, String username) {
         this.nome = nome;
         this.email = email;
-        this.senha = senha;
+        this.password = password;
         this.telefone = telefone;
-        this.confirmarSenha = confirmarSenha;
-        this.data = data;
+        this.username = username;
     }
 
-    // Getters e setters (opcional, dependendo da API)
+    // getters e setters
 }
