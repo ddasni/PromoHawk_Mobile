@@ -11,13 +11,7 @@
         android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_margin="20dp"
-        app:auto_cycle="true"
-        app:delay="0"
-        app:period="3000"
-        app:placeholder="@color/black"
-        app:error_image="@color/purple_700"
-        app:corner_radius="20" />
+        android:layout_margin="20dp" />
 
     <!-- Seção de Categorias em destaque com scroll horizontal -->
     <LinearLayout
