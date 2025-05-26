@@ -1,5 +1,6 @@
 package com.example.promohawk;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,6 +39,10 @@ public class Home extends AppCompatActivity {
 
         imageSlider.setImageList(slideModels);
 
+// Iniciar troca automática de imagens a cada 2 segundos (por exemplo)
+        imageSlider.startSliding(2000);
+
+
         // ====== Configurando cliques ======
         verMais = findViewById(R.id.verMaisCategorias);
         verMais.setOnClickListener(v -> {
@@ -55,6 +60,17 @@ public class Home extends AppCompatActivity {
         imgSmartphones.setOnClickListener(v -> abrirCategoria("Smartphones"));
         imgCalcados.setOnClickListener(v -> abrirCategoria("Calçados"));
         imgLivros.setOnClickListener(v -> abrirCategoria("Livros"));
+
+        // ====== Riscando preço antigo ======
+        TextView precoAntigo1 = findViewById(R.id.precoAntigoXboxS); // certifique-se que esse ID está no XML
+        TextView precoAntigo2 = findViewById(R.id.precoAntigoXboxX);
+        TextView precoAntigo3 = findViewById(R.id.precoAntigoPS5);
+        TextView precoAntigo4 = findViewById(R.id.precoAntigoPS4);
+
+        precoAntigo1.setPaintFlags(precoAntigo1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        precoAntigo2.setPaintFlags(precoAntigo2.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        precoAntigo3.setPaintFlags(precoAntigo3.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        precoAntigo4.setPaintFlags(precoAntigo4.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
     private void abrirCategoria(String nomeCategoria) {
