@@ -101,7 +101,7 @@ public class Cadastro extends AppCompatActivity {
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(Cadastro.this, "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Cadastro.this, Config.class);
+                        Intent intent = new Intent(Cadastro.this, Login.class);
                         startActivity(intent);
                         finish();
                     } else {

@@ -9,6 +9,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.promohawk.model.LoginRequest;
+import com.example.promohawk.model.LoginResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Login extends AppCompatActivity {
 
     private EditText editEmail, editSenha;
@@ -27,31 +34,54 @@ public class Login extends AppCompatActivity {
         btnCadastrar = findViewById(R.id.btnCadastrar);
         btnEsqueceuSenha = findViewById(R.id.btnEsqueceuSenha);
 
-        // Evento de clique para o botão "Entrar"
         btnEntrar.setOnClickListener(v -> {
             String email = editEmail.getText().toString();
             String senha = editSenha.getText().toString();
 
-            // Verificando se os campos estão vazios
             if (email.isEmpty()) {
                 Toast.makeText(this, "Por favor, insira o email.", Toast.LENGTH_SHORT).show();
-                return;  // Interrompe a execução aqui, se o email estiver vazio
+                return;
             }
 
             if (senha.isEmpty()) {
                 Toast.makeText(this, "Por favor, insira a senha.", Toast.LENGTH_SHORT).show();
-                return;  // Interrompe a execução aqui, se a senha estiver vazia
+                return;
             }
 
-            // Verificando se o login é correto
-            if (email.equals("usuario@email.com") && senha.equals("123456")) {
-                Intent intent = new Intent(Login.this, Config.class);
-                startActivity(intent);
-                finish();
-            } else {
-                Toast.makeText(this, "Email ou senha incorretos!", Toast.LENGTH_SHORT).show();
-            }
+            // Cria a requisição
+            LoginRequest loginRequest = new LoginRequest(email, senha);
+
+            // Chama a API
+            ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+            Call<LoginResponse> call = apiService.login(loginRequest);
+
+            call.enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        String token = response.body().getAccessToken();
+
+                        getSharedPreferences("usuario_prefs", MODE_PRIVATE)
+                                .edit()
+                                .putString("token", token)
+                                .apply();
+
+                        Intent intent = new Intent(Login.this, Config.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(Login.this, "Email ou senha incorretos!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    Toast.makeText(Login.this, "Erro de conexão: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
+
 
         // Evento de clique para o botão "Cadastrar"
         btnCadastrar.setOnClickListener(v -> {
