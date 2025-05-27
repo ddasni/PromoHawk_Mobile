@@ -3,11 +3,13 @@ package com.example.promohawk.model;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CategoriasDestaqueActivity {
+import com.example.promohawk.R;
+
+public class CategoriasDestaque {
 
 
 
-    public class CategoriasDestaqueActivity extends AppCompatActivity {
+    public class categoriasDestaque extends AppCompatActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);

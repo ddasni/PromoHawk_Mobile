@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".Config"
-    >
-
+    android:background="@drawable/bg_gradient_rounded"
+    android:padding="16dp">
 
     <!-- Botão de voltar -->
-    <ImageButton
+    <ImageView
         android:id="@+id/btnVoltar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@android:drawable/ic_menu_revert"
-        android:contentDescription="Voltar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/flecha_esquerda_negra"
+        android:contentDescription="Voltar" />
 
     <!-- Foto do perfil -->
     <ImageView
@@ -32,7 +30,7 @@
         android:background="@drawable/circle_background"
         android:contentDescription="Foto de Perfil" />
 
-    <!-- Scroll com os botões -->
+    <!-- Conteúdo com botões -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,50 +41,182 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="8dp">
+            android:paddingBottom="16dp">
 
-            <com.google.android.material.button.MaterialButton
+            <!-- Cartão Perfil -->
+            <LinearLayout
                 android:id="@+id/btnPerfil"
-                style="@style/MeuBotao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="4dp"
-                android:text="👤 Perfil do Usuário" />
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="20dp"
+                android:background="@drawable/card_background"
+                android:elevation="6dp"
+                android:clickable="true"
+                android:focusable="true">
 
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/user" />
 
-            <com.google.android.material.button.MaterialButton
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="20dp"
+                    android:text="Perfil do Usuário"
+                    android:textSize="18sp"
+                    android:textColor="#222222"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/direira_pra_la" />
+            </LinearLayout>
+
+            <!-- Cartão Favoritos -->
+            <LinearLayout
                 android:id="@+id/btnFavoritos"
-                style="@style/MeuBotao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="⭐ Favoritos"
-                android:layout_marginTop="8dp" />
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="20dp"
+                android:background="@drawable/card_background"
+                android:elevation="6dp"
+                android:clickable="true"
+                android:focusable="true">
 
-            <com.google.android.material.button.MaterialButton
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/favorite_24" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="20dp"
+                    android:text="Favoritos"
+                    android:textSize="18sp"
+                    android:textColor="#222222"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/direira_pra_la" />
+            </LinearLayout>
+
+            <!-- Cartão Conta -->
+            <LinearLayout
                 android:id="@+id/btnConta"
-                style="@style/MeuBotao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="⚙️ Configurações da Conta"
-                android:layout_marginTop="8dp" />
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="20dp"
+                android:background="@drawable/card_background"
+                android:elevation="6dp"
+                android:clickable="true"
+                android:focusable="true">
 
-            <com.google.android.material.button.MaterialButton
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/configu" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="20dp"
+                    android:text="Configurações da Conta"
+                    android:textSize="18sp"
+                    android:textColor="#222222"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/direira_pra_la" />
+            </LinearLayout>
+
+            <!-- Cartão Histórico -->
+            <LinearLayout
                 android:id="@+id/btnHistorico"
-                style="@style/MeuBotao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="🛒 Histórico de Compras"
-                android:layout_marginTop="8dp" />
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="20dp"
+                android:background="@drawable/card_background"
+                android:elevation="6dp"
+                android:clickable="true"
+                android:focusable="true">
 
-            <com.google.android.material.button.MaterialButton
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/carrinho" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="20dp"
+                    android:text="Histórico de Compras"
+                    android:textSize="18sp"
+                    android:textColor="#222222"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/direira_pra_la" />
+            </LinearLayout>
+
+            <!-- Cartão Suporte -->
+            <LinearLayout
                 android:id="@+id/btnSuporte"
-                style="@style/MeuBotao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="❓ Suporte"
-                android:layout_marginTop="8dp" />
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="20dp"
+                android:background="@drawable/card_background"
+                android:elevation="6dp"
+                android:clickable="true"
+                android:focusable="true">
 
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ajuda" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="20dp"
+                    android:text="Suporte"
+                    android:textSize="18sp"
+                    android:textColor="#222222"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/direira_pra_la" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

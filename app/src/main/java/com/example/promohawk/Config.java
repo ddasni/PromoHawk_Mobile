@@ -1,23 +1,24 @@
 package com.example.promohawk;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.button.MaterialButton;
+
 public class Config extends AppCompatActivity {
 
     private ImageView imgPerfil;
-    private ImageButton btnVoltar;
-    private MaterialButton btnPerfil, btnFavoritos, btnConta, btnHistorico,
-             btnSuporte;
+    private ImageView btnVoltar;  // mudar para ImageView, pois no XML é ImageView
+    private LinearLayout btnPerfil, btnFavoritos, btnConta, btnHistorico, btnSuporte;  // mudar para LinearLayout
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
 
-        // Botão voltar (ImageButton)
+        // Botão voltar (ImageView)
         btnVoltar = findViewById(R.id.btnVoltar);
         btnVoltar.setOnClickListener(v -> {
             Intent intent = new Intent(Config.this, Home.class);
@@ -32,7 +33,7 @@ public class Config extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Botões MaterialButton
+        // Botões (LinearLayout clicáveis)
         btnPerfil = findViewById(R.id.btnPerfil);
         btnFavoritos = findViewById(R.id.btnFavoritos);
         btnConta = findViewById(R.id.btnConta);
@@ -40,9 +41,9 @@ public class Config extends AppCompatActivity {
         btnSuporte = findViewById(R.id.btnSuporte);
 
         btnPerfil.setOnClickListener(v -> startActivity(new Intent(this, Perfil.class)));
-        btnFavoritos.setOnClickListener(v -> startActivity(new Intent(this, Favoritos.class))); //Favoritos
-        btnConta.setOnClickListener(v -> startActivity(new Intent(this, Config_interna.class))); //usuario
-        btnHistorico.setOnClickListener(v -> startActivity(new Intent(this, Historico.class))); //Historico
+        btnFavoritos.setOnClickListener(v -> startActivity(new Intent(this, Favoritos.class)));
+        btnConta.setOnClickListener(v -> startActivity(new Intent(this, Config_interna.class)));
+        btnHistorico.setOnClickListener(v -> startActivity(new Intent(this, Historico.class)));
         btnSuporte.setOnClickListener(v -> startActivity(new Intent(this, Suporte.class)));
     }
 }

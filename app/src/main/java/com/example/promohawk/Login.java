@@ -2,8 +2,10 @@ package com.example.promohawk;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,8 @@ public class Login extends AppCompatActivity {
     private EditText editEmail, editSenha;
     private Button btnEntrar;
     private TextView btnCadastrar, btnEsqueceuSenha;
+    private ImageView btnToggleSenha;
+    private boolean senhaVisivel = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,31 @@ public class Login extends AppCompatActivity {
         btnEntrar = findViewById(R.id.btnEntrar);
         btnCadastrar = findViewById(R.id.btnCadastrar);
         btnEsqueceuSenha = findViewById(R.id.btnEsqueceuSenha);
+        btnToggleSenha = findViewById(R.id.btnToggleSenha);
+
+        // Alternar visibilidade da senha
+        ImageView btnToggleSenha = findViewById(R.id.btnToggleSenha);
+        EditText editSenha = findViewById(R.id.editSenha);
+
+// Flag para controlar o estado da senha
+        final boolean[] isSenhaVisivel = {false};
+
+        btnToggleSenha.setOnClickListener(v -> {
+            if (isSenhaVisivel[0]) {
+                // Ocultar senha
+                editSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                btnToggleSenha.setImageResource(R.drawable.olho_fechado);
+            } else {
+                // Mostrar senha
+                editSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                btnToggleSenha.setImageResource(R.drawable.olho_aberto);
+            }
+            // Mantém o cursor no final do texto
+            editSenha.setSelection(editSenha.length());
+            isSenhaVisivel[0] = !isSenhaVisivel[0];
+        });
+
+
 
         btnEntrar.setOnClickListener(v -> {
             String email = editEmail.getText().toString();
@@ -48,10 +77,7 @@ public class Login extends AppCompatActivity {
                 return;
             }
 
-            // Cria a requisição
             LoginRequest loginRequest = new LoginRequest(email, senha);
-
-            // Chama a API
             ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
             Call<LoginResponse> call = apiService.login(loginRequest);
 
@@ -60,7 +86,6 @@ public class Login extends AppCompatActivity {
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         String token = response.body().getAccessToken();
-
                         getSharedPreferences("usuario_prefs", MODE_PRIVATE)
                                 .edit()
                                 .putString("token", token)
@@ -74,7 +99,6 @@ public class Login extends AppCompatActivity {
                     }
                 }
 
-
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
                     Toast.makeText(Login.this, "Erro de conexão: " + t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -82,19 +106,14 @@ public class Login extends AppCompatActivity {
             });
         });
 
-
-        // Evento de clique para o botão "Cadastrar"
         btnCadastrar.setOnClickListener(v -> {
             Intent intent = new Intent(Login.this, Cadastro.class);
             startActivity(intent);
         });
 
-        // Evento de clique para o botão "Esqueceu Senha"
         btnEsqueceuSenha.setOnClickListener(v -> {
             Intent intent = new Intent(Login.this, RecuperarSenha.class);
             startActivity(intent);
-
-
         });
     }
 }

@@ -16,11 +16,11 @@
         android:layout_height="150dp"
         android:contentDescription="Logo"
         android:scaleType="fitCenter"
+        android:src="@drawable/logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/logo"
-        android:layout_marginTop="48dp"/>
+        android:layout_marginTop="48dp" />
 
     <!-- Email -->
     <EditText
@@ -30,10 +30,11 @@
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:backgroundTint="@android:color/darker_gray"
+        android:paddingStart="12dp"
         app:layout_constraintTop_toBottomOf="@id/imageView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="32dp" />
 
     <!-- Senha -->
     <EditText
@@ -43,12 +44,28 @@
         android:hint="Senha"
         android:inputType="textPassword"
         android:backgroundTint="@android:color/darker_gray"
+        android:paddingStart="12dp"
+        android:paddingEnd="48dp"
         app:layout_constraintTop_toBottomOf="@id/editEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
-    <!-- Permanecer conectado -->
+    <!-- Ícone olho -->
+    <ImageView
+        android:id="@+id/btnToggleSenha"
+        android:layout_width="24dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/olho_fechado"
+        android:contentDescription="Mostrar ou ocultar senha"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="@id/editSenha"
+        app:layout_constraintTop_toTopOf="@id/editSenha"
+        app:layout_constraintBottom_toBottomOf="@id/editSenha" />
+
+    <!-- CheckBox -->
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
@@ -56,9 +73,9 @@
         android:text="Permanecer conectado"
         app:layout_constraintTop_toBottomOf="@id/editSenha"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="12dp" />
 
-    <!-- Esqueceu senha -->
+    <!-- Esqueceu a senha -->
     <TextView
         android:id="@+id/btnEsqueceuSenha"
         android:layout_width="wrap_content"
@@ -67,7 +84,7 @@
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="14sp"
         app:layout_constraintTop_toTopOf="@id/checkBox"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Botão Entrar -->
     <Button
@@ -76,10 +93,11 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#1A66CC"
         android:text="Entrar"
+        android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/checkBox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="24dp" />
 
     <!-- Texto auxiliar -->
     <TextView
@@ -89,7 +107,7 @@
         android:text="Não tem uma conta?"
         app:layout_constraintTop_toBottomOf="@id/btnEntrar"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
     <!-- Botão cadastrar -->
     <TextView
@@ -102,5 +120,6 @@
         app:layout_constraintTop_toBottomOf="@id/btnEntrar"
         app:layout_constraintStart_toEndOf="@id/textView2"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="4dp"/>
+        android:layout_marginStart="4dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
