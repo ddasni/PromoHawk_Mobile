@@ -27,56 +27,14 @@
             android:layout_marginBottom="24dp"
             android:cardElevation="3dp"
             android:cardCornerRadius="16dp"
-            android:cardBackgroundColor="#FFFFFF">
+            android:cardBackgroundColor="#FFFFFF"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp">
+                android:padding="16dp"/>
 
-                <LinearLayout
-                    android:id="@+id/layoutDadosPessoais"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtNome"
-                        android:text="Carlos Eduardo"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#222"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/txtEmail"
-                        android:text="edu.edusousa92@gmail.com"
-                        android:textSize="16sp"
-                        android:textColor="#444"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/txtTelefone"
-                        android:text="(11) 99118-1592"
-                        android:textSize="16sp"
-                        android:textColor="#444"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/btnEditarDados"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@android:drawable/ic_menu_edit"
-                    android:contentDescription="Editar dados"
-                    android:layout_marginTop="4dp"
-                    app:tint="#555" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
 
         <!-- ENDEREÇOS -->
         <TextView
