@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
+
+    <!-- Espaço superior -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="24dp" />
+
+    <!-- FAIXA COM LOGO SOBREPOSTA -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp">
+
+        <!-- Faixa colorida (Amazon) -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="top"
+            android:background="#424242" />
+
+        <!-- Logo redonda sobreposta -->
+        <ImageView
+            android:id="@+id/logoPichau"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="-20dp"
+            android:src="@drawable/pichau"
+            android:contentDescription="Logo"
+            android:scaleType="fitCenter"
+            android:elevation="4dp" />
+    </FrameLayout>
+
+    <!-- ÁREA DE PRODUTOS -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Produto Exemplo -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:cardElevation="4dp"
+                android:cardCornerRadius="12dp"
+                android:background="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:text="Produto Exemplo"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#333"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:text="R$ 199,90"
+                        android:textSize="16sp"
+                        android:textColor="#4CAF50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

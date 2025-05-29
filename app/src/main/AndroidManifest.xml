@@ -15,6 +15,24 @@
         android:theme="@style/Theme.Promohawk"
         tools:targetApi="31">
         <activity
+            android:name=".Pichau"
+            android:exported="false" />
+        <activity
+            android:name=".Kabum"
+            android:exported="false" />
+        <activity
+            android:name=".Mercado_Livre"
+            android:exported="false" />
+        <activity
+            android:name=".Centauro"
+            android:exported="false" />
+        <activity
+            android:name=".Magazine"
+            android:exported="false" />
+        <activity
+            android:name=".Amazon"
+            android:exported="false" />
+        <activity
             android:name=".item_produto"
             android:exported="false" />
         <activity
@@ -36,7 +54,7 @@
             android:name=".Favoritos"
             android:exported="false" />
         <activity
-            android:name=".Perfil"
+            android:name=".Perfil_config"
             android:exported="false" />
         <activity
             android:name=".Config"
@@ -52,8 +70,7 @@
             android:exported="false" />
         <activity
             android:name=".Login"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
