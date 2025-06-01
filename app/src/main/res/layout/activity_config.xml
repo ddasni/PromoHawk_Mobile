@@ -43,41 +43,6 @@
             android:orientation="vertical"
             android:paddingBottom="16dp">
 
-            <!-- Cartão Perfil -->
-            <LinearLayout
-                android:id="@+id/btnPerfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="20dp"
-                android:background="@drawable/card_background"
-                android:elevation="6dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/user" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="20dp"
-                    android:text="Perfil do Usuário"
-                    android:textSize="18sp"
-                    android:textColor="#222222"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/direira_pra_la" />
-            </LinearLayout>
-
             <!-- Cartão Favoritos -->
             <LinearLayout
                 android:id="@+id/btnFavoritos"
@@ -113,7 +78,7 @@
                     android:src="@drawable/direira_pra_la" />
             </LinearLayout>
 
-            <!-- Cartão Conta -->
+            <!-- Cartão Conta (Configurações da Conta) -->
             <LinearLayout
                 android:id="@+id/btnConta"
                 android:layout_width="match_parent"

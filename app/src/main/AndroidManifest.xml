@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Promohawk"
         tools:targetApi="31">
         <activity
+            android:name=".Perfil_view"
+            android:exported="false" />
+        <activity
             android:name=".Pichau"
             android:exported="false" />
         <activity
@@ -52,9 +55,6 @@
             android:exported="false" />
         <activity
             android:name=".Favoritos"
-            android:exported="false" />
-        <activity
-            android:name=".Perfil_config"
             android:exported="false" />
         <activity
             android:name=".Config"

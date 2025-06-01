@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="24dp" />
 
-    <!-- FAIXA COM LOGO SOBREPOSTA -->
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="140dp">
@@ -51,8 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="#FFFFFF"
-                android:cardCornerRadius="12dp"
-                android:cardElevation="4dp">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -71,7 +72,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="R$ 199,90"
                         android:textColor="#4CAF50"
                         android:textSize="16sp" />
                 </LinearLayout>

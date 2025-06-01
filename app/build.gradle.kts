@@ -59,6 +59,8 @@ android {
         androidTestImplementation("androidx.test.ext:junit:1.2.1")
         androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
         implementation ("com.github.yalantis:ucrop:2.2.8")
+        implementation ("androidx.cardview:cardview:1.0.0")
+
 
     }
 }

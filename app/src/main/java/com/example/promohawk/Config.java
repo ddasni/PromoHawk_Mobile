@@ -17,7 +17,7 @@ public class Config extends AppCompatActivity {
 
     private ImageView imgPerfil;
     private ImageView btnVoltar;
-    private LinearLayout btnPerfil, btnFavoritos, btnConta, btnHistorico, btnSuporte;
+    private LinearLayout btnFavoritos, btnConta, btnHistorico, btnSuporte;
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -42,13 +42,11 @@ public class Config extends AppCompatActivity {
             startActivityForResult(intent, PICK_IMAGE_REQUEST);
         });
 
-        btnPerfil = findViewById(R.id.btnPerfil);
         btnFavoritos = findViewById(R.id.btnFavoritos);
         btnConta = findViewById(R.id.btnConta);
         btnHistorico = findViewById(R.id.btnHistorico);
         btnSuporte = findViewById(R.id.btnSuporte);
 
-        btnPerfil.setOnClickListener(v -> startActivity(new Intent(this, Perfil.class)));
         btnFavoritos.setOnClickListener(v -> startActivity(new Intent(this, Favoritos.class)));
         btnConta.setOnClickListener(v -> startActivity(new Intent(this, Config_interna.class)));
         btnHistorico.setOnClickListener(v -> startActivity(new Intent(this, Historico.class)));
