@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Promohawk"
         tools:targetApi="31">
         <activity
+            android:name=".CuponsDestaque"
+            android:exported="false" />
+        <activity
+            android:name=".ProdutosDestaque"
+            android:exported="false" />
+        <activity
             android:name=".item_produto"
             android:exported="false" />
         <activity
@@ -52,8 +58,7 @@
             android:exported="false" />
         <activity
             android:name=".Login"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
