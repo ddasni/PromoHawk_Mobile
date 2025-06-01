@@ -1,13 +1,13 @@
 package com.example.promohawk;
 
-public class CuponsDestaque {
+public class Cupom {
 
     private String desconto;   // Exemplo: "50% OFF"
     private String descricao;  // Exemplo: "Em compras selecionadas"
     private String codigo;     // Exemplo: "ABCD123"
     private int imagem;        // Resource ID da imagem (R.drawable.amazon)
 
-    public CuponsDestaque(String desconto, String descricao, String codigo, int imagem) {
+    public Cupom(String desconto, String descricao, String codigo, int imagem) {
         this.desconto = desconto;
         this.descricao = descricao;
         this.codigo = codigo;
