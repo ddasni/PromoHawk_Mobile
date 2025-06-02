@@ -15,8 +15,11 @@
         android:theme="@style/Theme.Promohawk"
         tools:targetApi="31">
         <activity
-            android:name=".CuponsDestaque"
-            android:exported="false" />
+            android:name=".Cupom"
+            android:exported="false"/>
+        <activity
+            android:name=".CategoriasDestaque"
+            android:exported="false"/>
         <activity
             android:name=".ProdutosDestaque"
             android:exported="false" />

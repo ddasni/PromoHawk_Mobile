@@ -1,18 +1,20 @@
 package com.example.promohawk;
 
-public class Cupom {
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Cupom extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cupom);
+    }
 
     private String desconto;   // Exemplo: "50% OFF"
     private String descricao;  // Exemplo: "Em compras selecionadas"
     private String codigo;     // Exemplo: "ABCD123"
     private int imagem;        // Resource ID da imagem (R.drawable.amazon)
-
-    public Cupom(String desconto, String descricao, String codigo, int imagem) {
-        this.desconto = desconto;
-        this.descricao = descricao;
-        this.codigo = codigo;
-        this.imagem = imagem;
-    }
 
     public String getDesconto() {
         return desconto;
