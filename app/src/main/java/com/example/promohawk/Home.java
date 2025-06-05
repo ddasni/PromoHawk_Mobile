@@ -16,6 +16,8 @@ import com.denzcoskun.imageslider.models.SlideModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.content.Intent;
+
 
 public class Home extends AppCompatActivity {
 
@@ -43,11 +45,35 @@ public class Home extends AppCompatActivity {
         imageSlider.startSliding(2000);
 
 
-        // ====== Configurando cliques ======
-        verMais = findViewById(R.id.verMaisCategorias);
-        verMais.setOnClickListener(v -> {
-            Toast.makeText(Home.this, "Ver mais clicado!", Toast.LENGTH_SHORT).show();
+        TextView btnVerMaisCategorias = findViewById(R.id.verMaisCategorias);
+        TextView btnVerMaisProdutos = findViewById(R.id.verMaisProdutos);
+        TextView btnVerMaisCupons = findViewById(R.id.verMaisCupons);
+
+        btnVerMaisCategorias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, CategoriasDestaque.class);
+                startActivity(intent);
+            }
         });
+
+        btnVerMaisProdutos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, ProdutosDestaque.class);
+                startActivity(intent);
+            }
+        });
+
+        btnVerMaisCupons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, Cupom.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         imgEletronicos = findViewById(R.id.imgEletronicos);
         imgVideoGames = findViewById(R.id.imgVideoGames);
