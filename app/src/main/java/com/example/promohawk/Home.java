@@ -1,14 +1,16 @@
 package com.example.promohawk;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -16,13 +18,17 @@ import com.denzcoskun.imageslider.models.SlideModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.content.Intent;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class Home extends AppCompatActivity {
 
-    private ImageView imgEletronicos, imgVideoGames, imgSmartphones, imgCalcados, imgLivros;
-    private TextView verMais;
+    private RecyclerView recyclerViewProdutos;
+    private ProdutoAdapter produtoAdapter;
+    private List<Produto> listaProdutos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,76 +36,75 @@ public class Home extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
-        // ====== Configurando o ImageSlider ======
+        configurarBotoes();
+        configurarImageSlider();
+        configurarRecyclerView();
+        carregarProdutosDaApi();
+    }
+
+    private void configurarBotoes() {
+        findViewById(R.id.verMaisCategorias).setOnClickListener(v -> {
+            startActivity(new Intent(Home.this, CategoriasDestaque.class));
+        });
+        findViewById(R.id.verMaisProdutos).setOnClickListener(v -> {
+            startActivity(new Intent(Home.this, ProdutosDestaque.class));
+        });
+        findViewById(R.id.verMaisCupons).setOnClickListener(v -> {
+            startActivity(new Intent(Home.this, Cupom.class));
+        });
+
+        findViewById(R.id.imgEletronicos).setOnClickListener(v -> abrirCategoria("Eletrônicos"));
+        findViewById(R.id.imgVideoGames).setOnClickListener(v -> abrirCategoria("Video Games"));
+        findViewById(R.id.imgSmartphones).setOnClickListener(v -> abrirCategoria("Smartphones"));
+        findViewById(R.id.imgCalcados).setOnClickListener(v -> abrirCategoria("Calçados"));
+        findViewById(R.id.imgLivros).setOnClickListener(v -> abrirCategoria("Livros"));
+
+        ((TextView) findViewById(R.id.precoAntigoXboxS)).setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        ((TextView) findViewById(R.id.precoAntigoXboxX)).setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        ((TextView) findViewById(R.id.precoAntigoPS5)).setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        ((TextView) findViewById(R.id.precoAntigoPS4)).setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+    }
+
+    private void configurarImageSlider() {
         ImageSlider imageSlider = findViewById(R.id.slider);
         List<SlideModel> slideModels = new ArrayList<>();
-
-        slideModels.add(new SlideModel(R.drawable.img_1, ScaleTypes.CENTER_CROP));
         slideModels.add(new SlideModel("https://picsum.photos/seed/picsum/200/300", ScaleTypes.CENTER_CROP));
         slideModels.add(new SlideModel("https://picsum.photos/200/300?grayscale", ScaleTypes.CENTER_CROP));
         slideModels.add(new SlideModel("https://picsum.photos/200/300/?blur", ScaleTypes.CENTER_CROP));
-
         imageSlider.setImageList(slideModels);
-
-// Iniciar troca automática de imagens a cada 2 segundos (por exemplo)
         imageSlider.startSliding(2000);
+    }
 
+    private void configurarRecyclerView() {
+        recyclerViewProdutos = findViewById(R.id.recyclerViewProdutos);
+        recyclerViewProdutos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        produtoAdapter = new ProdutoAdapter(this, listaProdutos);
+        recyclerViewProdutos.setAdapter(produtoAdapter);
+    }
 
-        TextView btnVerMaisCategorias = findViewById(R.id.verMaisCategorias);
-        TextView btnVerMaisProdutos = findViewById(R.id.verMaisProdutos);
-        TextView btnVerMaisCupons = findViewById(R.id.verMaisCupons);
+    private void carregarProdutosDaApi() {
+        ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
+        Call<List<Produto>> call = apiService.getProdutos();
 
-        btnVerMaisCategorias.setOnClickListener(new View.OnClickListener() {
+        call.enqueue(new Callback<List<Produto>>() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Home.this, CategoriasDestaque.class);
-                startActivity(intent);
+            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    listaProdutos.clear();
+                    listaProdutos.addAll(response.body());
+                    produtoAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Produto>> call, Throwable t) {
+                Toast.makeText(Home.this, "Erro ao carregar produtos", Toast.LENGTH_SHORT).show();
             }
         });
-
-        btnVerMaisProdutos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Home.this, ProdutosDestaque.class);
-                startActivity(intent);
-            }
-        });
-
-        btnVerMaisCupons.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Home.this, Cupom.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-        imgEletronicos = findViewById(R.id.imgEletronicos);
-        imgVideoGames = findViewById(R.id.imgVideoGames);
-        imgSmartphones = findViewById(R.id.imgSmartphones);
-        imgCalcados = findViewById(R.id.imgCalcados);
-        imgLivros = findViewById(R.id.imgLivros);
-
-        imgEletronicos.setOnClickListener(v -> abrirCategoria("Eletrônicos"));
-        imgVideoGames.setOnClickListener(v -> abrirCategoria("Video Games"));
-        imgSmartphones.setOnClickListener(v -> abrirCategoria("Smartphones"));
-        imgCalcados.setOnClickListener(v -> abrirCategoria("Calçados"));
-        imgLivros.setOnClickListener(v -> abrirCategoria("Livros"));
-
-        // ====== Riscando preço antigo ======
-        TextView precoAntigo1 = findViewById(R.id.precoAntigoXboxS); // certifique-se que esse ID está no XML
-        TextView precoAntigo2 = findViewById(R.id.precoAntigoXboxX);
-        TextView precoAntigo3 = findViewById(R.id.precoAntigoPS5);
-        TextView precoAntigo4 = findViewById(R.id.precoAntigoPS4);
-
-        precoAntigo1.setPaintFlags(precoAntigo1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        precoAntigo2.setPaintFlags(precoAntigo2.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        precoAntigo3.setPaintFlags(precoAntigo3.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        precoAntigo4.setPaintFlags(precoAntigo4.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
     private void abrirCategoria(String nomeCategoria) {
         Toast.makeText(this, "Categoria: " + nomeCategoria, Toast.LENGTH_SHORT).show();
     }
 }
+

@@ -1,4 +1,5 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -242,13 +243,27 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginEnd="12dp"
-                        android:gravity="center_horizontal">
+                        android:gravity="center_horizontal"
+                        android:padding="8dp">
 
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:src="@drawable/xbox_series_s"
-                            android:scaleType="centerInside" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/xbox_series_s"
+                                android:scaleType="centerInside" />
+
+                            <ImageView
+                                android:id="@+id/favoritoProduto"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_favorite_border"
+                                android:layout_gravity="top|end"
+                                android:padding="4dp" />
+                        </FrameLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -269,7 +284,29 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="R$ 2.800,00"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@android:color/darker_gray"
+                            android:paintFlags="strikeThruText" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@drawable/ic_star"
+                                app:tint="#FFD700" />
+
+                            <TextView
+                                android:id="@+id/notaXboxS"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4.5"
+                                android:layout_marginStart="4dp" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <!-- Produto: Xbox Series X -->
@@ -278,13 +315,27 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginEnd="12dp"
-                        android:gravity="center_horizontal">
+                        android:gravity="center_horizontal"
+                        android:padding="8dp">
 
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/xbox_series_x" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/xbox_series_x"
+                                android:scaleType="centerInside" />
+
+                            <ImageView
+                                android:id="@+id/favoritoProduto"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_favorite_border"
+                                android:layout_gravity="top|end"
+                                android:padding="4dp" />
+                        </FrameLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -305,21 +356,58 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="R$ 2.800,00"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@android:color/darker_gray"
+                            android:paintFlags="strikeThruText" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@drawable/ic_star"
+                                app:tint="#FFD700" />
+
+                            <TextView
+                                android:id="@+id/notaXboxX"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4.7"
+                                android:layout_marginStart="4dp" />
+                        </LinearLayout>
                     </LinearLayout>
 
+                    <!-- Produto: Playstation 5 -->
                     <LinearLayout
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginEnd="12dp"
-                        android:gravity="center_horizontal">
+                        android:gravity="center_horizontal"
+                        android:padding="8dp">
 
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/playstation_5" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/playstation_5"
+                                android:scaleType="centerInside" />
+
+                            <ImageView
+                                android:id="@+id/favoritoProduto"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_favorite_border"
+                                android:layout_gravity="top|end"
+                                android:padding="4dp" />
+                        </FrameLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -340,21 +428,58 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="R$ 2.800,00"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@android:color/darker_gray"
+                            android:paintFlags="strikeThruText" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@drawable/ic_star"
+                                app:tint="#FFD700" />
+
+                            <TextView
+                                android:id="@+id/notaPS5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4.8"
+                                android:layout_marginStart="4dp" />
+                        </LinearLayout>
                     </LinearLayout>
 
+                    <!-- Produto: Playstation 4 -->
                     <LinearLayout
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginEnd="12dp"
-                        android:gravity="center_horizontal">
+                        android:gravity="center_horizontal"
+                        android:padding="8dp">
 
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/playstation_4" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/playstation_4"
+                                android:scaleType="centerInside" />
+
+                            <ImageView
+                                android:id="@+id/favoritoProduto"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_favorite_border"
+                                android:layout_gravity="top|end"
+                                android:padding="4dp" />
+                        </FrameLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -375,11 +500,34 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="R$ 2.800,00"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@android:color/darker_gray"
+                            android:paintFlags="strikeThruText" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@drawable/ic_star"
+                                app:tint="#FFD700" />
+
+                            <TextView
+                                android:id="@+id/notaPS4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4.4"
+                                android:layout_marginStart="4dp" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
         </LinearLayout>
+
 
         <!-- Seção de Cupons -->
         <LinearLayout

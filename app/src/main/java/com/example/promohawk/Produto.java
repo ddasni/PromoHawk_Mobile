@@ -1,19 +1,53 @@
 package com.example.promohawk;
 
-public class Produto {
+import java.io.Serializable;
+import java.util.List;
+
+public class Produto implements Serializable {
     private String nome;
-    private int imagem; // ID do recurso da imagem (ex: R.drawable.exemplo)
+    private String preco;
+    private String melhorPreco;
+    private float avaliacao;
+    private int qtdAvaliacoes;
+    private String urlLoja;
+    private List<String> imagens; // URLs das imagens
+    private List<Float> historicoPrecos; // Preços do gráfico
 
-    public Produto(String nome, int imagem) {
-        this.nome = nome;
-        this.imagem = imagem;
-    }
-
+    // Getters necessários para o adapter
     public String getNome() {
         return nome;
     }
 
-    public int getImagem() {
-        return imagem;
+    public String getPreco() {
+        return preco;
+    }
+
+    public String getImagemUrl() {
+        return imagens != null && !imagens.isEmpty() ? imagens.get(0) : null;
+    }
+
+    // Getters adicionais, se quiser
+    public String getMelhorPreco() {
+        return melhorPreco;
+    }
+
+    public float getAvaliacao() {
+        return avaliacao;
+    }
+
+    public int getQtdAvaliacoes() {
+        return qtdAvaliacoes;
+    }
+
+    public String getUrlLoja() {
+        return urlLoja;
+    }
+
+    public List<String> getImagens() {
+        return imagens;
+    }
+
+    public List<Float> getHistoricoPrecos() {
+        return historicoPrecos;
     }
 }
