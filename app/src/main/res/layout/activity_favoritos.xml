@@ -2,29 +2,71 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F7F7"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/bg_gradient_rounded"
+    tools:context=".item_favorito">
 
-    <TextView
-        android:id="@+id/tvTituloFavoritos"
+    <!-- Topo com título e botão voltar -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Meus Favoritos"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="#333"
-        android:paddingBottom="16dp"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="16dp">
 
+        <ImageView
+            android:id="@+id/botaoVoltarFavoritos"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/flecha_esquerda_negra"
+            android:contentDescription="Voltar" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Meus Favoritos"
+            android:textSize="24sp"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginEnd="40dp"/>
+    </LinearLayout>
+
+    <!-- Lista de produtos favoritados -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFavoritos"
+        android:id="@+id/recyclerViewFavoritos"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
         android:clipToPadding="false"
         android:paddingBottom="16dp"/>
 
+    <!-- Mensagem quando não há favoritos -->
+    <LinearLayout
+        android:id="@+id/emptyFavoritos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_favorite_border"
+            app:tint="#888888" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nenhum produto favoritado"
+            android:textSize="18sp"
+            android:textColor="#666666"/>
+    </LinearLayout>
 </LinearLayout>

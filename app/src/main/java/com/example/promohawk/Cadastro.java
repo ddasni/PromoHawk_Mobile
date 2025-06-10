@@ -1,10 +1,9 @@
     package com.example.promohawk;
+    import com.example.promohawk.api.ApiService;
     import com.example.promohawk.model.CadastroRequest;
     import android.annotation.SuppressLint;
     import android.os.Bundle;
-    import android.text.Editable;
     import android.text.InputFilter;
-    import android.text.TextWatcher;
     import android.widget.Button;
     import android.widget.EditText;
     import android.widget.TextView;

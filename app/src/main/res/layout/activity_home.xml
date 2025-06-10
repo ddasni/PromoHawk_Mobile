@@ -10,7 +10,8 @@
         android:id="@+id/mainContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#FFFFFF">
 
         <!-- Carrossel (ImageSlider) -->
         <com.denzcoskun.imageslider.ImageSlider
@@ -251,13 +252,13 @@
                             android:layout_height="100dp">
 
                             <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:src="@drawable/xbox_series_s"
-                                android:scaleType="centerInside" />
+                                android:layout_width="96dp"
+                                android:layout_height="91dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/xbox_series_s" />
 
                             <ImageView
-                                android:id="@+id/favoritoProduto"
+                                android:id="@+id/favorito1"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:src="@drawable/ic_favorite_border"
@@ -285,7 +286,7 @@
                             android:layout_height="wrap_content"
                             android:text="R$ 2.800,00"
                             android:textColor="@android:color/darker_gray"
-                            android:paintFlags="strikeThruText" />
+                             />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -329,12 +330,13 @@
                                 android:scaleType="centerInside" />
 
                             <ImageView
-                                android:id="@+id/favoritoProduto"
+                                android:id="@+id/favorito2"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:src="@drawable/ic_favorite_border"
                                 android:layout_gravity="top|end"
-                                android:padding="4dp" />
+                                android:layout_marginEnd="8dp"
+                                android:padding="4dp"/>
                         </FrameLayout>
 
                         <TextView
@@ -357,7 +359,7 @@
                             android:layout_height="wrap_content"
                             android:text="R$ 2.800,00"
                             android:textColor="@android:color/darker_gray"
-                            android:paintFlags="strikeThruText" />
+                            />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -401,7 +403,7 @@
                                 android:scaleType="centerInside" />
 
                             <ImageView
-                                android:id="@+id/favoritoProduto"
+                                android:id="@+id/favorito3"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:src="@drawable/ic_favorite_border"
@@ -429,7 +431,7 @@
                             android:layout_height="wrap_content"
                             android:text="R$ 2.800,00"
                             android:textColor="@android:color/darker_gray"
-                            android:paintFlags="strikeThruText" />
+                             />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -473,7 +475,7 @@
                                 android:scaleType="centerInside" />
 
                             <ImageView
-                                android:id="@+id/favoritoProduto"
+                                android:id="@+id/favorito4"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:src="@drawable/ic_favorite_border"
@@ -501,7 +503,7 @@
                             android:layout_height="wrap_content"
                             android:text="R$ 2.800,00"
                             android:textColor="@android:color/darker_gray"
-                            android:paintFlags="strikeThruText" />
+                             />
 
                         <LinearLayout
                             android:layout_width="wrap_content"

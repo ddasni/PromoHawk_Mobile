@@ -3,7 +3,6 @@ package com.example.promohawk;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.promohawk.api.ApiService;
 
 import java.util.ArrayList;
 import java.util.List;

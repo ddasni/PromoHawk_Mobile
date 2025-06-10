@@ -1,9 +1,14 @@
-package com.example.promohawk;
+package com.example.promohawk.api;
 
 import com.example.promohawk.model.CadastroRequest;
+import com.example.promohawk.model.Compra;
 import com.example.promohawk.model.LoginRequest;
 import com.example.promohawk.model.LoginResponse;
 import com.example.promohawk.model.PerfilRequest;
+
+import java.util.List;
+
+import retrofit2.http.GET;
 import retrofit2.http.PUT;
 
 import retrofit2.Call;
@@ -19,6 +24,9 @@ public interface ApiService {
 
     @PUT("perfil") // ou o endpoint correto da sua API para atualizar perfil
     Call<Void> atualizarPerfil(@Body PerfilRequest perfilRequest);
+
+    @GET("compras") // ou o endpoint correto da sua API para histórico
+    Call<List<Compra>> getHistoricoCompras();
 
 }
 
