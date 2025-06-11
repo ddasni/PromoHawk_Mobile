@@ -12,9 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.promohawk.ProdutoDetalheActivity;
-import com.example.promohawk.R;
-import com.example.promohawk.Produto;
 
 import java.util.List;
 
@@ -38,17 +35,24 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
     @Override
     public void onBindViewHolder(@NonNull ProdutoViewHolder holder, int position) {
         Produto produto = produtos.get(position);
-        holder.nome.setText(produto.getNome());
-        holder.preco.setText(produto.getPreco());
+
+        holder.tvNomeProduto.setText(produto.getNome());
+        holder.tvPrecoAtual.setText(produto.getPreco());
+        holder.tvPrecoAntigo.setText(produto.getMelhorPreco());
+        holder.tvAvaliacao.setText("★ " + produto.getAvaliacao());
+
+        // Deixa o texto do preço antigo riscado
+        holder.tvPrecoAntigo.setPaintFlags(holder.tvPrecoAntigo.getPaintFlags() | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
 
         Glide.with(context)
-                .load(produto.getImagemUrl()) // imagem vinda da API
-                .placeholder(R.drawable.placeholder) // opcional
-                .into(holder.imagem);
+                .load(produto.getImagemUrl())
+                .placeholder(android.R.drawable.ic_menu_gallery)
+                .into(holder.imgProduto);
 
+        // Clique para abrir os detalhes do produto
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProdutoDetalheActivity.class);
-            intent.putExtra("produto", produto); // certifique-se que Produto é Serializable ou Parcelable
+            intent.putExtra("produto", produto); // Certifique-se que Produto implementa Serializable ou Parcelable
             context.startActivity(intent);
         });
     }
@@ -59,14 +63,18 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
     }
 
     public static class ProdutoViewHolder extends RecyclerView.ViewHolder {
-        ImageView imagem;
-        TextView nome, preco;
+        ImageView imgProduto;
+        TextView tvNomeProduto, tvPrecoAtual, tvPrecoAntigo, tvAvaliacao;
+        ImageView btnFavoritar;
 
         public ProdutoViewHolder(@NonNull View itemView) {
             super(itemView);
-            imagem = itemView.findViewById(R.id.imgProduto);
-            nome = itemView.findViewById(R.id.textNomeProduto);
-            preco = itemView.findViewById(R.id.textPrecoProduto);
+            imgProduto = itemView.findViewById(R.id.imgProduto);
+            tvNomeProduto = itemView.findViewById(R.id.tvNomeProduto);
+            tvPrecoAtual = itemView.findViewById(R.id.tvPrecoAtual);
+            tvPrecoAntigo = itemView.findViewById(R.id.tvPrecoAntigo);
+            tvAvaliacao = itemView.findViewById(R.id.tvAvaliacao);
+            btnFavoritar = itemView.findViewById(R.id.btnFavoritar);
         }
     }
 }
