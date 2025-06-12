@@ -7,10 +7,8 @@ import com.example.promohawk.model.LoginResponse;
 import com.example.promohawk.model.PerfilRequest;
 
 import java.util.List;
-
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -27,6 +25,10 @@ public interface ApiService {
 
     @GET("compras") // ou o endpoint correto da sua API para histórico
     Call<List<Compra>> getHistoricoCompras();
+
+    @GET("compras/historico") // ajuste conforme sua rota real
+    Call<List<Compra>> obterHistoricoCompras();
+
 
 }
 

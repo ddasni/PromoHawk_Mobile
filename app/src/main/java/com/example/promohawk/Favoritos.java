@@ -17,7 +17,7 @@ public class Favoritos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoritos);
 
-        rvFavoritos = findViewById(R.id.rvFavoritos);
+        rvFavoritos = findViewById(R.id.recyclerViewFavoritos);
 
         // Dados iniciais (pode começar vazio)
         listaFavoritos = new ArrayList<>();
