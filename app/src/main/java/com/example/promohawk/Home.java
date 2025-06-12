@@ -27,7 +27,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class Home extends AppCompatActivity {
 
     private RecyclerView recyclerViewProdutos;
@@ -55,8 +54,7 @@ public class Home extends AppCompatActivity {
         carregarProdutosDaApi();
         configurarRecyclerCupons();
         carregarCuponsDaApi();
-
-        carregarCategoriasDaApi();  // Carrega as categorias
+        carregarCategoriasDaApi();
     }
 
     private void configurarBotoes() {
@@ -92,15 +90,28 @@ public class Home extends AppCompatActivity {
         imageSlider.startSliding(2000);
     }
 
+    // Home.java (completo, apenas a parte modificada foi alterada abaixo)
+
     private void configurarRecyclerView() {
         recyclerViewProdutos = findViewById(R.id.recyclerViewProdutos);
         recyclerViewProdutos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        produtoAdapter = new ProdutoAdapter(this, listaProdutos);
+
+        produtoAdapter = new ProdutoAdapter(this, listaProdutos, new ProdutoClickListener() {
+            @Override
+            public void onProdutoClick(Produto produto) {
+                // Abrir ProdutoDetalheActivity passando o ID
+                Intent intent = new Intent(Home.this, ProdutoDetalheActivity.class);
+                intent.putExtra("idProduto", produto.getId()); // Certifique-se de que o ID esteja presente
+                startActivity(intent);
+            }
+        });
+
         recyclerViewProdutos.setAdapter(produtoAdapter);
     }
 
+
     private void carregarProdutosDaApi() {
-        ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
         Call<List<Produto>> call = apiService.getProdutos();
 
         call.enqueue(new Callback<List<Produto>>() {
@@ -132,7 +143,7 @@ public class Home extends AppCompatActivity {
     }
 
     private void carregarCuponsDaApi() {
-        ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
         Call<List<Cupom>> call = apiService.getCupons();
 
         call.enqueue(new Callback<List<Cupom>>() {
@@ -153,7 +164,7 @@ public class Home extends AppCompatActivity {
     }
 
     private void carregarCategoriasDaApi() {
-        ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
         Call<List<Categoria>> call = apiService.getCategorias();
 
         call.enqueue(new Callback<List<Categoria>>() {
@@ -191,5 +202,4 @@ public class Home extends AppCompatActivity {
             linearLayoutCategorias.addView(card);
         }
     }
-
 }

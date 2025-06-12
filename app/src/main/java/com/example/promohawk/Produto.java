@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Produto implements Serializable {
+    private int id; // ID do produto adicionado
     private String nome;
     private String preco;
     private String melhorPreco;
@@ -12,6 +13,11 @@ public class Produto implements Serializable {
     private String urlLoja;
     private List<String> imagens; // URLs das imagens
     private List<Float> historicoPrecos; // Preços do gráfico
+
+    // Getter para o ID
+    public int getId() {
+        return id;
+    }
 
     // Getters necessários para o adapter
     public String getNome() {

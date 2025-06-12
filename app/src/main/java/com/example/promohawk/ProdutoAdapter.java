@@ -1,7 +1,6 @@
 package com.example.promohawk;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +18,12 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
 
     private Context context;
     private List<Produto> produtos;
+    private ProdutoClickListener listener;
 
-    public ProdutoAdapter(Context context, List<Produto> produtos) {
+    public ProdutoAdapter(Context context, List<Produto> produtos, ProdutoClickListener listener) {
         this.context = context;
         this.produtos = produtos;
+        this.listener = listener;
     }
 
     @NonNull
@@ -49,11 +50,11 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
                 .placeholder(android.R.drawable.ic_menu_gallery)
                 .into(holder.imgProduto);
 
-        // Clique para abrir os detalhes do produto
+        // Clique no produto
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ProdutoDetalheActivity.class);
-            intent.putExtra("produto", produto); // Certifique-se que Produto implementa Serializable ou Parcelable
-            context.startActivity(intent);
+            if (listener != null) {
+                listener.onProdutoClick(produto);
+            }
         });
     }
 

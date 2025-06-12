@@ -4,21 +4,39 @@ import com.example.promohawk.model.CadastroRequest;
 import com.example.promohawk.model.LoginRequest;
 import com.example.promohawk.model.LoginResponse;
 import com.example.promohawk.model.PerfilRequest;
-import retrofit2.http.PUT;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface ApiService {
+
+    // Registro de usuário
     @POST("users")
     Call<Void> registrar(@Body CadastroRequest request);
 
-    @POST("auth/login") // ou o endpoint correto da sua API
+    // Login
+    @POST("auth/login")
     Call<LoginResponse> login(@Body LoginRequest request);
 
-    @PUT("perfil") // ou o endpoint correto da sua API para atualizar perfil
+    // Atualizar perfil
+    @PUT("perfil")
     Call<Void> atualizarPerfil(@Body PerfilRequest perfilRequest);
 
-}
+    // ===============================
+    // NOVOS MÉTODOS PARA HOME.JAVA
+    // ===============================
 
+    @GET("produtos")
+    Call<List<Produto>> getProdutos();
+
+    @GET("cupons")
+    Call<List<Cupom>> getCupons();
+
+    @GET("categorias")
+    Call<List<Categoria>> getCategorias();
+}

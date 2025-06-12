@@ -1,6 +1,8 @@
 package com.example.promohawk;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,7 +12,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -24,10 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import android.content.Intent;
-import android.net.Uri;
-
-
 
 public class ProdutoDetalheActivity extends AppCompatActivity {
 
@@ -64,8 +61,11 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
                     R.drawable.ic_favorite_border);
         });
 
-        // Carrega produto da API (id fictício "123")
-        carregarProduto("123");
+        // Carregar produto da API
+        String idProduto = getIntent().getStringExtra("idProduto");
+        if (idProduto != null) {
+            carregarProduto(idProduto);
+        }
     }
 
     private void carregarProduto(String idProduto) {
@@ -91,33 +91,37 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
     }
 
     private void atualizarUI(Produto produto) {
-        textNome.setText(produto.nome);
-        textPreco.setText(produto.preco);
-        textMelhorPreco.setText(produto.melhorPreco);
-        ratingBar.setRating(produto.avaliacao);
-        textQtdAvaliacoes.setText("(" + produto.qtdAvaliacoes + " avaliações)");
+        textNome.setText(produto.getNome());
+        textPreco.setText(produto.getPreco());
+        textMelhorPreco.setText(produto.getMelhorPreco());
+        ratingBar.setRating(produto.getAvaliacao());
+        textQtdAvaliacoes.setText("(" + produto.getQtdAvaliacoes() + " avaliações)");
 
         // ViewPager
-        viewPager.setAdapter(new ImagemAdapter(produto.imagens)); // List<String> (URLs)
-
-        // Gráfico
-        List<Entry> entries = new ArrayList<>();
-        for (int i = 0; i < produto.historicoPrecos.size(); i++) {
-            entries.add(new Entry(i, produto.historicoPrecos.get(i)));
+        if (produto.getImagens() != null) {
+            viewPager.setAdapter(new ImagemAdapter(produto.getImagens()));
         }
 
-        LineDataSet dataSet = new LineDataSet(entries, "Preço (R$)");
-        dataSet.setColor(Color.BLUE);
-        dataSet.setValueTextColor(Color.BLACK);
+        // Gráfico
+        List<Float> historico = produto.getHistoricoPrecos();
+        if (historico != null) {
+            List<Entry> entries = new ArrayList<>();
+            for (int i = 0; i < historico.size(); i++) {
+                entries.add(new Entry(i, historico.get(i)));
+            }
 
-        graficoPreco.setData(new LineData(dataSet));
-        graficoPreco.invalidate();
+            LineDataSet dataSet = new LineDataSet(entries, "Preço (R$)");
+            dataSet.setColor(Color.BLUE);
+            dataSet.setValueTextColor(Color.BLACK);
+
+            graficoPreco.setData(new LineData(dataSet));
+            graficoPreco.invalidate();
+        }
 
         // Ação botão “Ir à loja”
         btnIrLoja.setOnClickListener(v -> {
-            // Exemplo: abrir no navegador
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(android.net.Uri.parse(produto.urlLoja));
+            intent.setData(Uri.parse(produto.getUrlLoja()));
             startActivity(intent);
         });
     }
