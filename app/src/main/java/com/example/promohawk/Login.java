@@ -79,7 +79,7 @@ public class Login extends AppCompatActivity {
             }
 
             LoginRequest loginRequest = new LoginRequest(email, senha);
-            ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+            ApiService apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
             Call<LoginResponse> call = apiService.login(loginRequest);
 
             call.enqueue(new Callback<LoginResponse>() {
