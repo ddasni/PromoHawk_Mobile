@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.promohawk.adapter.HistoricoAdapter;
 import com.example.promohawk.api.ApiService;
-import com.example.promohawk.api.RetrofitClient;
 import com.example.promohawk.model.Compra;
 
 import java.util.List;
@@ -38,7 +37,7 @@ public class HistoricoRE extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        apiService = RetrofitClient.getInstance().create(ApiService.class);
+        apiService = Amazon.RetrofitClient.getPromoHawkInstance().create(ApiService.class);
 
         carregarHistorico();
     }

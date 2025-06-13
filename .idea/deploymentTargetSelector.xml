@@ -4,11 +4,11 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-05-25T23:31:15.246865200Z">
+        <DropdownSelection timestamp="2025-06-12T23:48:07.599174500Z">
           <Target type="DEFAULT_BOOT">
-            <template>
-              <DeviceId pluginId="FirebaseDirectAccess" type="TEMPLATE" identifier="model_id=e1q/34" />
-            </template>
+            <handle>
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Pichau\.android\avd\Medium_Phone.avd" />
+            </handle>
           </Target>
         </DropdownSelection>
         <DialogSelection>
@@ -20,9 +20,6 @@
             </Target>
           </targets>
         </DialogSelection>
-      </SelectionState>
-      <SelectionState runConfigName="novo">
-        <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
   </component>
