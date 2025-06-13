@@ -18,6 +18,8 @@
             android:name=".ProdutoDetalheActivity"
             android:exported="false" />
         <activity
+            android:name=".ProdutosDestaque" />
+        <activity
             android:name=".item_produto"
             android:exported="false" />
         <activity
