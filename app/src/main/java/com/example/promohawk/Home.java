@@ -53,9 +53,10 @@ public class Home extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
+        configurarBotoes();
+
         linearLayoutCategorias = findViewById(R.id.linearLayoutCategorias);
 
-        configurarBotoes();
         configurarImageSlider();
         configurarRecyclerView();
         carregarProdutosDaApi();
