@@ -1,7 +1,5 @@
 package com.example.promohawk;
 
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -23,12 +21,12 @@ public class ImagemAdapter extends RecyclerView.Adapter<ImagemAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Infla um layout XML personalizado para imagens, se necessário
         ImageView imageView = new ImageView(parent.getContext());
         imageView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+                ViewGroup.LayoutParams.WRAP_CONTENT
         ));
+        imageView.setAdjustViewBounds(true);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         return new ViewHolder(imageView);
     }
@@ -38,8 +36,8 @@ public class ImagemAdapter extends RecyclerView.Adapter<ImagemAdapter.ViewHolder
         String urlImagem = imagens.get(position);
         Glide.with(holder.imageView.getContext())
                 .load(urlImagem)
-                .placeholder(R.drawable.placeholder) // opcional: imagem enquanto carrega
-                .error(R.drawable.placeholder)             // opcional: imagem em caso de erro
+                .placeholder(R.drawable.placeholder) // Use seu drawable
+                .error(R.drawable.placeholder)
                 .into(holder.imageView);
     }
 
@@ -51,9 +49,9 @@ public class ImagemAdapter extends RecyclerView.Adapter<ImagemAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
 
-        ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull ImageView itemView) {
             super(itemView);
-            this.imageView = (ImageView) itemView;
+            this.imageView = itemView;
         }
     }
 }

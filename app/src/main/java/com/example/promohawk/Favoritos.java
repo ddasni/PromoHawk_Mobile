@@ -1,15 +1,17 @@
 package com.example.promohawk;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 public class Favoritos extends AppCompatActivity {
 
     private RecyclerView rvFavoritos;
-    private FavoritosAdapter adapter; // Corrigido aqui para usar o adapter certo
+    private FavoritosAdapter adapter;
     private ArrayList<String> listaFavoritos;
 
     @Override
@@ -19,18 +21,17 @@ public class Favoritos extends AppCompatActivity {
 
         rvFavoritos = findViewById(R.id.recyclerViewFavoritos);
 
-        // Dados iniciais (pode começar vazio)
         listaFavoritos = new ArrayList<>();
 
-        // Configura RecyclerView
-        adapter = new FavoritosAdapter(listaFavoritos); // Usando o adapter certo
+        adapter = new FavoritosAdapter(listaFavoritos);
         rvFavoritos.setLayoutManager(new LinearLayoutManager(this));
         rvFavoritos.setAdapter(adapter);
     }
 
-    // Método para adicionar um favorito e atualizar a lista
     public void adicionarFavorito(String item) {
-        listaFavoritos.add(item);
-        adapter.notifyItemInserted(listaFavoritos.size() - 1);
+        if (!listaFavoritos.contains(item)) {
+            listaFavoritos.add(item);
+            adapter.notifyItemInserted(listaFavoritos.size() - 1);
+        }
     }
 }

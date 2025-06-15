@@ -1,77 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    android:background="@drawable/bg_card_rounded"
+    android:padding="12dp">
 
-    <LinearLayout
-        android:layout_width="200dp"
+    <ImageView
+        android:id="@+id/imgProduto"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/descricao_imagem_produto" />
+
+    <TextView
+        android:id="@+id/tvNomeProduto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="12dp">
+        android:layout_toEndOf="@id/imgProduto"
+        android:layout_marginStart="16dp"
+        android:text="Nome do Produto"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:maxLines="2"
+        android:ellipsize="end" />
 
-        <!-- Imagem do produto -->
-        <ImageView
-            android:id="@+id/imgProduto"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_marginBottom="8dp" />
+    <TextView
+        android:id="@+id/tvPrecoAtual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNomeProduto"
+        android:layout_toEndOf="@id/imgProduto"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="R$ 99,99"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-        <!-- Nome -->
-        <TextView
-            android:id="@+id/tvNomeProduto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nome do Produto"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:layout_marginBottom="4dp" />
+    <TextView
+        android:id="@+id/tvPrecoAntigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tvPrecoAtual"
+        android:layout_toEndOf="@id/tvPrecoAtual"
+        android:layout_marginStart="8dp"
+        android:text="R$ 120,00"
+        android:textColor="@color/preco_cinza"
+        android:textSize="14sp" />
 
-        <!-- Preço atual -->
-        <TextView
-            android:id="@+id/tvPrecoAtual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="R$ 299,99"
-            android:textColor="#4CAF50"
-            android:textSize="15sp"
-            android:layout_marginBottom="2dp"/>
+    <TextView
+        android:id="@+id/tvAvaliacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPrecoAtual"
+        android:layout_toEndOf="@id/imgProduto"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="★ 4.5"
+        android:textColor="@color/dourado_avaliacao"
+        android:textSize="14sp" />
 
-        <!-- Preço original riscado -->
-        <TextView
-            android:id="@+id/tvPrecoAntigo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="R$ 499,99"
-            android:textColor="#888888"
-            android:textSize="13sp"
-            android:layout_marginBottom="2dp" />
+    <ImageView
+        android:id="@+id/btnFavoritar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/descricao_favoritar"
+        android:src="@drawable/ic_favorite_border" />
 
-        <!-- Avaliação -->
-        <TextView
-            android:id="@+id/tvAvaliacao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="★ 4.5"
-            android:textSize="14sp"
-            android:textColor="#FFD700"
-            android:layout_marginBottom="4dp"/>
-
-        <!-- Favorito -->
-        <ImageView
-            android:id="@+id/btnFavoritar"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/baseline_favorite_24"
-            app:tint="@color/red"
-            android:layout_gravity="end" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+</RelativeLayout>

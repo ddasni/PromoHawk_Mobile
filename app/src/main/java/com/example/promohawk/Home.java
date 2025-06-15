@@ -4,26 +4,26 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.promohawk.api.RetrofitClient;
-import com.example.promohawk.Categoria;
-import com.example.promohawk.Produto;
-import com.example.promohawk.Cupom;
-
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.promohawk.api.ApiService;
+import com.example.promohawk.api.RetrofitClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +31,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import com.example.promohawk.api.ApiService;
-
 
 public class Home extends AppCompatActivity {
 
@@ -63,6 +61,32 @@ public class Home extends AppCompatActivity {
         configurarRecyclerCupons();
         carregarCuponsDaApi();
         carregarCategoriasDaApi();
+        configurarBottomNav(); // <- NAVBAR CONFIGURADA AQUI
+    }
+
+    private void configurarBottomNav() {
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setSelectedItemId(R.id.nav_home);
+
+        bottomNav.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.nav_home) {
+                    return true;
+                } else if (id == R.id.nav_produtos) {
+                    startActivity(new Intent(Home.this, ProdutosDestaque.class));
+                    return true;
+                } else if (id == R.id.nav_cupons) {
+                    startActivity(new Intent(Home.this, Cupom.class));
+                    return true;
+                } else if (id == R.id.nav_config) {
+                    startActivity(new Intent(Home.this, Config.class));
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void configurarBotoes() {
@@ -98,30 +122,20 @@ public class Home extends AppCompatActivity {
         imageSlider.startSliding(2000);
     }
 
-    // Home.java (completo, apenas a parte modificada foi alterada abaixo)
-
     private void configurarRecyclerView() {
         recyclerViewProdutos = findViewById(R.id.recyclerViewProdutos);
         recyclerViewProdutos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        produtoAdapter = new ProdutoAdapter(this, listaProdutos, new ProdutoClickListener() {
-            @Override
-            public void onProdutoClick(Produto produto) {
-                // Abrir ProdutoDetalheActivity passando o ID
-                Intent intent = new Intent(Home.this, ProdutoDetalheActivity.class);
-                intent.putExtra("idProduto", produto.getId()); // Certifique-se de que o ID esteja presente
-                startActivity(intent);
-            }
+        produtoAdapter = new ProdutoAdapter(this, listaProdutos, produto -> {
+            Intent intent = new Intent(Home.this, ProdutoDetalheActivity.class);
+            intent.putExtra("idProduto", produto.getId());
+            startActivity(intent);
         });
-
         recyclerViewProdutos.setAdapter(produtoAdapter);
     }
-
 
     private void carregarProdutosDaApi() {
         ApiService apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
         Call<List<Produto>> call = apiService.getProdutos();
-
         call.enqueue(new Callback<List<Produto>>() {
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
@@ -139,10 +153,6 @@ public class Home extends AppCompatActivity {
         });
     }
 
-    private void abrirCategoria(String nomeCategoria) {
-        Toast.makeText(this, "Categoria: " + nomeCategoria, Toast.LENGTH_SHORT).show();
-    }
-
     private void configurarRecyclerCupons() {
         recyclerViewCupons = findViewById(R.id.recyclerViewCupons);
         recyclerViewCupons.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -153,7 +163,6 @@ public class Home extends AppCompatActivity {
     private void carregarCuponsDaApi() {
         ApiService apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
         Call<List<Cupom>> call = apiService.getCupons();
-
         call.enqueue(new Callback<List<Cupom>>() {
             @Override
             public void onResponse(Call<List<Cupom>> call, Response<List<Cupom>> response) {
@@ -174,7 +183,6 @@ public class Home extends AppCompatActivity {
     private void carregarCategoriasDaApi() {
         ApiService apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
         Call<List<Categoria>> call = apiService.getCategorias();
-
         call.enqueue(new Callback<List<Categoria>>() {
             @Override
             public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
@@ -195,19 +203,18 @@ public class Home extends AppCompatActivity {
     private void popularCategorias() {
         linearLayoutCategorias.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(this);
-
         for (Categoria categoria : listaCategorias) {
             View card = inflater.inflate(R.layout.item_categoria, linearLayoutCategorias, false);
-
             TextView nomeCategoria = card.findViewById(R.id.txtNomeCategoria);
             ImageView imagemCategoria = card.findViewById(R.id.imgCategoria);
-
             nomeCategoria.setText(categoria.getNome());
             Glide.with(this).load(categoria.getImagemUrl()).placeholder(R.drawable.placeholder).into(imagemCategoria);
-
             card.setOnClickListener(v -> abrirCategoria(categoria.getNome()));
-
             linearLayoutCategorias.addView(card);
         }
+    }
+
+    private void abrirCategoria(String nomeCategoria) {
+        Toast.makeText(this, "Categoria: " + nomeCategoria, Toast.LENGTH_SHORT).show();
     }
 }

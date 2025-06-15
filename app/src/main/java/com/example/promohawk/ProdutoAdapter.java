@@ -1,6 +1,7 @@
 package com.example.promohawk;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,28 +40,50 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
 
         holder.tvNomeProduto.setText(produto.getNome());
         holder.tvPrecoAtual.setText(produto.getPreco());
-        holder.tvPrecoAntigo.setText(produto.getMelhorPreco());
-        holder.tvAvaliacao.setText("★ " + produto.getAvaliacao());
 
-        // Deixa o texto do preço antigo riscado
-        holder.tvPrecoAntigo.setPaintFlags(holder.tvPrecoAntigo.getPaintFlags() | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
+        // Preço antigo riscado
+        String precoAntigo = produto.getMelhorPreco();
+        if (precoAntigo != null && !precoAntigo.isEmpty()) {
+            holder.tvPrecoAntigo.setVisibility(View.VISIBLE);
+            holder.tvPrecoAntigo.setText(precoAntigo);
+            holder.tvPrecoAntigo.setPaintFlags(
+                    holder.tvPrecoAntigo.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG
+            );
+        } else {
+            holder.tvPrecoAntigo.setVisibility(View.GONE);
+        }
 
+        // Avaliação
+        float avaliacao = produto.getAvaliacao();
+        if (avaliacao > 0) {
+            holder.tvAvaliacao.setText("★ " + String.format("%.1f", avaliacao));
+        } else {
+            holder.tvAvaliacao.setText("Sem avaliação");
+        }
+
+        // Carregar imagem com Glide
         Glide.with(context)
                 .load(produto.getImagemUrl())
                 .placeholder(android.R.drawable.ic_menu_gallery)
+                .error(android.R.drawable.ic_delete)
                 .into(holder.imgProduto);
 
-        // Clique no produto
+        // Clique no item
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onProdutoClick(produto);
             }
         });
+
+        // Clique no botão de favoritar
+        holder.btnFavoritar.setOnClickListener(v -> {
+            // Implemente aqui a lógica de favoritar, se necessário
+        });
     }
 
     @Override
     public int getItemCount() {
-        return produtos.size();
+        return produtos != null ? produtos.size() : 0;
     }
 
     public static class ProdutoViewHolder extends RecyclerView.ViewHolder {

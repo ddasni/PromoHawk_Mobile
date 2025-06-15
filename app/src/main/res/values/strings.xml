@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Promohawk</string>
+    <string name="favoritar_produto">Favoritar produto</string>
+    <string name="ir_ala_loja">Ir à loja</string>
+    <string name="descricao_imagem_produto">Imagem do produto</string>
+    <string name="descricao_favoritar">Favoritar produto</string>
+
 </resources>

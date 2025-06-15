@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
@@ -46,14 +47,12 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         textNome = findViewById(R.id.textNomeProduto);
         textPreco = findViewById(R.id.textPrecoProduto);
         imgFavorito = findViewById(R.id.imgFavorito);
-        btnVerOpcoes = findViewById(R.id.btnVerOpcoes);
         graficoPreco = findViewById(R.id.graficoPreco);
         textMelhorPreco = findViewById(R.id.textMelhorPreco);
         btnIrLoja = findViewById(R.id.btnIrLoja);
         ratingBar = findViewById(R.id.ratingBar);
         textQtdAvaliacoes = findViewById(R.id.textQtdAvaliacoes);
 
-        // Botão de favorito
         imgFavorito.setOnClickListener(v -> {
             favorito = !favorito;
             imgFavorito.setImageResource(favorito ?
@@ -61,7 +60,6 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
                     R.drawable.ic_favorite_border);
         });
 
-        // Carregar produto da API
         String idProduto = getIntent().getStringExtra("idProduto");
         if (idProduto != null) {
             carregarProduto(idProduto);
@@ -70,7 +68,7 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
 
     private void carregarProduto(String idProduto) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://suaapi.com/") // Substitua pelo seu endpoint real
+                .baseUrl("https://suaapi.com/") // Atualize para sua API real
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -80,12 +78,16 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
             public void onResponse(Call<Produto> call, Response<Produto> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     atualizarUI(response.body());
+                } else {
+                    Toast.makeText(ProdutoDetalheActivity.this,
+                            "Falha ao carregar produto", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Produto> call, Throwable t) {
-                // Trate erro aqui (ex: mostrar Toast)
+                Toast.makeText(ProdutoDetalheActivity.this,
+                        "Erro na requisição: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -97,14 +99,12 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         ratingBar.setRating(produto.getAvaliacao());
         textQtdAvaliacoes.setText("(" + produto.getQtdAvaliacoes() + " avaliações)");
 
-        // ViewPager
         if (produto.getImagens() != null) {
             viewPager.setAdapter(new ImagemAdapter(produto.getImagens()));
         }
 
-        // Gráfico
         List<Float> historico = produto.getHistoricoPrecos();
-        if (historico != null) {
+        if (historico != null && !historico.isEmpty()) {
             List<Entry> entries = new ArrayList<>();
             for (int i = 0; i < historico.size(); i++) {
                 entries.add(new Entry(i, historico.get(i)));
@@ -118,7 +118,6 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
             graficoPreco.invalidate();
         }
 
-        // Ação botão “Ir à loja”
         btnIrLoja.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(produto.getUrlLoja()));
