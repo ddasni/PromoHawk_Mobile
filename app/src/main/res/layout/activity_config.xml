@@ -130,14 +130,14 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/carrinho" />
+                    android:src="@drawable/historico_1" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingStart="20dp"
-                    android:text="Histórico de Compras"
+                    android:text="Histórico"
                     android:textSize="18sp"
                     android:textColor="#222222"
                     android:textStyle="bold" />

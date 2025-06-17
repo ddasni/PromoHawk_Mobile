@@ -1,13 +1,16 @@
 package com.example.promohawk;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.graphics.Bitmap;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.yalantis.ucrop.UCrop;
 
@@ -34,7 +37,19 @@ public class Config extends AppCompatActivity {
         });
 
         imgPerfil = findViewById(R.id.imgPerfil);
-        imgPerfil.setImageResource(R.drawable.ic_launcher_foreground);
+
+        // 🔁 Carregar imagem salva
+        SharedPreferences prefs = getSharedPreferences("perfil", MODE_PRIVATE);
+        String fotoSalva = prefs.getString("fotoPerfil", null);
+        if (fotoSalva != null) {
+            Glide.with(this)
+                    .load(Uri.parse(fotoSalva))
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.imagem_erro)
+                    .into(imgPerfil);
+        } else {
+            imgPerfil.setImageResource(R.drawable.ic_launcher_foreground);
+        }
 
         imgPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
@@ -66,7 +81,7 @@ public class Config extends AppCompatActivity {
             options.setCompressionQuality(90);
 
             UCrop.of(sourceUri, destinationUri)
-                    .withAspectRatio(1, 1) // Quadrado, ideal para foto de perfil
+                    .withAspectRatio(1, 1)
                     .withOptions(options)
                     .start(this);
         }
@@ -75,15 +90,19 @@ public class Config extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 final Uri resultUri = UCrop.getOutput(data);
                 if (resultUri != null) {
+                    // ✅ Mostrar imagem cortada
                     Glide.with(this)
                             .load(resultUri)
                             .placeholder(R.drawable.ic_launcher_foreground)
                             .error(R.drawable.imagem_erro)
                             .into(imgPerfil);
+
+                    // ✅ Salvar no SharedPreferences
+                    SharedPreferences prefs = getSharedPreferences("perfil", MODE_PRIVATE);
+                    prefs.edit().putString("fotoPerfil", resultUri.toString()).apply();
                 }
             } else if (resultCode == UCrop.RESULT_ERROR) {
                 final Throwable cropError = UCrop.getError(data);
-                // Aqui pode tratar erro, exibir mensagem para o usuário
                 cropError.printStackTrace();
             }
         }
