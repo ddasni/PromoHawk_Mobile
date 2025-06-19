@@ -5,6 +5,8 @@ import com.example.promohawk.Cupom;
 import com.example.promohawk.Produto;
 import com.example.promohawk.model.CadastroRequest;
 import com.example.promohawk.model.Compra;
+import com.example.promohawk.model.FotoPerfilBase64Request;
+import com.example.promohawk.model.FotoPerfilRequest;
 import com.example.promohawk.model.LoginRequest;
 import com.example.promohawk.model.LoginResponse;
 import com.example.promohawk.model.PerfilRequest;
@@ -42,4 +44,13 @@ public interface ApiService {
 
     @GET("categorias")
     Call<List<Categoria>> getCategorias();
+
+    @PUT("perfil/foto")
+    Call<Void> atualizarFotoPerfil(@Body FotoPerfilRequest fotoPerfilRequest);
+
+    @PUT("perfil/foto-base64")
+    Call<Void> atualizarFotoPerfilBase64(@Body FotoPerfilBase64Request request);
+
+
 }
+

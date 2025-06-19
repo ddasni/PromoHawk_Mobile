@@ -10,11 +10,12 @@ public class PerfilRequest {
     private String bairro;
     private String cidade;
     private String estado;
+    private String imagemBase64;
 
     // Construtor
     public PerfilRequest(String nome, String email, String telefone,
                          String cep, String rua, String numero, String bairro,
-                         String cidade, String estado) {
+                         String cidade, String estado,String imagemBase64) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -24,6 +25,10 @@ public class PerfilRequest {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
+        this.imagemBase64 = imagemBase64;
+    }
+    public String getImagemBase64() {
+        return imagemBase64;
     }
 
     public PerfilRequest(String nome, String email, String telefone, String enderecoCompleto) {

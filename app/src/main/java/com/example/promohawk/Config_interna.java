@@ -1,7 +1,9 @@
 package com.example.promohawk;
+
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -11,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +21,6 @@ public class Config_interna extends AppCompatActivity {
 
     private Switch switchNotificacoes;
     private LinearLayout layoutTermos;
-
     private TextView textoTermos;
     private boolean termosExpandido = false;
 
@@ -47,25 +49,32 @@ public class Config_interna extends AppCompatActivity {
         // Termos
         layoutTermos = findViewById(R.id.layoutTermos);
         textoTermos = findViewById(R.id.textoTermos);
-
         layoutTermos.setOnClickListener(v -> {
             termosExpandido = !termosExpandido;
             textoTermos.setVisibility(termosExpandido ? View.VISIBLE : View.GONE);
         });
 
-        // Ações extras
+        // Segurança e Privacidade
         findViewById(R.id.SegurancaPriv).setOnClickListener(v ->
                 Toast.makeText(this, "Segurança e Privacidade clicado", Toast.LENGTH_SHORT).show());
 
-        findViewById(R.id.Sair_tudo).setOnClickListener(v ->
-                Toast.makeText(this, "Sair da conta clicado", Toast.LENGTH_SHORT).show());
+        // Sair da conta
+        findViewById(R.id.Sair_tudo).setOnClickListener(v -> {
+            SharedPreferences prefs = getSharedPreferences("usuario_prefs", MODE_PRIVATE);
+            prefs.edit().clear().apply(); // Limpa tudo (inclui email, token, etc.)
 
-        // Botão de voltar
+            Intent intent = new Intent(Config_interna.this, Login.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Garante que a pilha seja limpa
+            startActivity(intent);
+            finish(); // Finaliza a activity atual
+        });
+
+        // Voltar
         ImageView botaoVoltar = findViewById(R.id.botaoVoltar);
         botaoVoltar.setOnClickListener(v -> {
-            Intent intent = new Intent(Config_interna.this, Config.class); // Altere se o nome da activity principal for diferente
+            Intent intent = new Intent(Config_interna.this, Config.class);
             startActivity(intent);
-            finish(); // Finaliza esta tela
+            finish();
         });
     }
 

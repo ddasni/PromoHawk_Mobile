@@ -1,9 +1,12 @@
 package com.example.promohawk;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,14 +29,30 @@ public class Login extends AppCompatActivity {
     private Button btnEntrar;
     private TextView btnCadastrar, btnEsqueceuSenha;
     private ImageView btnToggleSenha;
-    private boolean senhaVisivel = false;
+    private CheckBox checkBox;  // Checkbox para "Permanecer conectado"
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Inicializando os componentes da UI
+        checkBox = findViewById(R.id.checkBox);
+
+        // Carregar estado da checkbox e verificar token
+        SharedPreferences prefs = getSharedPreferences("usuario_prefs", MODE_PRIVATE);
+        boolean manterConectado = prefs.getBoolean("manterConectado", false);
+        String token = prefs.getString("token", null);
+
+        checkBox.setChecked(manterConectado);
+
+        if (manterConectado && token != null && !token.isEmpty()) {
+            // Usuário quer manter conectado e tem token salvo, vai direto para a tela principal
+            Intent intent = new Intent(Login.this, Config.class);
+            startActivity(intent);
+            finish();
+            return; // Evita continuar carregando tela de login
+        }
+
         editEmail = findViewById(R.id.editEmail);
         editSenha = findViewById(R.id.editSenha);
         btnEntrar = findViewById(R.id.btnEntrar);
@@ -41,41 +60,25 @@ public class Login extends AppCompatActivity {
         btnEsqueceuSenha = findViewById(R.id.btnEsqueceuSenha);
         btnToggleSenha = findViewById(R.id.btnToggleSenha);
 
-        // Alternar visibilidade da senha
-        ImageView btnToggleSenha = findViewById(R.id.btnToggleSenha);
-        EditText editSenha = findViewById(R.id.editSenha);
-
-// Flag para controlar o estado da senha
         final boolean[] isSenhaVisivel = {false};
-
         btnToggleSenha.setOnClickListener(v -> {
             if (isSenhaVisivel[0]) {
-                // Ocultar senha
                 editSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 btnToggleSenha.setImageResource(R.drawable.olho_fechado);
             } else {
-                // Mostrar senha
                 editSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                 btnToggleSenha.setImageResource(R.drawable.olho_aberto);
             }
-            // Mantém o cursor no final do texto
             editSenha.setSelection(editSenha.length());
             isSenhaVisivel[0] = !isSenhaVisivel[0];
         });
-
-
 
         btnEntrar.setOnClickListener(v -> {
             String email = editEmail.getText().toString();
             String senha = editSenha.getText().toString();
 
-            if (email.isEmpty()) {
-                Toast.makeText(this, "Por favor, insira o email.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (senha.isEmpty()) {
-                Toast.makeText(this, "Por favor, insira a senha.", Toast.LENGTH_SHORT).show();
+            if (email.isEmpty() || senha.isEmpty()) {
+                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -87,11 +90,28 @@ public class Login extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        String token = response.body().getAccessToken();
-                        getSharedPreferences("usuario_prefs", MODE_PRIVATE)
-                                .edit()
-                                .putString("token", token)
-                                .apply();
+                        LoginResponse login = response.body();
+
+                        SharedPreferences prefs = getSharedPreferences("usuario_prefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+
+                        boolean manterConectado = checkBox.isChecked();
+
+                        if (manterConectado) {
+                            editor.putString("token", login.getAccessToken());
+                            editor.putString("email", login.getEmail());
+                            editor.putString("nome", login.getNome());
+
+                            String chaveFoto = "fotoPerfil_" + login.getEmail();
+                            editor.putString(chaveFoto, login.getFotoUrl());
+                        } else {
+                            editor.clear(); // Limpa os dados caso não queira manter conectado
+                        }
+
+                        editor.putBoolean("manterConectado", manterConectado);
+                        editor.apply();
+
+                        Log.d("TOKEN_SALVO", "Token: " + login.getAccessToken());
 
                         Intent intent = new Intent(Login.this, Config.class);
                         startActivity(intent);
@@ -108,14 +128,7 @@ public class Login extends AppCompatActivity {
             });
         });
 
-        btnCadastrar.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this, Cadastro.class);
-            startActivity(intent);
-        });
-
-        btnEsqueceuSenha.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this, RecuperarSenha.class);
-            startActivity(intent);
-        });
+        btnCadastrar.setOnClickListener(v -> startActivity(new Intent(this, Cadastro.class)));
+        btnEsqueceuSenha.setOnClickListener(v -> startActivity(new Intent(this, RecuperarSenha.class)));
     }
 }

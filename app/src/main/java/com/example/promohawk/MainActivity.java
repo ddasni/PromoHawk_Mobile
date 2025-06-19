@@ -2,29 +2,39 @@ package com.example.promohawk;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.models.SlideModel;
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); // Aqui você pode ter o layout com animação ou imagem
 
-        // Iniciando a atividade de Login após 3 segundos
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, Login.class);
-                startActivity(intent);
-                finish();  // Finaliza a MainActivity
+        ImageView logo = findViewById(R.id.logo);
+        logo.animate()
+                .alpha(1f)
+                .setDuration(1000)
+                .setStartDelay(300)
+                .start();
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            SharedPreferences prefs = getSharedPreferences("usuario_prefs", MODE_PRIVATE);
+            String token = prefs.getString("token", null);
+
+            if (token != null && !token.isEmpty()) {
+                // Token existe, pode ir direto pra tela principal (Config, Home etc)
+                startActivity(new Intent(MainActivity.this, Config.class));
+            } else {
+                // Não tem token, vai para login
+                startActivity(new Intent(MainActivity.this, Login.class));
             }
-        }, 3000);
+            finish();
+
+        }, 3000); // 3 segundos de splash
     }
 }
-
