@@ -10,7 +10,8 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="56dp"> <!-- Altura da navbar -->
+        android:layout_marginBottom="56dp"
+        android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/mainLayout"
@@ -78,8 +79,8 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
                     android:text="Produtos em Destaque"
                     android:textStyle="bold"
                     android:textSize="18sp" />
@@ -108,7 +109,7 @@
                 android:id="@+id/progressBarProdutos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:visibility="gone"
                 android:layout_marginBottom="8dp" />
 
@@ -131,8 +132,8 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
                     android:text="Cupons em Destaque"
                     android:textStyle="bold"
                     android:textSize="18sp" />
@@ -161,7 +162,7 @@
                 android:id="@+id/progressBarCupons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:visibility="gone"
                 android:layout_marginBottom="8dp" />
 
@@ -181,6 +182,10 @@
         android:layout_height="56dp"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
-        app:menu="@menu/bottom_nav_menu" />
-
+        android:contentDescription="@string/descricao_navbar"
+        app:itemIconTint="@color/icone_nav_cor"
+        app:itemTextColor="@color/icone_nav_cor"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu"
+        style="@style/BottomNavStyle" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

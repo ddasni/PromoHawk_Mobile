@@ -1,4 +1,4 @@
-package com.example.promohawk;
+package com.example.promohawk.model;
 
 public class Categoria {
     private int id;

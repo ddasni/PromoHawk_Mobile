@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.promohawk.api.ApiService;
 import com.example.promohawk.api.RetrofitClient;
 import com.example.promohawk.model.FotoPerfilBase64Request;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.ByteArrayOutputStream;
@@ -31,6 +32,8 @@ public class Config extends AppCompatActivity {
     private ImageView imgPerfil;
     private ImageView btnVoltar;
     private LinearLayout btnFavoritos, btnConta, btnHistorico, btnSuporte;
+
+    private BottomNavigationView bottomNavigationView;
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -53,6 +56,9 @@ public class Config extends AppCompatActivity {
         btnHistorico = findViewById(R.id.btnHistorico);
         btnSuporte = findViewById(R.id.btnSuporte);
 
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        configurarBottomNavigation();
+
         btnVoltar.setOnClickListener(v -> {
             startActivity(new Intent(this, Home.class));
             finish();
@@ -72,8 +78,31 @@ public class Config extends AppCompatActivity {
         carregarFotoPerfil();
     }
 
+    private void configurarBottomNavigation() {
+        bottomNavigationView.setSelectedItemId(R.id.nav_config);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                startActivity(new Intent(this, Home.class));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (id == R.id.nav_produtos) {
+                startActivity(new Intent(this, ProdutosActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (id == R.id.nav_cupons) {
+                startActivity(new Intent(this, CuponsActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (id == R.id.nav_config) {
+                return true;
+            }
+            return false;
+        });
+    }
+
     private void carregarFotoPerfil() {
-        // Substitua isso se seu backend disponibilizar um endpoint para recuperar a imagem via e-mail
         String fotoBase64 = getSharedPreferences("usuario_prefs", MODE_PRIVATE)
                 .getString("fotoPerfil_" + email, null);
 
@@ -144,7 +173,6 @@ public class Config extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    // ✅ Sucesso! Salve o base64 local para exibição rápida (temporário)
                     getSharedPreferences("usuario_prefs", MODE_PRIVATE)
                             .edit()
                             .putString("fotoPerfil_" + email, "data:image/jpeg;base64," + base64)

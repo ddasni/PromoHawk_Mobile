@@ -1,21 +1,23 @@
 package com.example.promohawk;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.promohawk.model.Cupom;
 
 import java.util.List;
 
-
 public class CupomAdapter extends RecyclerView.Adapter<CupomAdapter.CupomViewHolder> {
+
     private Context context;
     private List<Cupom> listaCupons;
 
@@ -34,32 +36,50 @@ public class CupomAdapter extends RecyclerView.Adapter<CupomAdapter.CupomViewHol
     @Override
     public void onBindViewHolder(@NonNull CupomViewHolder holder, int position) {
         Cupom cupom = listaCupons.get(position);
-        holder.cupomDesconto.setText(cupom.getDesconto());
-        holder.cupomDescricao.setText(cupom.getDescricao());
-        holder.cupomCodigo.setText(cupom.getCodigo());
 
-        // Se estiver usando Glide para carregar imagens
-        Glide.with(context)
-                .load(cupom.getImagemUrl())
-                .into(holder.cupomImagem);
+        holder.tvData.setText(cupom.getData());
+        holder.tvDesconto.setText(cupom.getDesconto());
+        holder.tvDescricao.setText(cupom.getDescricao());
+        holder.tvCodigo.setText(cupom.getCodigo());
+
+        // Esconder/Mostrar código ao clicar
+        holder.tvVerCodigo.setOnClickListener(v -> {
+            if (holder.layoutCodigo.getVisibility() == View.GONE) {
+                holder.layoutCodigo.setVisibility(View.VISIBLE);
+                holder.tvVerCodigo.setText("Esconder código →");
+            } else {
+                holder.layoutCodigo.setVisibility(View.GONE);
+                holder.tvVerCodigo.setText("Ver código →");
+            }
+        });
+
+        // Copiar o código
+        holder.tvCopiar.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Código do cupom", cupom.getCodigo());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(context, "Código copiado!", Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
     public int getItemCount() {
-        return listaCupons.size();
+        return listaCupons != null ? listaCupons.size() : 0;
     }
 
-    public class CupomViewHolder extends RecyclerView.ViewHolder {
-        ImageView cupomImagem;
-        TextView cupomDesconto, cupomDescricao, cupomCodigo;
+    public static class CupomViewHolder extends RecyclerView.ViewHolder {
+        TextView tvData, tvDesconto, tvDescricao, tvVerCodigo, tvCodigo, tvCopiar;
+        View layoutCodigo;
 
         public CupomViewHolder(@NonNull View itemView) {
             super(itemView);
-            cupomImagem = itemView.findViewById(R.id.cupomImagem);
-            cupomDesconto = itemView.findViewById(R.id.cupomDesconto);
-            cupomDescricao = itemView.findViewById(R.id.cupomDescricao);
-            cupomCodigo = itemView.findViewById(R.id.cupomCodigo);
+            tvData = itemView.findViewById(R.id.tvData);
+            tvDesconto = itemView.findViewById(R.id.tvDesconto);
+            tvDescricao = itemView.findViewById(R.id.tvDescricao);
+            tvVerCodigo = itemView.findViewById(R.id.tvVerCodigo);
+            tvCodigo = itemView.findViewById(R.id.tvCodigo);
+            tvCopiar = itemView.findViewById(R.id.btnCopiar);
+            layoutCodigo = itemView.findViewById(R.id.layoutCodigo);
         }
     }
 }
-

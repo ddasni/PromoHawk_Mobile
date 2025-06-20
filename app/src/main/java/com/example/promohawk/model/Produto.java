@@ -1,4 +1,4 @@
-package com.example.promohawk;
+package com.example.promohawk.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +14,9 @@ public class Produto implements Serializable {
     private String urlLoja;
     private List<String> imagens;
     private List<Float> historicoPrecos;
+
+    // ✅ Adicionando categoria
+    private String categoria;
 
     public int getId() {
         return id;
@@ -53,5 +56,14 @@ public class Produto implements Serializable {
 
     public List<Float> getHistoricoPrecos() {
         return historicoPrecos;
+    }
+
+    // ✅ Getter e setter para categoria
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

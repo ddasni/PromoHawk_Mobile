@@ -1,8 +1,8 @@
 package com.example.promohawk.api;
 
-import com.example.promohawk.Categoria;
-import com.example.promohawk.Cupom;
-import com.example.promohawk.Produto;
+import com.example.promohawk.model.Categoria;
+import com.example.promohawk.model.Cupom;
+import com.example.promohawk.model.Produto;
 import com.example.promohawk.model.CadastroRequest;
 import com.example.promohawk.model.Compra;
 import com.example.promohawk.model.FotoPerfilBase64Request;

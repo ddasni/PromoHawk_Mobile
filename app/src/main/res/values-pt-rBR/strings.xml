@@ -5,4 +5,6 @@
     <string name="ir_ala_loja">Ir à loja</string>
     <string name="descricao_imagem_produto">Imagem do produto</string>
     <string name="descricao_favoritar">Favoritar produto</string>
+    <string name="descricao_navbar">Barra de navegação inferior</string>
+    <string name="descricao_imagem_categoria">Imagem da categoria</string>
 </resources>

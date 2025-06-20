@@ -9,4 +9,18 @@
                 <item name="android:paddingEnd">16dp</item>
         </style>
 
+        <style name="BottomNavStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+                <!-- Aumenta o espaçamento entre o ícone e o texto -->
+                <item name="itemIconSize">24dp</item>
+                <item name="itemTextAppearanceActive">@style/BottomNavText</item>
+                <item name="itemTextAppearanceInactive">@style/BottomNavText</item>
+        </style>
+
+        <style name="BottomNavText" parent="TextAppearance.AppCompat.Caption">
+                <item name="android:paddingTop">4dp</item>
+                <item name="android:paddingBottom">2dp</item>
+                <item name="android:textSize">12sp</item>
+        </style>
+
+
 </resources>
