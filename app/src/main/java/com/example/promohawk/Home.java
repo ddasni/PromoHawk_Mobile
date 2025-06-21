@@ -88,10 +88,18 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(context, Config.class));
                 overridePendingTransition(0, 0);
                 finish();
-                return true;
+            }    else if (id == R.id.nav_lojas) {
+                  startActivity(new Intent(context, Lojas.class));
+                  overridePendingTransition(0, 0);
+                  finish();
+                  return true;
             }
-            return false;
+
+                return false;
+
         });
+
+
     }
 
     private void configurarSlider() {

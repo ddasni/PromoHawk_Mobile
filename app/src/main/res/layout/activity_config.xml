@@ -24,9 +24,10 @@
         android:layout_below="@id/btnVoltar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:background="@drawable/circle_mask"
+        android:clipToOutline="true"
         android:scaleType="centerCrop"
-        android:background="@drawable/circle_background"
+        android:src="@drawable/user"
         android:contentDescription="Foto de Perfil" />
 
     <!-- Conteúdo com botões -->

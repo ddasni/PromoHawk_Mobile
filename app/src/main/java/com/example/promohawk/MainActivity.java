@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Config.class));
             } else {
                 // Não tem token, vai para login
-                startActivity(new Intent(MainActivity.this, Login.class));
+                startActivity(new Intent(MainActivity.this, Config.class));
             }
             finish();
 
