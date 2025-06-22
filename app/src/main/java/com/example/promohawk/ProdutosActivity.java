@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.promohawk.api.ApiService;
 import com.example.promohawk.api.RetrofitClient;
 import com.example.promohawk.model.Produto;
+import com.example.promohawk.model.ProdutoListResponse;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -36,7 +37,6 @@ public class ProdutosActivity extends AppCompatActivity {
 
         rvProdutos = findViewById(R.id.rvProdutos);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-
         apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
 
         configurarBottomNavigation();
@@ -68,26 +68,32 @@ public class ProdutosActivity extends AppCompatActivity {
     }
 
     private void carregarProdutos() {
-        apiService.getProdutos().enqueue(new Callback<List<Produto>>() {
+        apiService.getProdutos().enqueue(new Callback<ProdutoListResponse>() {
             @Override
-            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
+            public void onResponse(Call<ProdutoListResponse> call, Response<ProdutoListResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Produto> listaProdutos = response.body();
+                    List<Produto> listaProdutos = response.body().getProdutos();
+                    if (listaProdutos == null || listaProdutos.isEmpty()) {
+                        Toast.makeText(context, "Nenhum produto disponível.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     produtoAdapter = new ProdutoAdapter(context, listaProdutos, produto -> {
                         Intent intent = new Intent(context, ProdutoDetalheActivity.class);
                         intent.putExtra("idProduto", String.valueOf(produto.getId()));
                         startActivity(intent);
                     });
+
                     rvProdutos.setLayoutManager(new LinearLayoutManager(context));
                     rvProdutos.setAdapter(produtoAdapter);
                 } else {
-                    Toast.makeText(context, "Nenhum produto encontrado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Erro ao obter produtos", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Produto>> call, Throwable t) {
-                Toast.makeText(context, "Erro ao carregar produtos", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<ProdutoListResponse> call, Throwable t) {
+                Toast.makeText(context, "Falha de conexão: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

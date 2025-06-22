@@ -1,22 +1,36 @@
 package com.example.promohawk.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 
 public class Produto implements Serializable {
 
     private int id;
+
     private String nome;
-    private String preco;
-    private String melhorPreco;
+
+    private String descricao;
+
+    @SerializedName("media_nota")
     private float avaliacao;
-    private int qtdAvaliacoes;
+
+    @SerializedName("link")
     private String urlLoja;
+
     private List<String> imagens;
+
+    @SerializedName("categoria")
+    private Categoria categoria; // Objeto categoria
+
+    @SerializedName("precos")
+    private List<Preco> precos; // Lista de objetos de preço
+
+    // Para gráfico de histórico (preencher depois com base na lógica, se necessário)
     private List<Float> historicoPrecos;
 
-    // ✅ Adicionando categoria
-    private String categoria;
+    // ==== Getters ====
 
     public int getId() {
         return id;
@@ -26,20 +40,12 @@ public class Produto implements Serializable {
         return nome;
     }
 
-    public String getPreco() {
-        return preco;
-    }
-
-    public String getMelhorPreco() {
-        return melhorPreco;
+    public String getDescricao() {
+        return descricao;
     }
 
     public float getAvaliacao() {
         return avaliacao;
-    }
-
-    public int getQtdAvaliacoes() {
-        return qtdAvaliacoes;
     }
 
     public String getUrlLoja() {
@@ -54,16 +60,20 @@ public class Produto implements Serializable {
         return (imagens != null && !imagens.isEmpty()) ? imagens.get(0) : null;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public List<Preco> getPrecos() {
+        return precos;
+    }
+
     public List<Float> getHistoricoPrecos() {
         return historicoPrecos;
     }
 
-    // ✅ Getter e setter para categoria
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    // Opcional: setter para histórico (se precisar preencher manualmente)
+    public void setHistoricoPrecos(List<Float> historicoPrecos) {
+        this.historicoPrecos = historicoPrecos;
     }
 }

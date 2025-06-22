@@ -13,7 +13,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.promohawk.api.ApiService;
+import com.example.promohawk.api.RetrofitClient;
 import com.example.promohawk.model.Produto;
+import com.example.promohawk.model.ProdutoResponse;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -25,34 +28,36 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProdutoDetalheActivity extends AppCompatActivity {
 
     private ViewPager2 viewPager;
     private TextView textNome, textPreco, textMelhorPreco, textQtdAvaliacoes;
     private ImageView imgFavorito;
-    private Button btnVerOpcoes, btnIrLoja;
+    private Button btnIrLoja;
     private LineChart graficoPreco;
     private RatingBar ratingBar;
 
     private boolean favorito = false;
+    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.produto_detalhe);
 
+        // Inicializa views
         viewPager = findViewById(R.id.viewPagerImagemProduto);
         textNome = findViewById(R.id.textNomeProduto);
         textPreco = findViewById(R.id.textPrecoProduto);
-        imgFavorito = findViewById(R.id.imgFavorito);
-        graficoPreco = findViewById(R.id.graficoPreco);
         textMelhorPreco = findViewById(R.id.textMelhorPreco);
-        btnIrLoja = findViewById(R.id.btnIrLoja);
-        ratingBar = findViewById(R.id.ratingBar);
         textQtdAvaliacoes = findViewById(R.id.textQtdAvaliacoes);
+        imgFavorito = findViewById(R.id.imgFavorito);
+        ratingBar = findViewById(R.id.ratingBar);
+        btnIrLoja = findViewById(R.id.btnIrLoja);
+        graficoPreco = findViewById(R.id.graficoPreco); // ✅ Inicializado aqui
+
+        apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
 
         imgFavorito.setOnClickListener(v -> {
             favorito = !favorito;
@@ -61,34 +66,33 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
                     R.drawable.ic_favorite_border);
         });
 
-        String idProduto = getIntent().getStringExtra("idProduto");
-        if (idProduto != null) {
-            carregarProduto(idProduto);
+        String idProdutoStr = getIntent().getStringExtra("idProduto");
+        if (idProdutoStr != null) {
+            try {
+                int idProduto = Integer.parseInt(idProdutoStr);
+                carregarProduto(idProduto);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "ID inválido", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
-    private void carregarProduto(String idProduto) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://suaapi.com/") // Atualize para sua API real
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ProdutoService service = retrofit.create(ProdutoService.class);
-        service.getProduto(idProduto).enqueue(new Callback<Produto>() {
+    private void carregarProduto(int idProduto) {
+        apiService.getProduto(idProduto).enqueue(new Callback<ProdutoResponse>() {
             @Override
-            public void onResponse(Call<Produto> call, Response<Produto> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    atualizarUI(response.body());
+            public void onResponse(Call<ProdutoResponse> call, Response<ProdutoResponse> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().getProduto() != null) {
+                    atualizarUI(response.body().getProduto());
                 } else {
                     Toast.makeText(ProdutoDetalheActivity.this,
-                            "Falha ao carregar produto", Toast.LENGTH_SHORT).show();
+                            "Produto não encontrado", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Produto> call, Throwable t) {
+            public void onFailure(Call<ProdutoResponse> call, Throwable t) {
                 Toast.makeText(ProdutoDetalheActivity.this,
-                        "Erro na requisição: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        "Erro ao carregar produto: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -100,7 +104,7 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         ratingBar.setRating(produto.getAvaliacao());
         textQtdAvaliacoes.setText("(" + produto.getQtdAvaliacoes() + " avaliações)");
 
-        if (produto.getImagens() != null) {
+        if (produto.getImagens() != null && !produto.getImagens().isEmpty()) {
             viewPager.setAdapter(new ImagemAdapter(produto.getImagens()));
         }
 
@@ -114,8 +118,12 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
             LineDataSet dataSet = new LineDataSet(entries, "Preço (R$)");
             dataSet.setColor(Color.BLUE);
             dataSet.setValueTextColor(Color.BLACK);
+            dataSet.setLineWidth(2f);
+            dataSet.setCircleRadius(3f);
+            dataSet.setDrawValues(false);
 
             graficoPreco.setData(new LineData(dataSet));
+            graficoPreco.getDescription().setEnabled(false);
             graficoPreco.invalidate();
         }
 

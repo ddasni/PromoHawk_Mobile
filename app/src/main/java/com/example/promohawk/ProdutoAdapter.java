@@ -40,11 +40,17 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
         Produto produto = produtos.get(position);
 
         holder.tvNomeProduto.setText(produto.getNome());
-        holder.tvPrecoAtual.setText(produto.getPreco());
 
-        // Preço antigo riscado
-        String precoAntigo = produto.getMelhorPreco();
-        if (precoAntigo != null && !precoAntigo.isEmpty()) {
+        String precoAtual = produto.getMelhorPreco();
+        String precoAntigo = produto.getPreco();
+
+        if (precoAtual != null && !precoAtual.isEmpty()) {
+            holder.tvPrecoAtual.setText(precoAtual);
+        } else {
+            holder.tvPrecoAtual.setText("Preço indisponível");
+        }
+
+        if (precoAntigo != null && !precoAntigo.isEmpty() && !precoAntigo.equals(precoAtual)) {
             holder.tvPrecoAntigo.setVisibility(View.VISIBLE);
             holder.tvPrecoAntigo.setText(precoAntigo);
             holder.tvPrecoAntigo.setPaintFlags(
@@ -54,7 +60,6 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
             holder.tvPrecoAntigo.setVisibility(View.GONE);
         }
 
-        // Avaliação
         float avaliacao = produto.getAvaliacao();
         if (avaliacao > 0) {
             holder.tvAvaliacao.setText("★ " + String.format("%.1f", avaliacao));
@@ -62,23 +67,21 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
             holder.tvAvaliacao.setText("Sem avaliação");
         }
 
-        // Carregar imagem com Glide
         Glide.with(context)
                 .load(produto.getImagemUrl())
                 .placeholder(android.R.drawable.ic_menu_gallery)
                 .error(android.R.drawable.ic_delete)
                 .into(holder.imgProduto);
 
-        // Clique no item
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onProdutoClick(produto);
             }
         });
 
-        // Clique no botão de favoritar
         holder.btnFavoritar.setOnClickListener(v -> {
-            // Implemente aqui a lógica de favoritar, se necessário
+            // Implemente sua lógica aqui
+            // Exemplo: salvar nos favoritos locais, Firebase, etc.
         });
     }
 

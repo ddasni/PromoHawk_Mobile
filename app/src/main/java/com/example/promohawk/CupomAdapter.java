@@ -18,8 +18,8 @@ import java.util.List;
 
 public class CupomAdapter extends RecyclerView.Adapter<CupomAdapter.CupomViewHolder> {
 
-    private Context context;
-    private List<Cupom> listaCupons;
+    private final Context context;
+    private final List<Cupom> listaCupons;
 
     public CupomAdapter(Context context, List<Cupom> listaCupons) {
         this.context = context;
@@ -42,18 +42,14 @@ public class CupomAdapter extends RecyclerView.Adapter<CupomAdapter.CupomViewHol
         holder.tvDescricao.setText(cupom.getDescricao());
         holder.tvCodigo.setText(cupom.getCodigo());
 
-        // Esconder/Mostrar código ao clicar
+        // Alternar visibilidade do código ao clicar
         holder.tvVerCodigo.setOnClickListener(v -> {
-            if (holder.layoutCodigo.getVisibility() == View.GONE) {
-                holder.layoutCodigo.setVisibility(View.VISIBLE);
-                holder.tvVerCodigo.setText("Esconder código →");
-            } else {
-                holder.layoutCodigo.setVisibility(View.GONE);
-                holder.tvVerCodigo.setText("Ver código →");
-            }
+            boolean visivel = holder.layoutCodigo.getVisibility() == View.VISIBLE;
+            holder.layoutCodigo.setVisibility(visivel ? View.GONE : View.VISIBLE);
+            holder.tvVerCodigo.setText(visivel ? "Ver código →" : "Esconder código →");
         });
 
-        // Copiar o código
+        // Copiar o código do cupom
         holder.tvCopiar.setOnClickListener(v -> {
             ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("Código do cupom", cupom.getCodigo());
@@ -67,7 +63,7 @@ public class CupomAdapter extends RecyclerView.Adapter<CupomAdapter.CupomViewHol
         return listaCupons != null ? listaCupons.size() : 0;
     }
 
-    public static class CupomViewHolder extends RecyclerView.ViewHolder {
+    static class CupomViewHolder extends RecyclerView.ViewHolder {
         TextView tvData, tvDesconto, tvDescricao, tvVerCodigo, tvCodigo, tvCopiar;
         View layoutCodigo;
 

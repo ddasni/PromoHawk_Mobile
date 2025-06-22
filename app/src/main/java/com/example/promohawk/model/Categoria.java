@@ -1,8 +1,12 @@
 package com.example.promohawk.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Categoria {
     private int id;
     private String nome;
+
+    @SerializedName("imagem")
     private String imagemUrl;
 
     public Categoria() {}

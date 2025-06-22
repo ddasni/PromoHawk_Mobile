@@ -1,27 +1,20 @@
+// === ApiService.java (completo e atualizado) ===
 package com.example.promohawk.api;
 
-import com.example.promohawk.model.Categoria;
-import com.example.promohawk.model.Cupom;
-import com.example.promohawk.model.Produto;
-import com.example.promohawk.model.CadastroRequest;
-import com.example.promohawk.model.Compra;
-import com.example.promohawk.model.FotoPerfilBase64Request;
-import com.example.promohawk.model.FotoPerfilRequest;
-import com.example.promohawk.model.LoginRequest;
-import com.example.promohawk.model.LoginResponse;
-import com.example.promohawk.model.PerfilRequest;
+import com.example.promohawk.model.*;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiService {
 
-    // Autenticação e Usuário
+    // ==== Autenticação e Perfil ====
     @POST("users")
     Call<Void> registrar(@Body CadastroRequest request);
 
@@ -31,20 +24,6 @@ public interface ApiService {
     @PUT("perfil")
     Call<Void> atualizarPerfil(@Body PerfilRequest perfilRequest);
 
-    // Dados do Usuário
-    @GET("compras")
-    Call<List<Compra>> getHistoricoCompras();
-
-    // Dados para Home
-    @GET("produtos")
-    Call<List<Produto>> getProdutos();
-
-    @GET("cupons")
-    Call<List<Cupom>> getCupons();
-
-    @GET("categorias")
-    Call<List<Categoria>> getCategorias();
-
     @PUT("perfil/foto")
     Call<Void> atualizarFotoPerfil(@Body FotoPerfilRequest fotoPerfilRequest);
 
@@ -52,5 +31,31 @@ public interface ApiService {
     Call<Void> atualizarFotoPerfilBase64(@Body FotoPerfilBase64Request request);
 
 
-}
+    // ==== Produtos ====
+    @GET("produtos")
+    Call<ProdutoListResponse> getProdutos();
 
+    @GET("produtos/{id}")
+    Call<ProdutoResponse> getProduto(@Path("id") int id);
+
+
+    // ==== Cupons ====
+    @GET("cupons")
+    Call<CupomListResponse> getCupons();
+
+    @GET("cupons/{id}")
+    Call<CupomResponse> getCupom(@Path("id") int id); // ✅ Novo método
+
+
+    // ==== Categorias ====
+    @GET("categorias")
+    Call<CategoriaListResponse> getCategorias();
+
+    @GET("categorias/{id}")
+    Call<CategoriaResponse> getCategoria(@Path("id") int id); // ✅ Novo método
+
+
+    // ==== Histórico ====
+    @GET("compras")
+    Call<List<Compra>> getHistoricoCompras();
+}

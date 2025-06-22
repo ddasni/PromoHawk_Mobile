@@ -1,16 +1,15 @@
 package com.example.promohawk;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.TextView;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,15 +17,8 @@ import java.util.List;
 public class Lojas extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-
-    private List<Loja> listaLojas = Arrays.asList(
-            new Loja("Amazon", R.drawable.amazon, Amazon.class),
-            new Loja("Centauro", R.drawable.centauru, Centauro.class),
-            new Loja("Kabum", R.drawable.kabum, Kabum.class),
-            new Loja("Pichau", R.drawable.pichau3, Pichau.class),
-            new Loja("Magazine", R.drawable.magazine2, Magazine.class),
-            new Loja("Mercado Livre", R.drawable.mercado2, Mercado_Livre.class)
-    );
+    private BottomNavigationView bottomNavigationView;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,68 +27,43 @@ public class Lojas extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerLojas);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerView.setAdapter(new LojaAdapter(listaLojas));
+        recyclerView.setAdapter(new LojaAdapter(context, getListaLojas()));
+        recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.animation_fall_down));
 
-        recyclerView.setLayoutAnimation(
-                AnimationUtils.loadLayoutAnimation(this, R.anim.animation_fall_down)
-        );
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        configurarBottomNavigation();
     }
 
-    // Classe Loja com referência à Activity
-    static class Loja {
-        String nome;
-        int imagemRes;
-        Class<?> activityClass;
+    private void configurarBottomNavigation() {
+        bottomNavigationView.setSelectedItemId(R.id.nav_lojas);
 
-        Loja(String nome, int imagemRes, Class<?> activityClass) {
-            this.nome = nome;
-            this.imagemRes = imagemRes;
-            this.activityClass = activityClass;
-        }
-    }
-
-    public static class LojaAdapter extends RecyclerView.Adapter<LojaAdapter.LojaViewHolder> {
-
-        private final List<Loja> lojas;
-
-        public LojaAdapter(List<Loja> lojas) {
-            this.lojas = lojas;
-        }
-
-        @NonNull
-        @Override
-        public LojaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_loja, parent, false);
-            return new LojaViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull LojaViewHolder holder, int position) {
-            Loja loja = lojas.get(position);
-            holder.txtNome.setText(loja.nome);
-            holder.imgIcon.setImageResource(loja.imagemRes);
-
-            holder.itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(v.getContext(), loja.activityClass);
-                v.getContext().startActivity(intent);
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return lojas.size();
-        }
-
-        class LojaViewHolder extends RecyclerView.ViewHolder {
-            TextView txtNome;
-            ImageView imgIcon;
-
-            public LojaViewHolder(@NonNull View itemView) {
-                super(itemView);
-                txtNome = itemView.findViewById(R.id.txtNomeLoja);
-                imgIcon = itemView.findViewById(R.id.imgIconLoja);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                startActivity(new Intent(context, Home.class));
+            } else if (id == R.id.nav_produtos) {
+                startActivity(new Intent(context, ProdutosActivity.class));
+            } else if (id == R.id.nav_cupons) {
+                startActivity(new Intent(context, CuponsActivity.class));
+            } else if (id == R.id.nav_config) {
+                startActivity(new Intent(context, Config.class));
+            } else if (id == R.id.nav_lojas) {
+                return true;
             }
-        }
+            overridePendingTransition(0, 0);
+            finish();
+            return true;
+        });
+    }
+
+    private List<LojaCard> getListaLojas() {
+        return Arrays.asList(
+                new LojaCard("Amazon", R.drawable.amazon, Amazon.class),
+                new LojaCard("Centauro", R.drawable.centauru, Centauro.class),
+                new LojaCard("Kabum", R.drawable.kabum, Kabum.class),
+                new LojaCard("Pichau", R.drawable.pichau3, Pichau.class),
+                new LojaCard("Magazine", R.drawable.magazine2, Magazine.class),
+                new LojaCard("Mercado Livre", R.drawable.mercado2, Mercado_Livre.class)
+        );
     }
 }

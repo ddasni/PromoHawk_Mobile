@@ -19,8 +19,11 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.promohawk.api.ApiService;
 import com.example.promohawk.api.RetrofitClient;
 import com.example.promohawk.model.Categoria;
+import com.example.promohawk.model.CategoriaListResponse;
 import com.example.promohawk.model.Cupom;
+import com.example.promohawk.model.CupomListResponse;
 import com.example.promohawk.model.Produto;
+import com.example.promohawk.model.ProdutoListResponse;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -72,15 +75,14 @@ public class Home extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
-                // Já está na Home, não faz nada
                 return true;
             } else if (id == R.id.nav_produtos) {
                 startActivity(new Intent(context, ProdutosActivity.class));
                 overridePendingTransition(0, 0);
-                finish();  // Finaliza para evitar pilha excessiva
+                finish();
                 return true;
             } else if (id == R.id.nav_cupons) {
-                startActivity(new Intent(context,  CuponsActivity.class));
+                startActivity(new Intent(context, CuponsActivity.class));
                 overridePendingTransition(0, 0);
                 finish();
                 return true;
@@ -88,18 +90,15 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(context, Config.class));
                 overridePendingTransition(0, 0);
                 finish();
-            }    else if (id == R.id.nav_lojas) {
-                  startActivity(new Intent(context, Lojas.class));
-                  overridePendingTransition(0, 0);
-                  finish();
-                  return true;
+                return true;
+            } else if (id == R.id.nav_lojas) {
+                startActivity(new Intent(context, Lojas.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
             }
-
-                return false;
-
+            return false;
         });
-
-
     }
 
     private void configurarSlider() {
@@ -112,12 +111,12 @@ public class Home extends AppCompatActivity {
     }
 
     private void carregarCategorias() {
-        apiService.getCategorias().enqueue(new Callback<List<Categoria>>() {
+        apiService.getCategorias().enqueue(new Callback<CategoriaListResponse>() {
             @Override
-            public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
+            public void onResponse(Call<CategoriaListResponse> call, Response<CategoriaListResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     linearLayoutCategorias.removeAllViews();
-                    for (Categoria categoria : response.body()) {
+                    for (Categoria categoria : response.body().getCategorias()) {
                         View card = getLayoutInflater().inflate(R.layout.item_categoria, null);
 
                         TextView nomeCategoria = card.findViewById(R.id.nomeCategoria);
@@ -137,7 +136,7 @@ public class Home extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Categoria>> call, Throwable t) {
+            public void onFailure(Call<CategoriaListResponse> call, Throwable t) {
                 Toast.makeText(context, "Erro ao carregar categorias", Toast.LENGTH_SHORT).show();
             }
         });
@@ -145,12 +144,12 @@ public class Home extends AppCompatActivity {
 
     private void carregarProdutos() {
         progressBarProdutos.setVisibility(View.VISIBLE);
-        apiService.getProdutos().enqueue(new Callback<List<Produto>>() {
+        apiService.getProdutos().enqueue(new Callback<ProdutoListResponse>() {
             @Override
-            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
+            public void onResponse(Call<ProdutoListResponse> call, Response<ProdutoListResponse> response) {
                 progressBarProdutos.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Produto> lista = response.body();
+                    List<Produto> lista = response.body().getProdutos();
                     if (lista.isEmpty()) {
                         txtProdutosVazio.setVisibility(View.VISIBLE);
                     } else {
@@ -167,7 +166,7 @@ public class Home extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Produto>> call, Throwable t) {
+            public void onFailure(Call<ProdutoListResponse> call, Throwable t) {
                 progressBarProdutos.setVisibility(View.GONE);
                 Toast.makeText(context, "Erro ao carregar produtos", Toast.LENGTH_SHORT).show();
             }
@@ -176,12 +175,12 @@ public class Home extends AppCompatActivity {
 
     private void carregarCupons() {
         progressBarCupons.setVisibility(View.VISIBLE);
-        apiService.getCupons().enqueue(new Callback<List<Cupom>>() {
+        apiService.getCupons().enqueue(new Callback<CupomListResponse>() {
             @Override
-            public void onResponse(Call<List<Cupom>> call, Response<List<Cupom>> response) {
+            public void onResponse(Call<CupomListResponse> call, Response<CupomListResponse> response) {
                 progressBarCupons.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Cupom> lista = response.body();
+                    List<Cupom> lista = response.body().getCupons();
                     if (lista.isEmpty()) {
                         txtCuponsVazio.setVisibility(View.VISIBLE);
                     } else {
@@ -194,7 +193,7 @@ public class Home extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Cupom>> call, Throwable t) {
+            public void onFailure(Call<CupomListResponse> call, Throwable t) {
                 progressBarCupons.setVisibility(View.GONE);
                 Toast.makeText(context, "Erro ao carregar cupons", Toast.LENGTH_SHORT).show();
             }

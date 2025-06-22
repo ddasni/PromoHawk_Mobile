@@ -1,24 +1,51 @@
 package com.example.promohawk.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Cupom {
-    private String imagemUrl;
-    private String desconto;
-    private String descricao;
+
+    @SerializedName("codigo")
     private String codigo;
-    private String data; // nova propriedade
 
-    public String getImagemUrl() { return imagemUrl; }
-    public void setImagemUrl(String imagemUrl) { this.imagemUrl = imagemUrl; }
+    @SerializedName("descricao")
+    private String descricao;
 
-    public String getDesconto() { return desconto; }
-    public void setDesconto(String desconto) { this.desconto = desconto; }
+    @SerializedName("desconto")
+    private String desconto;
 
-    public String getDescricao() { return descricao; }
-    public void setDescricao(String descricao) { this.descricao = descricao; }
+    @SerializedName("validade")
+    private String data;
 
-    public String getCodigo() { return codigo; }
-    public void setCodigo(String codigo) { this.codigo = codigo; }
+    // Getters e Setters
+    public String getDesconto() {
+        return desconto;
+    }
 
-    public String getData() { return data; }
-    public void setData(String data) { this.data = data; }
+    public void setDesconto(String desconto) {
+        this.desconto = desconto;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
 }

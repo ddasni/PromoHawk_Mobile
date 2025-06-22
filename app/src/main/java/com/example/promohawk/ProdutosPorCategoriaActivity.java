@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.promohawk.api.ApiService;
 import com.example.promohawk.api.RetrofitClient;
 import com.example.promohawk.model.Produto;
+import com.example.promohawk.model.ProdutoListResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,13 +54,15 @@ public class ProdutosPorCategoriaActivity extends AppCompatActivity {
 
     private void carregarProdutosDaCategoria() {
         progressBar.setVisibility(View.VISIBLE);
-        apiService.getProdutos().enqueue(new Callback<List<Produto>>() {
+        apiService.getProdutos().enqueue(new Callback<ProdutoListResponse>() {
             @Override
-            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
+            public void onResponse(Call<ProdutoListResponse> call, Response<ProdutoListResponse> response) {
                 progressBar.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
+                    List<Produto> todos = response.body().getProdutos();
                     listaFiltrada.clear();
-                    for (Produto produto : response.body()) {
+
+                    for (Produto produto : todos) {
                         if (produto.getCategoria() != null &&
                                 produto.getCategoria().equalsIgnoreCase(categoriaSelecionada)) {
                             listaFiltrada.add(produto);
@@ -71,9 +74,7 @@ public class ProdutosPorCategoriaActivity extends AppCompatActivity {
                     } else {
                         txtSemResultados.setVisibility(View.GONE);
 
-                        // Criando o adapter com o listener de clique
                         produtoAdapter = new ProdutoAdapter(ProdutosPorCategoriaActivity.this, listaFiltrada, produto -> {
-                            // Ação ao clicar no produto: abrir ProdutoDetalheActivity
                             Intent intent = new Intent(ProdutosPorCategoriaActivity.this, ProdutoDetalheActivity.class);
                             intent.putExtra("idProduto", String.valueOf(produto.getId()));
                             startActivity(intent);
@@ -89,7 +90,7 @@ public class ProdutosPorCategoriaActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Produto>> call, Throwable t) {
+            public void onFailure(Call<ProdutoListResponse> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(ProdutosPorCategoriaActivity.this, "Erro ao carregar produtos", Toast.LENGTH_SHORT).show();
             }
