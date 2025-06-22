@@ -24,74 +24,89 @@ public class Lojas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lojas);
 
-        // Inicialização dos componentes
-        initViews();
+        initializeViews();
         setupRecyclerView();
-        setupBottomNavigation();
     }
 
-    private void initViews() {
+    private void initializeViews() {
         recyclerView = findViewById(R.id.recyclerLojas);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
     }
 
     private void setupRecyclerView() {
-        // Configuração do LayoutManager com 2 colunas
+        // Configuração do LayoutManager
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
 
         // Configuração do Adapter
-        LojasAdapter adapter = new LojasAdapter(getListaLojas(), this);
+        LojasAdapter adapter = new LojasAdapter(getStoreList(), this);
         recyclerView.setAdapter(adapter);
 
-        // Animação para os itens
-        recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(
-                this, R.anim.animation_fall_down));
-
-        // Adiciona espaçamento entre os itens (opcional)
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 16, true));
+        // Animação e espaçamento
+        setupRecyclerViewAnimations();
+        addItemDecoration();
     }
 
-    private void setupBottomNavigation() {
+    private void setupRecyclerViewAnimations() {
+        recyclerView.setLayoutAnimation(
+                AnimationUtils.loadLayoutAnimation(this, R.anim.animation_fall_down)
+        );
+    }
+
+    private void addItemDecoration() {
+        int spanCount = 2; // Número de colunas
+        int spacing = getResources().getDimensionPixelSize(R.dimen.grid_spacing); // 16dp
+        boolean includeEdge = true;
+
+        recyclerView.addItemDecoration(
+                new GridSpacingItemDecoration(spanCount, spacing, includeEdge)
+        );
+    }
+
+    private void configurarBottomNavigation() {
         bottomNavigationView.setSelectedItemId(R.id.nav_lojas);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
+            Context context = this;
 
-            if (id == R.id.nav_lojas) {
-                return true; // Já estamos nesta tela
-            }
-
-            // Navegação para outras telas
-            Class<?> destination = null;
             if (id == R.id.nav_home) {
-                destination = Home.class;
-            } else if (id == R.id.nav_produtos) {
-                destination = ProdutosActivity.class;
-            } else if (id == R.id.nav_cupons) {
-                destination = CuponsActivity.class;
-            } else if (id == R.id.nav_config) {
-                destination = Config.class;
-            }
-
-            if (destination != null) {
-                startActivity(new Intent(this, destination));
+                startActivity(new Intent(context, Home.class));
                 overridePendingTransition(0, 0);
                 finish();
+                return true;
+            } else if (id == R.id.nav_produtos) {
+                startActivity(new Intent(context, ProdutosActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            } else if (id == R.id.nav_cupons) {
+                startActivity(new Intent(context, CuponsActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            } else if (id == R.id.nav_lojas) {
+                return true; // Já está na tela de lojas
             }
 
-            return true;
+            return false;
         });
     }
 
-    private List<LojaCard> getListaLojas() {
+
+            private void applyTransition() {
+        overridePendingTransition(0, 0);
+        finish();
+    }
+
+    private List<LojaCard> getStoreList() {
         return Arrays.asList(
-                new LojaCard("Amazon", R.drawable.amazon, Amazon.class),
-                new LojaCard("Centauro", R.drawable.centauru, Centauro.class),
-                new LojaCard("Kabum", R.drawable.kabum, Kabum.class),
-                new LojaCard("Pichau", R.drawable.pichau3, Pichau.class),
-                new LojaCard("Magazine", R.drawable.magazine2, Magazine.class),
-                new LojaCard("Mercado Livre", R.drawable.mercado2, Mercado_Livre.class)
+                new LojaCard(getString(R.string.amazon), R.drawable.amazon, Amazon.class),
+                new LojaCard(getString(R.string.centauro), R.drawable.centauru, Centauro.class),
+                new LojaCard(getString(R.string.kabum), R.drawable.kabum, Kabum.class),
+                new LojaCard(getString(R.string.pichau), R.drawable.pichau3, Pichau.class),
+                new LojaCard(getString(R.string.magazine), R.drawable.magazine2, Magazine.class),
+                new LojaCard(getString(R.string.mercado_livre), R.drawable.mercado2, Mercado_Livre.class)
         );
     }
 }

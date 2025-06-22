@@ -44,28 +44,42 @@ public class ProdutosActivity extends AppCompatActivity {
     }
 
     private void configurarBottomNavigation() {
-        bottomNavigationView.setSelectedItemId(R.id.nav_produtos);
+        bottomNavigationView.setSelectedItemId(R.id.nav_produtos); // Marcando produtos como selecionado
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
+            Context context = this;
+
             if (id == R.id.nav_home) {
                 startActivity(new Intent(context, Home.class));
                 overridePendingTransition(0, 0);
+                finish();
                 return true;
             } else if (id == R.id.nav_produtos) {
-                return true;
+                return true; // Já está na tela de produtos
             } else if (id == R.id.nav_cupons) {
                 startActivity(new Intent(context, CuponsActivity.class));
                 overridePendingTransition(0, 0);
+                finish();
                 return true;
             } else if (id == R.id.nav_config) {
                 startActivity(new Intent(context, Config.class));
                 overridePendingTransition(0, 0);
+                finish();
+                return true;
+            } else if (id == R.id.nav_lojas) {
+                startActivity(new Intent(context, Lojas.class));
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             }
+
             return false;
         });
     }
+
+
+
 
     private void carregarProdutos() {
         apiService.getProdutos().enqueue(new Callback<ProdutoListResponse>() {

@@ -60,9 +60,14 @@ public class CuponsActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             } else if (id == R.id.nav_cupons) {
                 return true;
-            }
-            finish();
-            return true;
+            } else if (id == R.id.nav_lojas) {
+                startActivity(new Intent(context, Lojas.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;}
+
+            return false;
+
         });
     }
 
