@@ -2,24 +2,17 @@ package com.example.promohawk;
 
 public class LojaCard {
     private String nome;
-    private int imagemRes;
-    private Class<?> activityClass;
+    private int imagemResId;
+    private Class<?> activityDestino;
 
-    public LojaCard(String nome, int imagemRes, Class<?> activityClass) {
+    public LojaCard(String nome, int imagemResId, Class<?> activityDestino) {
         this.nome = nome;
-        this.imagemRes = imagemRes;
-        this.activityClass = activityClass;
+        this.imagemResId = imagemResId;
+        this.activityDestino = activityDestino;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public int getImagemRes() {
-        return imagemRes;
-    }
-
-    public Class<?> getActivityClass() {
-        return activityClass;
-    }
+    // Getters
+    public String getNome() { return nome; }
+    public int getImagemResId() { return imagemResId; }
+    public Class<?> getActivityDestino() { return activityDestino; }
 }

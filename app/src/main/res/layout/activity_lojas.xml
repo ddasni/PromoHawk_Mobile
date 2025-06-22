@@ -4,26 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Conteúdo principal com RecyclerView -->
+    <!-- RecyclerView com margem para não cobrir pela navbar -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerLojas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
         android:paddingBottom="72dp"
-        android:layout_margin="16dp"
-        android:scrollbars="vertical" />
+        android:clipToPadding="false"
+        android:layout_margin="16dp" />
 
-    <!-- Bottom Navigation fixa -->
+    <!-- BottomNavigationView -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        android:contentDescription="@string/descricao_navbar"
         app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@color/icone_nav_cor"
-        app:itemTextColor="@color/icone_nav_cor" />
-
+        app:itemTextColor="@color/icone_nav_cor"
+        android:background="?android:attr/windowBackground" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

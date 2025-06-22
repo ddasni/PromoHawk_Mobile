@@ -18,40 +18,68 @@ public class Lojas extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private BottomNavigationView bottomNavigationView;
-    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lojas);
 
-        recyclerView = findViewById(R.id.recyclerLojas);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerView.setAdapter(new LojaAdapter(context, getListaLojas()));
-        recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.animation_fall_down));
-
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-        configurarBottomNavigation();
+        // Inicialização dos componentes
+        initViews();
+        setupRecyclerView();
+        setupBottomNavigation();
     }
 
-    private void configurarBottomNavigation() {
+    private void initViews() {
+        recyclerView = findViewById(R.id.recyclerLojas);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+    }
+
+    private void setupRecyclerView() {
+        // Configuração do LayoutManager com 2 colunas
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // Configuração do Adapter
+        LojasAdapter adapter = new LojasAdapter(getListaLojas(), this);
+        recyclerView.setAdapter(adapter);
+
+        // Animação para os itens
+        recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(
+                this, R.anim.animation_fall_down));
+
+        // Adiciona espaçamento entre os itens (opcional)
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 16, true));
+    }
+
+    private void setupBottomNavigation() {
         bottomNavigationView.setSelectedItemId(R.id.nav_lojas);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.nav_home) {
-                startActivity(new Intent(context, Home.class));
-            } else if (id == R.id.nav_produtos) {
-                startActivity(new Intent(context, ProdutosActivity.class));
-            } else if (id == R.id.nav_cupons) {
-                startActivity(new Intent(context, CuponsActivity.class));
-            } else if (id == R.id.nav_config) {
-                startActivity(new Intent(context, Config.class));
-            } else if (id == R.id.nav_lojas) {
-                return true;
+
+            if (id == R.id.nav_lojas) {
+                return true; // Já estamos nesta tela
             }
-            overridePendingTransition(0, 0);
-            finish();
+
+            // Navegação para outras telas
+            Class<?> destination = null;
+            if (id == R.id.nav_home) {
+                destination = Home.class;
+            } else if (id == R.id.nav_produtos) {
+                destination = ProdutosActivity.class;
+            } else if (id == R.id.nav_cupons) {
+                destination = CuponsActivity.class;
+            } else if (id == R.id.nav_config) {
+                destination = Config.class;
+            }
+
+            if (destination != null) {
+                startActivity(new Intent(this, destination));
+                overridePendingTransition(0, 0);
+                finish();
+            }
+
             return true;
         });
     }

@@ -92,9 +92,12 @@ public class Home extends AppCompatActivity {
                 finish();
                 return true;
             } else if (id == R.id.nav_lojas) {
-                startActivity(new Intent(context, Lojas.class));
-                overridePendingTransition(0, 0);
-                finish();
+                if (!(context instanceof Lojas)) {
+                    Toast.makeText(context, "Clicou em Lojas", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(context, Lojas.class));
+                    overridePendingTransition(0, 0);
+                    finish();
+                }
                 return true;
             }
             return false;
