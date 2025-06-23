@@ -54,6 +54,7 @@ public class ProdutosPorCategoriaActivity extends AppCompatActivity {
 
     private void carregarProdutosDaCategoria() {
         progressBar.setVisibility(View.VISIBLE);
+
         apiService.getProdutos().enqueue(new Callback<ProdutoListResponse>() {
             @Override
             public void onResponse(Call<ProdutoListResponse> call, Response<ProdutoListResponse> response) {
@@ -64,7 +65,7 @@ public class ProdutosPorCategoriaActivity extends AppCompatActivity {
 
                     for (Produto produto : todos) {
                         if (produto.getCategoria() != null &&
-                                produto.getCategoria().equalsIgnoreCase(categoriaSelecionada)) {
+                                produto.getCategoria().getNome().equalsIgnoreCase(categoriaSelecionada)) {
                             listaFiltrada.add(produto);
                         }
                     }

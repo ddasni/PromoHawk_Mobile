@@ -8,9 +8,7 @@ import java.util.List;
 public class Produto implements Serializable {
 
     private int id;
-
     private String nome;
-
     private String descricao;
 
     @SerializedName("media_nota")
@@ -21,17 +19,15 @@ public class Produto implements Serializable {
 
     private List<String> imagens;
 
-    @SerializedName("categoria")
-    private Categoria categoria; // Objeto categoria
+    private Categoria categoria;
 
-    @SerializedName("precos")
-    private List<Preco> precos; // Lista de objetos de preço
+    private List<Preco> precos;
 
-    // Para gráfico de histórico (preencher depois com base na lógica, se necessário)
     private List<Float> historicoPrecos;
 
-    // ==== Getters ====
+    private List<Review> reviews;
 
+    // Getters
     public int getId() {
         return id;
     }
@@ -72,8 +68,22 @@ public class Produto implements Serializable {
         return historicoPrecos;
     }
 
-    // Opcional: setter para histórico (se precisar preencher manualmente)
     public void setHistoricoPrecos(List<Float> historicoPrecos) {
         this.historicoPrecos = historicoPrecos;
     }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    // Preço atual (primeiro da lista, ou null se vazio)
+    public String getPreco() {
+        return (precos != null && !precos.isEmpty()) ? precos.get(0).getPreco() : null;
+    }
+
+    // Melhor preço (pode ser lógica diferente, mas por enquanto igual ao atual)
+    public String getMelhorPreco() {
+        return getPreco(); // ou implemente uma lógica para obter o menor preço se desejar
+    }
+
 }

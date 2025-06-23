@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Conteúdo Principal -->
+    <!-- Conteúdo com Scroll -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -20,14 +20,14 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Slider -->
+            <!-- Slider de Imagens -->
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Seção Categorias -->
+            <!-- Categorias -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,10 +40,10 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
                     android:text="Categorias em destaque"
                     android:textStyle="bold"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:id="@+id/verMaisCategorias"
@@ -64,10 +64,11 @@
                     android:id="@+id/linearLayoutCategorias"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" />
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp" />
             </HorizontalScrollView>
 
-            <!-- Seção Produtos -->
+            <!-- Produtos -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,10 +81,10 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
                     android:text="Produtos em Destaque"
                     android:textStyle="bold"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:id="@+id/verMaisProdutos"
@@ -99,9 +100,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nenhum produto encontrado."
-                android:gravity="center"
-                android:textSize="16sp"
                 android:textColor="#888888"
+                android:textSize="16sp"
+                android:gravity="center"
                 android:visibility="gone"
                 android:layout_marginBottom="8dp" />
 
@@ -120,7 +121,7 @@
                 android:scrollbars="horizontal"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Seção Cupons -->
+            <!-- Cupons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -133,10 +134,10 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
                     android:text="Cupons em Destaque"
                     android:textStyle="bold"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:id="@+id/verMaisCupons"
@@ -152,9 +153,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nenhum cupom disponível."
-                android:gravity="center"
-                android:textSize="16sp"
                 android:textColor="#888888"
+                android:textSize="16sp"
+                android:gravity="center"
                 android:visibility="gone"
                 android:layout_marginBottom="8dp" />
 
