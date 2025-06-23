@@ -32,30 +32,30 @@ public interface ApiService {
 
 
     // ==== Produtos ====
-    @GET("produtos")
+    @GET("produto")
     Call<ProdutoListResponse> getProdutos();
 
-    @GET("produtos/{id}")
+    @GET("produto/{id}")
     Call<ProdutoResponse> getProduto(@Path("id") int id);
 
 
     // ==== Cupons ====
-    @GET("cupons")
+    @GET("cupom")
     Call<CupomListResponse> getCupons();
 
-    @GET("cupons/{id}")
+    @GET("cupom/{id}")
     Call<CupomResponse> getCupom(@Path("id") int id); // ✅ Novo método
 
 
     // ==== Categorias ====
-    @GET("categorias")
+    @GET("categoria")
     Call<CategoriaListResponse> getCategorias();
 
-    @GET("categorias/{id}")
+    @GET("categoria/{id}")
     Call<CategoriaResponse> getCategoria(@Path("id") int id); // ✅ Novo método
 
 
     // ==== Histórico ====
-    @GET("compras")
+    @GET("compra")
     Call<List<Compra>> getHistoricoCompras();
 }
