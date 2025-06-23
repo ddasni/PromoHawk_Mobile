@@ -4,12 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp">
 
         <LinearLayout
             android:padding="16dp"
@@ -30,7 +33,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
-                android:orientation="horizontal" />
+                android:orientation="horizontal"
+                android:useDefaultMargins="true"
+                android:alignmentMode="alignMargins" />
 
         </LinearLayout>
     </ScrollView>

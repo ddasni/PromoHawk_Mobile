@@ -2,30 +2,34 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:orientation="vertical"
     android:background="#FFFFFF">
 
     <!-- Título da tela -->
     <TextView
+        android:id="@+id/tituloProdutos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Produtos"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:paddingBottom="16dp"/>
+        android:paddingVertical="16dp"
+        android:textColor="#000000" />
 
     <!-- Lista de produtos -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProdutos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
+        android:scrollbars="vertical" />
 
-    <!-- Bottom Navigation -->
+    <!-- Navegação inferior -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

@@ -11,12 +11,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.promohawk.api.ApiService;
 import com.example.promohawk.api.RetrofitClient;
+import com.example.promohawk.model.Preco;
 import com.example.promohawk.model.Produto;
 import com.example.promohawk.model.ProdutoResponse;
+import com.example.promohawk.model.Review;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -37,16 +41,17 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
     private Button btnIrLoja;
     private LineChart graficoPreco;
     private RatingBar ratingBar;
+    private RecyclerView recyclerViewReviews;
 
     private boolean favorito = false;
     private ApiService apiService;
+    private ReviewAdapter reviewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.produto_detalhe);
 
-        // Inicializa views
         viewPager = findViewById(R.id.viewPagerImagemProduto);
         textNome = findViewById(R.id.textNomeProduto);
         textPreco = findViewById(R.id.textPrecoProduto);
@@ -55,7 +60,8 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         imgFavorito = findViewById(R.id.imgFavorito);
         ratingBar = findViewById(R.id.ratingBar);
         btnIrLoja = findViewById(R.id.btnIrLoja);
-        graficoPreco = findViewById(R.id.graficoPreco); // ✅ Inicializado aqui
+        graficoPreco = findViewById(R.id.graficoPreco);
+        recyclerViewReviews = findViewById(R.id.recyclerViewReviews);
 
         apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
 
@@ -81,56 +87,67 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         apiService.getProduto(idProduto).enqueue(new Callback<ProdutoResponse>() {
             @Override
             public void onResponse(Call<ProdutoResponse> call, Response<ProdutoResponse> response) {
-                if (response.isSuccessful() && response.body() != null && response.body().getProduto() != null) {
+                if (response.isSuccessful() && response.body() != null) {
                     atualizarUI(response.body().getProduto());
                 } else {
-                    Toast.makeText(ProdutoDetalheActivity.this,
-                            "Produto não encontrado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProdutoDetalheActivity.this, "Produto não encontrado", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ProdutoResponse> call, Throwable t) {
-                Toast.makeText(ProdutoDetalheActivity.this,
-                        "Erro ao carregar produto: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProdutoDetalheActivity.this, "Erro: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void atualizarUI(Produto produto) {
         textNome.setText(produto.getNome());
-        textPreco.setText(produto.getPreco());
-        textMelhorPreco.setText(produto.getMelhorPreco());
-        ratingBar.setRating(produto.getAvaliacao());
-        textQtdAvaliacoes.setText("(" + produto.getQtdAvaliacoes() + " avaliações)");
 
-        if (produto.getImagens() != null && !produto.getImagens().isEmpty()) {
+        if (produto.getPrecos() != null && !produto.getPrecos().isEmpty()) {
+            Preco preco = produto.getPrecos().get(0);
+            textPreco.setText("R$ " + preco.getPreco());
+            textMelhorPreco.setText("R$ " + preco.getValor_parcela());
+        } else {
+            textPreco.setText("Preço indisponível");
+            textMelhorPreco.setText("");
+        }
+
+        ratingBar.setRating(produto.getAvaliacao());
+        textQtdAvaliacoes.setText(String.format("(%.1f estrelas)", produto.getAvaliacao()));
+
+        if (produto.getImagens() != null) {
             viewPager.setAdapter(new ImagemAdapter(produto.getImagens()));
         }
 
-        List<Float> historico = produto.getHistoricoPrecos();
-        if (historico != null && !historico.isEmpty()) {
+        if (produto.getUrlLoja() != null && !produto.getUrlLoja().isEmpty()) {
+            btnIrLoja.setOnClickListener(v -> {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(produto.getUrlLoja()));
+                startActivity(intent);
+            });
+        }
+
+        if (produto.getHistoricoPrecos() != null && !produto.getHistoricoPrecos().isEmpty()) {
             List<Entry> entries = new ArrayList<>();
+            List<Float> historico = produto.getHistoricoPrecos();
             for (int i = 0; i < historico.size(); i++) {
                 entries.add(new Entry(i, historico.get(i)));
             }
 
-            LineDataSet dataSet = new LineDataSet(entries, "Preço (R$)");
+            LineDataSet dataSet = new LineDataSet(entries, "Histórico de Preço (R$)");
             dataSet.setColor(Color.BLUE);
             dataSet.setValueTextColor(Color.BLACK);
-            dataSet.setLineWidth(2f);
-            dataSet.setCircleRadius(3f);
-            dataSet.setDrawValues(false);
+            LineData lineData = new LineData(dataSet);
 
-            graficoPreco.setData(new LineData(dataSet));
-            graficoPreco.getDescription().setEnabled(false);
+            graficoPreco.setData(lineData);
             graficoPreco.invalidate();
         }
 
-        btnIrLoja.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(produto.getUrlLoja()));
-            startActivity(intent);
-        });
+        // Reviews
+        if (produto.getReviews() != null && !produto.getReviews().isEmpty()) {
+            recyclerViewReviews.setLayoutManager(new LinearLayoutManager(this));
+            reviewAdapter = new ReviewAdapter(produto.getReviews());
+            recyclerViewReviews.setAdapter(reviewAdapter);
+        }
     }
 }

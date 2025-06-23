@@ -93,7 +93,6 @@ public class Home extends AppCompatActivity {
                 return true;
             } else if (id == R.id.nav_lojas) {
                 if (!(context instanceof Lojas)) {
-                    Toast.makeText(context, "Clicou em Lojas", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(context, Lojas.class));
                     overridePendingTransition(0, 0);
                     finish();

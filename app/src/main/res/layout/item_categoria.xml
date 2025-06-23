@@ -14,8 +14,9 @@
         android:layout_height="72dp"
         android:scaleType="centerCrop"
         android:src="@android:drawable/ic_menu_gallery"
-    android:contentDescription="Imagem da Categoria"
-    android:background="@drawable/circle_background" />
+        android:contentDescription="@string/img_categoria_desc"
+        android:background="@drawable/circle_background"
+        android:elevation="2dp" />
 
     <TextView
         android:id="@+id/nomeCategoria"
@@ -23,10 +24,10 @@
         android:layout_height="wrap_content"
         android:text="Categoria"
         android:textSize="14sp"
-        android:textColor="@android:color/black"
+        android:textColor="#222222"
         android:layout_marginTop="6dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:gravity="center" />
-
+        android:gravity="center"
+        android:textAlignment="center" />
 </LinearLayout>

@@ -7,4 +7,6 @@
     <string name="descricao_favoritar">Favoritar produto</string>
     <string name="descricao_navbar">Barra de navegação inferior</string>
     <string name="descricao_imagem_categoria">Imagem da categoria</string>
+    <string name="img_categoria_desc">Imagem da Categoria</string>
+    <string name="descricao_slider_produto">Descrição do produto para o slider</string>
 </resources>
