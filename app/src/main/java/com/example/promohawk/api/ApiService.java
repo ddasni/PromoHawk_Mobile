@@ -33,15 +33,15 @@ public interface ApiService {
 
     // ==== Produtos ====
     @GET("produto")
-    Call<ProdutoListResponse> getProdutos();
+    Call<ProdutoListResponse> getProduto();
 
     @GET("produto/{id}")
-    Call<ProdutoResponse> getProduto(@Path("id") int id);
+    Call<Produto> getProduto(@Path("id") int id);
 
 
     // ==== Cupons ====
     @GET("cupom")
-    Call<CupomListResponse> getCupons();
+    Call<CupomListResponse> getCupom();
 
     @GET("cupom/{id}")
     Call<CupomResponse> getCupom(@Path("id") int id); // ✅ Novo método
@@ -49,7 +49,7 @@ public interface ApiService {
 
     // ==== Categorias ====
     @GET("categoria")
-    Call<CategoriaListResponse> getCategorias();
+    Call<CategoriaListResponse> getCategoria();
 
     @GET("categoria/{id}")
     Call<CategoriaResponse> getCategoria(@Path("id") int id); // ✅ Novo método
