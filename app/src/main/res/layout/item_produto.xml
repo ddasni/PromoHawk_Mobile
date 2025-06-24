@@ -1,79 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_card_rounded"
-    android:padding="12dp"
-    android:elevation="2dp"
-    android:layout_marginBottom="12dp">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    android:background="@android:color/white"
+    android:elevation="4dp">
 
-    <ImageView
-        android:id="@+id/imgProduto"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/bg_imagem_produto"
-        android:contentDescription="@string/descricao_imagem_produto" />
-
-    <TextView
-        android:id="@+id/tvNomeProduto"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/imgProduto"
-        android:layout_alignTop="@id/imgProduto"
-        android:layout_marginStart="16dp"
-        android:text="Nome do Produto"
-        android:textColor="#222222"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:maxLines="2"
-        android:ellipsize="end" />
+        android:padding="12dp">
 
-    <TextView
-        android:id="@+id/tvPrecoAtual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvNomeProduto"
-        android:layout_toEndOf="@id/imgProduto"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="R$ 99,99"
-        android:textColor="#FF3B30"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/btnFavoritar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/ic_favorite_border"
+            android:contentDescription="@string/descricao_favoritar"
+            app:tint="@color/black" />
 
-    <TextView
-        android:id="@+id/tvPrecoAntigo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/tvPrecoAtual"
-        android:layout_toEndOf="@id/tvPrecoAtual"
-        android:layout_marginStart="8dp"
-        android:text="R$ 120,00"
-        android:textColor="#999999"
-        android:textSize="14sp" />
+        <ImageView
+            android:id="@+id/imgProduto"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/descricao_imagem_produto" />
 
-    <TextView
-        android:id="@+id/tvAvaliacao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvPrecoAtual"
-        android:layout_toEndOf="@id/imgProduto"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="★ 4.5"
-        android:textColor="#FFD700"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tvNomeProduto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgProduto"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Nome do Produto"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end" />
 
-    <ImageView
-        android:id="@+id/btnFavoritar"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="8dp"
-        android:layout_centerVertical="true"
-        android:src="@drawable/ic_favorite_border"
-        android:contentDescription="@string/descricao_favoritar" />
-
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tvPrecoAtual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNomeProduto"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="R$ 0,00"
+            android:textColor="#444444"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

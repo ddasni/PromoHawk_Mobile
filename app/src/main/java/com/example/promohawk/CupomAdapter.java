@@ -1,19 +1,15 @@
 package com.example.promohawk;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.promohawk.model.Cupom;
-
 import java.util.List;
 
 public class CupomAdapter extends RecyclerView.Adapter<CupomAdapter.CupomViewHolder> {
@@ -23,7 +19,7 @@ public class CupomAdapter extends RecyclerView.Adapter<CupomAdapter.CupomViewHol
 
     public CupomAdapter(Context context, List<Cupom> listaCupons) {
         this.context = context;
-        this.listaCupons = listaCupons;
+        this.listaCupons = listaCupons.size() > 6 ? listaCupons.subList(0, 6) : listaCupons;
     }
 
     @NonNull
@@ -40,32 +36,31 @@ public class CupomAdapter extends RecyclerView.Adapter<CupomAdapter.CupomViewHol
         holder.tvData.setText(cupom.getData());
         holder.tvDesconto.setText(cupom.getDesconto());
         holder.tvDescricao.setText(cupom.getDescricao());
-        holder.tvCodigo.setText(cupom.getCodigo());
 
-        // Alternar visibilidade do código ao clicar
         holder.tvVerCodigo.setOnClickListener(v -> {
-            boolean visivel = holder.layoutCodigo.getVisibility() == View.VISIBLE;
-            holder.layoutCodigo.setVisibility(visivel ? View.GONE : View.VISIBLE);
-            holder.tvVerCodigo.setText(visivel ? "Ver código →" : "Esconder código →");
+            holder.layoutCodigo.setVisibility(View.VISIBLE);
+            holder.tvVerCodigo.setVisibility(View.GONE);
+            holder.tvCodigo.setText(cupom.getCodigo());
         });
 
-        // Copiar o código do cupom
-        holder.tvCopiar.setOnClickListener(v -> {
-            ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("Código do cupom", cupom.getCodigo());
+        holder.btnCopiar.setOnClickListener(v -> {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager)
+                    context.getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Cupom", cupom.getCodigo());
             clipboard.setPrimaryClip(clip);
-            Toast.makeText(context, "Código copiado!", Toast.LENGTH_SHORT).show();
+            android.widget.Toast.makeText(context, "Código copiado!", android.widget.Toast.LENGTH_SHORT).show();
         });
     }
 
     @Override
     public int getItemCount() {
-        return listaCupons != null ? listaCupons.size() : 0;
+        return listaCupons.size();
     }
 
-    static class CupomViewHolder extends RecyclerView.ViewHolder {
-        TextView tvData, tvDesconto, tvDescricao, tvVerCodigo, tvCodigo, tvCopiar;
-        View layoutCodigo;
+    public static class CupomViewHolder extends RecyclerView.ViewHolder {
+        TextView tvData, tvDesconto, tvDescricao, tvVerCodigo, tvCodigo;
+        LinearLayout layoutCodigo;
+        Button btnCopiar;
 
         public CupomViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,8 +69,8 @@ public class CupomAdapter extends RecyclerView.Adapter<CupomAdapter.CupomViewHol
             tvDescricao = itemView.findViewById(R.id.tvDescricao);
             tvVerCodigo = itemView.findViewById(R.id.tvVerCodigo);
             tvCodigo = itemView.findViewById(R.id.tvCodigo);
-            tvCopiar = itemView.findViewById(R.id.btnCopiar);
             layoutCodigo = itemView.findViewById(R.id.layoutCodigo);
+            btnCopiar = itemView.findViewById(R.id.btnCopiar);
         }
     }
 }

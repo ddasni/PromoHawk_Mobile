@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Conteúdo com Scroll -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -20,7 +19,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Slider de Imagens -->
+            <!-- Carrossel -->
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
@@ -43,20 +42,22 @@
                     android:text="Categorias em destaque"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:textColor="#D8D8D8"/>
 
                 <TextView
                     android:id="@+id/verMaisCategorias"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ver mais >"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@android:color/holo_blue_light"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="noHideDescendants"
                 android:overScrollMode="never"
                 android:scrollbars="none">
 
@@ -84,14 +85,15 @@
                     android:text="Produtos em Destaque"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:textColor="#D8D8D8"/>
 
                 <TextView
                     android:id="@+id/verMaisProdutos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ver mais >"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@android:color/holo_blue_light"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -118,8 +120,9 @@
                 android:id="@+id/recyclerViewProdutos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:nestedScrollingEnabled="false"
+                android:scrollbars="horizontal" />
 
             <!-- Cupons -->
             <LinearLayout
@@ -137,14 +140,15 @@
                     android:text="Cupons em Destaque"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:textColor="#D8D8D8"/>
 
                 <TextView
                     android:id="@+id/verMaisCupons"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ver mais >"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@android:color/holo_blue_light"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -171,12 +175,11 @@
                 android:id="@+id/recyclerViewCupons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal"
+                android:nestedScrollingEnabled="false"
                 android:layout_marginBottom="16dp" />
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

@@ -3,27 +3,27 @@ package com.example.promohawk;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.promohawk.api.ApiService;
 import com.example.promohawk.api.RetrofitClient;
-import com.example.promohawk.model.Categoria;
-import com.example.promohawk.model.CategoriaListResponse;
-import com.example.promohawk.model.Cupom;
-import com.example.promohawk.model.CupomListResponse;
-import com.example.promohawk.model.Produto;
-import com.example.promohawk.model.ProdutoListResponse;
+import com.example.promohawk.model.*;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -35,15 +35,14 @@ import retrofit2.Response;
 
 public class Home extends AppCompatActivity {
 
+    private ApiService apiService;
     private LinearLayout linearLayoutCategorias;
     private RecyclerView recyclerViewProdutos, recyclerViewCupons;
+    private ProdutoAdapter produtoAdapter;
+    private CupomAdapter cupomAdapter;
     private ProgressBar progressBarProdutos, progressBarCupons;
     private TextView txtProdutosVazio, txtCuponsVazio;
     private BottomNavigationView bottomNavigationView;
-
-    private ProdutoAdapter produtoAdapter;
-    private CupomAdapter cupomAdapter;
-    private ApiService apiService;
     private Context context = this;
 
     @Override
@@ -52,18 +51,17 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
-
         linearLayoutCategorias = findViewById(R.id.linearLayoutCategorias);
         recyclerViewProdutos = findViewById(R.id.recyclerViewProdutos);
         recyclerViewCupons = findViewById(R.id.recyclerViewCupons);
-        progressBarProdutos = findViewById(R.id.progressBarProdutos);
-        progressBarCupons = findViewById(R.id.progressBarCupons);
         txtProdutosVazio = findViewById(R.id.txtProdutosVazio);
         txtCuponsVazio = findViewById(R.id.txtCuponsVazio);
+        progressBarProdutos = findViewById(R.id.progressBarProdutos);
+        progressBarCupons = findViewById(R.id.progressBarCupons);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         configurarBottomNavigation();
-        configurarSlider();
+        carregarSlider();
         carregarCategorias();
         carregarProdutos();
         carregarCupons();
@@ -71,45 +69,26 @@ public class Home extends AppCompatActivity {
 
     private void configurarBottomNavigation() {
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
-
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.nav_home) {
-                return true;
-            } else if (id == R.id.nav_produtos) {
-                startActivity(new Intent(context, ProdutosActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            } else if (id == R.id.nav_cupons) {
-                startActivity(new Intent(context, CuponsActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            } else if (id == R.id.nav_config) {
-                startActivity(new Intent(context, Config.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            } else if (id == R.id.nav_lojas) {
-                if (!(context instanceof Lojas)) {
-                    startActivity(new Intent(context, Lojas.class));
-                    overridePendingTransition(0, 0);
-                    finish();
-                }
-                return true;
-            }
-            return false;
+            if (id == R.id.nav_home) return true;
+            if (id == R.id.nav_produtos) startActivity(new Intent(context, ProdutosActivity.class));
+            else if (id == R.id.nav_cupons) startActivity(new Intent(context, CuponsActivity.class));
+            else if (id == R.id.nav_config) startActivity(new Intent(context, Config.class));
+            else if (id == R.id.nav_lojas) startActivity(new Intent(context, Lojas.class));
+            overridePendingTransition(0, 0);
+            finish();
+            return true;
         });
     }
 
-    private void configurarSlider() {
+    private void carregarSlider() {
         ImageSlider slider = findViewById(R.id.slider);
         List<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel(R.drawable.slider1, ScaleTypes.CENTER_CROP));
-        slideModels.add(new SlideModel(R.drawable.slider2, ScaleTypes.CENTER_CROP));
-        slideModels.add(new SlideModel(R.drawable.slider3, ScaleTypes.CENTER_CROP));
-        slider.setImageList(slideModels, ScaleTypes.CENTER_CROP);
+        slideModels.add(new SlideModel("https://link-imagem-1.png", ScaleTypes.FIT));
+        slideModels.add(new SlideModel("https://link-imagem-2.png", ScaleTypes.FIT));
+        slideModels.add(new SlideModel("https://link-imagem-3.png", ScaleTypes.FIT));
+        slider.setImageList(slideModels, ScaleTypes.FIT);
     }
 
     private void carregarCategorias() {
@@ -117,23 +96,31 @@ public class Home extends AppCompatActivity {
             @Override
             public void onResponse(Call<CategoriaListResponse> call, Response<CategoriaListResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    List<Categoria> categorias = response.body().getCategorias();
                     linearLayoutCategorias.removeAllViews();
-                    for (Categoria categoria : response.body().getCategorias()) {
-                        View card = getLayoutInflater().inflate(R.layout.item_categoria, null);
+                    LayoutInflater inflater = LayoutInflater.from(context);
+                    int limite = Math.min(6, categorias.size());
 
-                        TextView nomeCategoria = card.findViewById(R.id.nomeCategoria);
-                        nomeCategoria.setText(categoria.getNome());
+                    for (int i = 0; i < limite; i++) {
+                        Categoria categoria = categorias.get(i);
+                        View view = inflater.inflate(R.layout.item_categoria, linearLayoutCategorias, false);
+                        TextView nome = view.findViewById(R.id.nomeCategoria);
+                        ImageView imagem = view.findViewById(R.id.imgCategoria);
+                        nome.setText(categoria.getNome());
 
-                        card.setOnClickListener(v -> {
+                        Glide.with(context)
+                                .load(categoria.getImagemUrl())
+                                .placeholder(R.drawable.placeholder)
+                                .into(imagem);
+
+                        view.setOnClickListener(v -> {
                             Intent intent = new Intent(context, ProdutosPorCategoriaActivity.class);
                             intent.putExtra("categoria", categoria.getNome());
                             startActivity(intent);
                         });
 
-                        linearLayoutCategorias.addView(card);
+                        linearLayoutCategorias.addView(view);
                     }
-                } else {
-                    Toast.makeText(context, "Nenhuma categoria encontrada", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -156,7 +143,7 @@ public class Home extends AppCompatActivity {
                         txtProdutosVazio.setVisibility(View.VISIBLE);
                     } else {
                         txtProdutosVazio.setVisibility(View.GONE);
-                        produtoAdapter = new ProdutoAdapter(context, lista, produto -> {
+                        produtoAdapter = new ProdutoAdapter(context, lista.subList(0, Math.min(6, lista.size())), produto -> {
                             Intent intent = new Intent(context, ProdutoDetalheActivity.class);
                             intent.putExtra("idProduto", String.valueOf(produto.getId()));
                             startActivity(intent);
@@ -187,8 +174,8 @@ public class Home extends AppCompatActivity {
                         txtCuponsVazio.setVisibility(View.VISIBLE);
                     } else {
                         txtCuponsVazio.setVisibility(View.GONE);
-                        cupomAdapter = new CupomAdapter(context, lista);
-                        recyclerViewCupons.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+                        cupomAdapter = new CupomAdapter(context, lista.subList(0, Math.min(6, lista.size())));
+                        recyclerViewCupons.setLayoutManager(new GridLayoutManager(context, 2));
                         recyclerViewCupons.setAdapter(cupomAdapter);
                     }
                 }
