@@ -7,14 +7,14 @@ public class Categoria {
     private String nome;
 
     @SerializedName("imagem")
-    private String imagemUrl;
+    private String imagem;
 
     public Categoria() {}
 
-    public Categoria(int id, String nome, String imagemUrl) {
+    public Categoria(int id, String nome, String imagem) {
         this.id = id;
         this.nome = nome;
-        this.imagemUrl = imagemUrl;
+        this.imagem = imagem;
     }
 
     public int getId() {
@@ -25,8 +25,8 @@ public class Categoria {
         return nome;
     }
 
-    public String getImagemUrl() {
-        return imagemUrl;
+    public String getImagem() {
+        return imagem;
     }
 
     public void setId(int id) {
@@ -37,7 +37,7 @@ public class Categoria {
         this.nome = nome;
     }
 
-    public void setImagemUrl(String imagemUrl) {
-        this.imagemUrl = imagemUrl;
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 }

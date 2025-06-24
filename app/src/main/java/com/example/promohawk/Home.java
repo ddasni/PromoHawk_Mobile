@@ -109,7 +109,7 @@ public class Home extends AppCompatActivity {
                         nome.setText(categoria.getNome());
 
                         Glide.with(context)
-                                .load(categoria.getImagemUrl())
+                                .load(categoria.getImagem())
                                 .placeholder(R.drawable.placeholder)
                                 .into(imagem);
 
