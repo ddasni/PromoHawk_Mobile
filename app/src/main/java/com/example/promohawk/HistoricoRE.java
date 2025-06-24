@@ -37,8 +37,6 @@ public class HistoricoRE extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        apiService = Amazon.RetrofitClient.getPromoHawkInstance().create(ApiService.class);
-
         carregarHistorico();
     }
 

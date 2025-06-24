@@ -35,7 +35,7 @@ public class Historico extends AppCompatActivity {
         emptyView = findViewById(R.id.emptyHistorico);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        apiService = Amazon.RetrofitClient.getPromoHawkInstance().create(ApiService.class);
+
 
         carregarHistorico();
     }
