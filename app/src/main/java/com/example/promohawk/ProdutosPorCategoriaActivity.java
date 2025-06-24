@@ -55,7 +55,7 @@ public class ProdutosPorCategoriaActivity extends AppCompatActivity {
     private void carregarProdutosDaCategoria() {
         progressBar.setVisibility(View.VISIBLE);
 
-        apiService.getProdutos().enqueue(new Callback<ProdutoListResponse>() {
+        apiService.getProduto().enqueue(new Callback<ProdutoListResponse>() {
             @Override
             public void onResponse(Call<ProdutoListResponse> call, Response<ProdutoListResponse> response) {
                 progressBar.setVisibility(View.GONE);
