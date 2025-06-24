@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Config_interna extends AppCompatActivity {
 
     private Switch switchNotificacoes;
-    private LinearLayout layoutTermos;
+    private LinearLayout SegPriv;
     private TextView textoTermos;
     private boolean termosExpandido = false;
 
@@ -47,16 +47,12 @@ public class Config_interna extends AppCompatActivity {
         });
 
         // Termos
-        layoutTermos = findViewById(R.id.layoutTermos);
+        SegPriv = findViewById(R.id.layoutTermos);
         textoTermos = findViewById(R.id.textoTermos);
-        layoutTermos.setOnClickListener(v -> {
+        SegPriv.setOnClickListener(v -> {
             termosExpandido = !termosExpandido;
             textoTermos.setVisibility(termosExpandido ? View.VISIBLE : View.GONE);
         });
-
-        // Segurança e Privacidade
-        findViewById(R.id.SegurancaPriv).setOnClickListener(v ->
-                Toast.makeText(this, "Segurança e Privacidade clicado", Toast.LENGTH_SHORT).show());
 
         // Sair da conta
         findViewById(R.id.Sair_tudo).setOnClickListener(v -> {

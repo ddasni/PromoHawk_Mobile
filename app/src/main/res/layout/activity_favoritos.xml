@@ -20,11 +20,11 @@
 
         <ImageView
             android:id="@+id/botaoVoltarFavoritos"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_flecha_esquerda_negra"
-            android:contentDescription="Voltar" />
+            android:contentDescription="Voltar"
+            android:src="@drawable/ic_flecha_esquerda_negra" />
 
         <TextView
             android:layout_width="match_parent"

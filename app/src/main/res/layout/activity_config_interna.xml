@@ -34,41 +34,6 @@ android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:orientation="vertical">
 
-<!-- Segurança e Privacidade -->
-<LinearLayout
-    android:id="@+id/SegurancaPriv"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:padding="20dp"
-    android:background="@drawable/card_background"
-    android:clickable="true"
-    android:focusable="true"
-    android:elevation="6dp">
-
-    <ImageView
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:src="@drawable/ic_seguranca" />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingStart="20dp"
-        android:text="Segurança e Privacidade"
-        android:textSize="18sp"
-        android:textColor="#222222"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:src="@drawable/ic_direira_pra_la" />
-</LinearLayout>
-
 <!-- Notificações -->
 <LinearLayout
     android:layout_width="match_parent"
@@ -102,49 +67,55 @@ android:orientation="vertical">
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 </LinearLayout>
 
-<!-- Termos de Uso -->
-<LinearLayout
-    android:id="@+id/layoutTermos"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:background="@drawable/card_background"
-    android:elevation="6dp">
-
+    <!-- Termos de Uso -->
     <LinearLayout
+        android:id="@+id/layoutTermos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@drawable/card_background"
+        android:elevation="6dp">
 
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/ic_informacao" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_informacao" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="20dp"
+                android:text="Termos de Uso e Política de Privacidade"
+                android:textSize="18sp"
+                android:textColor="#222222"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/iconeSetaTermos"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_down" />
+        </LinearLayout>
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/textoTermos"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="20dp"
-            android:text="Termos de Uso e Política"
-            android:textSize="18sp"
-            android:textColor="#222222"
-            android:textStyle="bold" />
+            android:text="Ao utilizar o aplicativo Promohawk, você concorda com nossos Termos de Serviço e Política de Privacidade. Coletamos informações pessoais como nome, e-mail, telefone e credenciais de acesso para proporcionar uma experiência personalizada. A imagem de perfil é opcional.\n\nTodas as informações são armazenadas com segurança e não são comercializadas. Podemos enviar notificações, mediante sua autorização. Seus dados são utilizados exclusivamente para:\n\n• Aprimoramento dos nossos serviços\n• Comparação de preços mais precisa\n\nVocê possui direito de acessar, corrigir ou solicitar a exclusão dos seus dados a qualquer momento. O uso inadequado da plataforma é expressamente proibido.\n\nAlterações nestes termos serão comunicadas através do aplicativo. Para dúvidas ou solicitações, contate-nos: contato@promohawk.com"
+            android:visibility="gone"
+            android:textSize="15sp"
+            android:paddingTop="12dp"
+            android:textColor="#666666" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textoTermos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ao usar o app da Promohawk, você concorda com nossos termos. Coletamos dados como nome, e-mail, telefone, login, senha e imagem (opcional) para personalizar sua experiência. Suas informações são protegidas e nunca vendidas. Podemos enviar notificações se você permitir. Usamos seus dados para melhorar nossos serviços e comparar preços com mais precisão. Você pode acessar, editar ou excluir seus dados a qualquer momento. O uso indevido da plataforma é proibido. Alterações nos termos serão informadas no app. Dúvidas?Fale com a gente: contato@promohawk.com"
-        android:visibility="gone"
-        android:textSize="15sp"
-        android:paddingTop="12dp"
-        android:textColor="#666666" />
-</LinearLayout>
 
 <!-- Sair da Conta -->
 <LinearLayout
