@@ -44,7 +44,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         holder.nomeCategoria.setText(categoria.getNome());
 
         Glide.with(context)
-                .load(categoria.getImagemUrl())
+                .load(categoria.getImagem())
                 .placeholder(R.drawable.placeholder)
                 .into(holder.imgCategoria);
 

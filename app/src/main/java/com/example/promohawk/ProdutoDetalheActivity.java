@@ -20,7 +20,6 @@ import com.example.promohawk.api.RetrofitClient;
 import com.example.promohawk.model.Preco;
 import com.example.promohawk.model.Produto;
 import com.example.promohawk.model.ProdutoResponse;
-import com.example.promohawk.model.Review;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -84,18 +83,18 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
     }
 
     private void carregarProduto(int idProduto) {
-        apiService.getProduto(idProduto).enqueue(new Callback<ProdutoResponse>() {
+        apiService.getProduto(idProduto).enqueue(new Callback<Produto>() {
             @Override
-            public void onResponse(Call<ProdutoResponse> call, Response<ProdutoResponse> response) {
+            public void onResponse(Call<Produto> call, Response<Produto> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    atualizarUI(response.body().getProduto());
+                    atualizarUI(response.body());
                 } else {
                     Toast.makeText(ProdutoDetalheActivity.this, "Produto não encontrado", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ProdutoResponse> call, Throwable t) {
+            public void onFailure(Call<Produto> call, Throwable t) {
                 Toast.makeText(ProdutoDetalheActivity.this, "Erro: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -107,7 +106,7 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         if (produto.getPrecos() != null && !produto.getPrecos().isEmpty()) {
             Preco preco = produto.getPrecos().get(0);
             textPreco.setText("R$ " + preco.getPreco());
-            textMelhorPreco.setText("R$ " + preco.getValor_parcela());
+            textMelhorPreco.setText("R$ " + preco.getValorParcela());
         } else {
             textPreco.setText("Preço indisponível");
             textMelhorPreco.setText("");
@@ -116,7 +115,7 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         ratingBar.setRating(produto.getAvaliacao());
         textQtdAvaliacoes.setText(String.format("(%.1f estrelas)", produto.getAvaliacao()));
 
-        if (produto.getImagens() != null) {
+        if (produto.getImagens() != null && !produto.getImagens().isEmpty()) {
             viewPager.setAdapter(new ImagemAdapter(produto.getImagens()));
         }
 
@@ -127,11 +126,12 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
             });
         }
 
+        // Se futuramente quiser usar histórico de preços
+        // Aqui está um exemplo (pode ser populado por uma lógica futura)
         if (produto.getHistoricoPrecos() != null && !produto.getHistoricoPrecos().isEmpty()) {
             List<Entry> entries = new ArrayList<>();
-            List<Float> historico = produto.getHistoricoPrecos();
-            for (int i = 0; i < historico.size(); i++) {
-                entries.add(new Entry(i, historico.get(i)));
+            for (int i = 0; i < produto.getHistoricoPrecos().size(); i++) {
+                entries.add(new Entry(i, produto.getHistoricoPrecos().get(i)));
             }
 
             LineDataSet dataSet = new LineDataSet(entries, "Histórico de Preço (R$)");

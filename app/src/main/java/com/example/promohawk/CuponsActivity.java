@@ -72,7 +72,7 @@ public class CuponsActivity extends AppCompatActivity {
     }
 
     private void carregarCupons() {
-        apiService.getCupons().enqueue(new Callback<CupomListResponse>() {
+        apiService.getCupom().enqueue(new Callback<CupomListResponse>() {
             @Override
             public void onResponse(Call<CupomListResponse> call, Response<CupomListResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {

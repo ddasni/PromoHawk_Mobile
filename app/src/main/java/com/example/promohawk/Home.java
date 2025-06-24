@@ -3,6 +3,7 @@ package com.example.promohawk;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -92,7 +93,7 @@ public class Home extends AppCompatActivity {
     }
 
     private void carregarCategorias() {
-        apiService.getCategorias().enqueue(new Callback<CategoriaListResponse>() {
+        apiService.getCategoria().enqueue(new Callback<CategoriaListResponse>() {
             @Override
             public void onResponse(Call<CategoriaListResponse> call, Response<CategoriaListResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -109,7 +110,7 @@ public class Home extends AppCompatActivity {
                         nome.setText(categoria.getNome());
 
                         Glide.with(context)
-                                .load(categoria.getImagemUrl())
+                                .load(categoria.getImagem())
                                 .placeholder(R.drawable.placeholder)
                                 .into(imagem);
 
@@ -133,7 +134,7 @@ public class Home extends AppCompatActivity {
 
     private void carregarProdutos() {
         progressBarProdutos.setVisibility(View.VISIBLE);
-        apiService.getProdutos().enqueue(new Callback<ProdutoListResponse>() {
+        apiService.getProduto().enqueue(new Callback<ProdutoListResponse>() {
             @Override
             public void onResponse(Call<ProdutoListResponse> call, Response<ProdutoListResponse> response) {
                 progressBarProdutos.setVisibility(View.GONE);
@@ -157,14 +158,15 @@ public class Home extends AppCompatActivity {
             @Override
             public void onFailure(Call<ProdutoListResponse> call, Throwable t) {
                 progressBarProdutos.setVisibility(View.GONE);
-                Toast.makeText(context, "Erro ao carregar produtos", Toast.LENGTH_SHORT).show();
+                Log.e("Home", "Erro ao carregar produtos: ", t);
+                Toast.makeText(context, "Erro: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void carregarCupons() {
         progressBarCupons.setVisibility(View.VISIBLE);
-        apiService.getCupons().enqueue(new Callback<CupomListResponse>() {
+        apiService.getCupom().enqueue(new Callback<CupomListResponse>() {
             @Override
             public void onResponse(Call<CupomListResponse> call, Response<CupomListResponse> response) {
                 progressBarCupons.setVisibility(View.GONE);
