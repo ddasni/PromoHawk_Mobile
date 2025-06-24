@@ -23,7 +23,7 @@
             android:clipToPadding="true"
             android:padding="4dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/submarino_logo" />
+            android:src="@drawable/ka_bum" />
 
         <!-- Card de produto -->
         <androidx.cardview.widget.CardView
@@ -48,7 +48,7 @@
                     android:layout_gravity="center_horizontal"
                     android:contentDescription="@string/descricao_imagem_produto"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/produtoteste5" />
+                    android:src="@drawable/produto_apple_watch_series_10" />
 
                 <TextView
                     android:id="@+id/txtNomeProduto"

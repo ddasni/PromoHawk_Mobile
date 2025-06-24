@@ -23,7 +23,7 @@
             android:clipToPadding="true"
             android:padding="4dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/dolce_gusto_logo" />
+            android:src="@drawable/mege_lu" />
 
         <!-- Card de produto -->
         <androidx.cardview.widget.CardView
@@ -48,7 +48,7 @@
                     android:layout_gravity="center_horizontal"
                     android:contentDescription="@string/descricao_imagem_produto"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/produtoteste5" />
+                    android:src="@drawable/xbox_series_s" />
 
                 <TextView
                     android:id="@+id/txtNomeProduto"

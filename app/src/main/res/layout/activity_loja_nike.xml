@@ -17,13 +17,13 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/circle_background"
             android:clipChildren="true"
             android:clipToPadding="true"
-            android:padding="9dp"
+            android:padding="4dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/apple_logo" />
+            android:src="@drawable/nike_logo" />
 
         <!-- Card de produto -->
         <androidx.cardview.widget.CardView
@@ -48,7 +48,7 @@
                     android:layout_gravity="center_horizontal"
                     android:contentDescription="@string/descricao_imagem_produto"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/produtoteste5" />
+                    android:src="@drawable/produto_tenis_nike1" />
 
                 <TextView
                     android:id="@+id/txtNomeProduto"

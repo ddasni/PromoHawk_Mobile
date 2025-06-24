@@ -17,13 +17,13 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/circle_background"
             android:clipChildren="true"
             android:clipToPadding="true"
-            android:padding="4dp"
+            android:padding="9dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ka_bum" />
+            android:src="@drawable/apple_logo" />
 
         <!-- Card de produto -->
         <androidx.cardview.widget.CardView
@@ -44,17 +44,17 @@
                 <ImageView
                     android:id="@+id/imgProduto"
                     android:layout_width="180dp"
-                    android:layout_height="180dp"
+                    android:layout_height="230dp"
                     android:layout_gravity="center_horizontal"
                     android:contentDescription="@string/descricao_imagem_produto"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/produtoteste5" />
+                    android:src="@drawable/produto_iphone_15_pro_max" />
 
                 <TextView
                     android:id="@+id/txtNomeProduto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="18dp"
                     android:text="KZ ZS10 PRO X"
                     android:textAlignment="center"
                     android:textColor="#333333"

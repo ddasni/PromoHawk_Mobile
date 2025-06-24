@@ -7,6 +7,6 @@ public class Kabum extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kabum); // troque para o nome certo do seu layout
+        setContentView(R.layout.activity_loja_kabum); // troque para o nome certo do seu layout
     }
 }

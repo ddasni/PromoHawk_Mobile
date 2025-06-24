@@ -120,6 +120,8 @@ public class Lojas extends AppCompatActivity {
                 new LojaCard(getString(R.string.gopro), R.drawable.gopro_logo, GoPro.class),
                 new LojaCard(getString(R.string.apple), R.drawable.apple_logo, AppleStore.class),
                 new LojaCard(getString(R.string.submarino), R.drawable.submarino_logo, Submarino.class),
+                new LojaCard("samsung", R.drawable.samsung_logo, samsung.class),
+                new LojaCard("Sony", R.drawable.sony_logo, Sony.class),
                 new LojaCard(getString(R.string.lg), R.drawable.lg_logo, LG.class));
 
             }

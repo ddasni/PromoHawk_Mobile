@@ -7,6 +7,6 @@ public class Pichau extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pichau); // ou o nome do seu XML, ex: pichau.xml
+        setContentView(R.layout.activity_loja_pichau); // ou o nome do seu XML, ex: pichau.xml
     }
 }
