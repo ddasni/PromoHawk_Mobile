@@ -23,7 +23,7 @@
             android:clipToPadding="true"
             android:padding="4dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/mege_lu" />
+            android:src="@drawable/gopro_logo" />
 
         <!-- Card de produto -->
         <androidx.cardview.widget.CardView

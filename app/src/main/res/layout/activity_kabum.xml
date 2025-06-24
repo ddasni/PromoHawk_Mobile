@@ -1,189 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FAFAFA">
 
-    <Space
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="24dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <!-- FAIXA COM LOGO SOBREPOSTA -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="140dp">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_gravity="top"
-            android:background="#2960A2" />
-
+        <!-- Logo redonda no topo -->
         <ImageView
-            android:id="@+id/logo"
+            android:id="@+id/logoLoja"
             android:layout_width="100dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginBottom="-20dp"
-            android:src="@drawable/kabum"
-            android:scaleType="fitCenter"
-            android:elevation="4dp" />
-    </FrameLayout>
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/circle_background"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            android:padding="4dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ka_bum" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:orientation="vertical"
+        <!-- Card de produto -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
 
-            <!-- Produto 1 -->
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardElevation="4dp"
-                app:cardCornerRadius="12dp"
-                android:background="#FFFFFF">
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/imgProduto"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="@string/descricao_imagem_produto"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/produtoteste5" />
+
+                <TextView
+                    android:id="@+id/txtNomeProduto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:layout_marginTop="16dp"
+                    android:text="KZ ZS10 PRO X"
+                    android:textAlignment="center"
+                    android:textColor="#333333"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/produtoteste5" />
-
-                    <TextView
-                        android:text="Echo Dot 5ª Geração"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#333"
-                        android:layout_marginTop="8dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:text="R$ 379,00"
-                        android:textSize="16sp"
-                        android:textColor="#4CAF50"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:text="Este item é apenas ilustrativo e não será vendido."
-                        android:textSize="12sp"
-                        android:textColor="#888"
-                        android:layout_marginTop="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Produto 2 -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardElevation="4dp"
-                app:cardCornerRadius="12dp"
-                android:background="#FFFFFF">
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/txtPrecoProduto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:layout_marginTop="8dp"
+                    android:text="R$ 0,00"
+                    android:textAlignment="center"
+                    android:textColor="#4CAF50"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/produtoteste6" />
-
-                    <TextView
-                        android:text="Kindle 11ª Geração"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#333"
-                        android:layout_marginTop="8dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:text="R$ 499,00"
-                        android:textSize="16sp"
-                        android:textColor="#4CAF50"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:text="Este item é apenas ilustrativo e não será vendido."
-                        android:textSize="12sp"
-                        android:textColor="#888"
-                        android:layout_marginTop="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Produto 3 -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardElevation="4dp"
-                app:cardCornerRadius="12dp"
-                android:background="#FFFFFF">
-
-                <LinearLayout
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/produtoteste3" />
-
-                    <TextView
-                        android:text="Fire TV Stick 4K"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#333"
-                        android:layout_marginTop="8dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:text="R$ 449,00"
-                        android:textSize="16sp"
-                        android:textColor="#4CAF50"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:text="Este item é apenas ilustrativo e não será vendido."
-                        android:textSize="12sp"
-                        android:textColor="#888"
-                        android:layout_marginTop="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+                    android:layout_height="16dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>

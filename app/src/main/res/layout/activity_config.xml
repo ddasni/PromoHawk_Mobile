@@ -1,204 +1,207 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient_rounded"
-    android:padding="16dp">
+    android:background="@drawable/bg_gradient_rounded">
 
-    <!-- Botão de voltar -->
-    <ImageView
-        android:id="@+id/btnVoltar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/flecha_esquerda_negra"
-        android:contentDescription="Voltar" />
-
-    <!-- Foto do perfil -->
-    <ImageView
-        android:id="@+id/imgPerfil"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@id/btnVoltar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/circle_mask"
-        android:clipToOutline="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/user"
-        android:contentDescription="Foto de Perfil" />
-
-    <!-- Conteúdo com botões -->
-    <ScrollView
-        android:id="@+id/scrollConfig"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/imgPerfil"
-        android:layout_above="@id/bottom_navigation"
-        android:layout_marginTop="16dp">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <!-- Scroll com conteúdo -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:clipToPadding="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="80dp">
+
+                <!-- Botão de voltar -->
+                <ImageView
+                    android:id="@+id/btnVoltar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="start"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/flecha_esquerda_negra"
+                    android:contentDescription="Voltar"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Foto do perfil -->
+                <ImageView
+                    android:id="@+id/imgPerfil"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/circle_mask"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/user"
+                    android:contentDescription="Foto de Perfil" />
+
+                <!-- Botão Favoritos -->
+                <LinearLayout
+                    android:id="@+id/btnFavoritos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="20dp"
+                    android:background="@drawable/card_background"
+                    android:elevation="6dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/favorite_24" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="20dp"
+                        android:text="Favoritos"
+                        android:textSize="18sp"
+                        android:textColor="#222222"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/direira_pra_la" />
+                </LinearLayout>
+
+                <!-- Botão Conta -->
+                <LinearLayout
+                    android:id="@+id/btnConta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="20dp"
+                    android:background="@drawable/card_background"
+                    android:elevation="6dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/configu" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="20dp"
+                        android:text="Configurações da Conta"
+                        android:textSize="18sp"
+                        android:textColor="#222222"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/direira_pra_la" />
+                </LinearLayout>
+
+                <!-- Botão Histórico -->
+                <LinearLayout
+                    android:id="@+id/btnHistorico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="20dp"
+                    android:background="@drawable/card_background"
+                    android:elevation="6dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/historico_1" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="20dp"
+                        android:text="Histórico"
+                        android:textSize="18sp"
+                        android:textColor="#222222"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/direira_pra_la" />
+                </LinearLayout>
+
+                <!-- Botão Suporte -->
+                <LinearLayout
+                    android:id="@+id/btnSuporte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="20dp"
+                    android:background="@drawable/card_background"
+                    android:elevation="6dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ajuda" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="20dp"
+                        android:text="Suporte"
+                        android:textSize="18sp"
+                        android:textColor="#222222"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/direira_pra_la" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- Bottom Navigation -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="80dp">
-
-            <!-- Botão Favoritos -->
-            <LinearLayout
-                android:id="@+id/btnFavoritos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="20dp"
-                android:background="@drawable/card_background"
-                android:elevation="6dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/favorite_24" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="20dp"
-                    android:text="Favoritos"
-                    android:textSize="18sp"
-                    android:textColor="#222222"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/direira_pra_la" />
-            </LinearLayout>
-
-            <!-- Botão Conta -->
-            <LinearLayout
-                android:id="@+id/btnConta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="20dp"
-                android:background="@drawable/card_background"
-                android:elevation="6dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/configu" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="20dp"
-                    android:text="Configurações da Conta"
-                    android:textSize="18sp"
-                    android:textColor="#222222"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/direira_pra_la" />
-            </LinearLayout>
-
-            <!-- Botão Histórico -->
-            <LinearLayout
-                android:id="@+id/btnHistorico"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="20dp"
-                android:background="@drawable/card_background"
-                android:elevation="6dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/historico_1" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="20dp"
-                    android:text="Histórico"
-                    android:textSize="18sp"
-                    android:textColor="#222222"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/direira_pra_la" />
-            </LinearLayout>
-
-            <!-- Botão Suporte -->
-            <LinearLayout
-                android:id="@+id/btnSuporte"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="20dp"
-                android:background="@drawable/card_background"
-                android:elevation="6dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/ajuda" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="20dp"
-                    android:text="Suporte"
-                    android:textSize="18sp"
-                    android:textColor="#222222"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/direira_pra_la" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
-    <!-- Bottom Navigation -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:background="?android:attr/windowBackground"
-        android:contentDescription="@string/descricao_navbar"
-        app:itemIconTint="@color/icone_nav_cor"
-        app:itemTextColor="@color/icone_nav_cor"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu"
-        style="@style/BottomNavStyle" />
-
-</RelativeLayout>
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/bottom_nav_menu"
+            app:itemIconTint="@color/icone_nav_cor"
+            app:itemTextColor="@color/icone_nav_cor"
+            app:labelVisibilityMode="labeled"
+            style="@style/BottomNavStyle" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

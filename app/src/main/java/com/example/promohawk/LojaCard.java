@@ -1,6 +1,8 @@
 package com.example.promohawk;
 
 public class LojaCard {
+
+
     private String nome;
     private int imagemResId;
     private Class<?> activityDestino;

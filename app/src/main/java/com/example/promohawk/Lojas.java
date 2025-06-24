@@ -26,6 +26,7 @@ public class Lojas extends AppCompatActivity {
 
         initializeViews();
         setupRecyclerView();
+        configurarBottomNavigation();
     }
 
     private void initializeViews() {
@@ -85,6 +86,11 @@ public class Lojas extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 finish();
                 return true;
+            } else if (id == R.id.nav_config) {
+                startActivity(new Intent(context, Config.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
             } else if (id == R.id.nav_lojas) {
                 return true; // Já está na tela de lojas
             }
@@ -93,20 +99,30 @@ public class Lojas extends AppCompatActivity {
         });
     }
 
-
-            private void applyTransition() {
+    private void applyTransition() {
         overridePendingTransition(0, 0);
         finish();
     }
 
     private List<LojaCard> getStoreList() {
         return Arrays.asList(
-                new LojaCard(getString(R.string.amazon), R.drawable.amazon, Amazon.class),
-                new LojaCard(getString(R.string.centauro), R.drawable.centauru, Centauro.class),
-                new LojaCard(getString(R.string.kabum), R.drawable.kabum, Kabum.class),
-                new LojaCard(getString(R.string.pichau), R.drawable.pichau3, Pichau.class),
-                new LojaCard(getString(R.string.magazine), R.drawable.magazine2, Magazine.class),
-                new LojaCard(getString(R.string.mercado_livre), R.drawable.mercado2, Mercado_Livre.class)
-        );
+                new LojaCard(getString(R.string.amazon), R.drawable.seta_ama, Amazon.class),
+                new LojaCard(getString(R.string.centauro), R.drawable.sapato, Centauro.class),
+                new LojaCard(getString(R.string.kabum), R.drawable.ka_bum, Kabum.class),
+                new LojaCard(getString(R.string.pichau), R.drawable.p, Pichau.class),
+                new LojaCard(getString(R.string.magazine), R.drawable.mege_lu, Magazine.class),
+                new LojaCard(getString(R.string.mercado_livre), R.drawable.maodemercado, Mercado_Livre.class),
+
+                // Novas lojas adicionadas
+                new LojaCard(getString(R.string.kz), R.drawable.kz_logo, Kz.class),
+                new LojaCard(getString(R.string.nike), R.drawable.nike_logo, Nike.class),
+                new LojaCard(getString(R.string.dolce_gusto), R.drawable.dolce_gusto_logo, DolceGusto.class),
+                new LojaCard(getString(R.string.gopro), R.drawable.gopro_logo, GoPro.class),
+                new LojaCard(getString(R.string.apple), R.drawable.apple_logo, AppleStore.class),
+                new LojaCard(getString(R.string.submarino), R.drawable.submarino_logo, Submarino.class),
+                new LojaCard(getString(R.string.lg), R.drawable.lg_logo, LG.class));
+
+            }
+
     }
-}
+
