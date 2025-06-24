@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,16 +44,17 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
     public void onBindViewHolder(@NonNull ProdutoViewHolder holder, int position) {
         Produto produto = listaProdutos.get(position);
         holder.tvNomeProduto.setText(produto.getNome());
+        holder.ratingBarProduto.setRating(produto.getAvaliacao());
 
         if (produto.getPrecos() != null && !produto.getPrecos().isEmpty()) {
             Preco preco = produto.getPrecos().get(0);
-            holder.tvPrecoAtual.setText(preco.getPreco());
+            holder.tvPrecoAtual.setText(String.format("R$ %.2f", preco.getPreco()));
         } else {
             holder.tvPrecoAtual.setText("Preço indisponível");
         }
 
         Glide.with(context)
-                .load(produto.getImagemUrl())
+                .load(produto.getImagem())
                 .placeholder(R.drawable.placeholder)
                 .into(holder.imgProduto);
 
@@ -67,12 +69,15 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
     public static class ProdutoViewHolder extends RecyclerView.ViewHolder {
         ImageView imgProduto, btnFavoritar;
         TextView tvNomeProduto, tvPrecoAtual;
+        RatingBar ratingBarProduto;
+
 
         public ProdutoViewHolder(@NonNull View itemView) {
             super(itemView);
             imgProduto = itemView.findViewById(R.id.imgProduto);
             tvNomeProduto = itemView.findViewById(R.id.tvNomeProduto);
             tvPrecoAtual = itemView.findViewById(R.id.tvPrecoAtual);
+            ratingBarProduto = itemView.findViewById(R.id.ratingBarProduto);
             btnFavoritar = itemView.findViewById(R.id.btnFavoritar);
         }
     }

@@ -8,7 +8,11 @@ import java.util.List;
 public class Produto implements Serializable {
 
     private int id;
+
+    @SerializedName("nome")
     private String nome;
+
+    @SerializedName("descricao")
     private String descricao;
 
     @SerializedName("media_nota")
@@ -25,6 +29,7 @@ public class Produto implements Serializable {
 
     private List<Float> historicoPrecos;
 
+    @SerializedName("reviews")
     private List<Review> reviews;
 
     // Getters
@@ -52,7 +57,7 @@ public class Produto implements Serializable {
         return imagens;
     }
 
-    public String getImagemUrl() {
+    public String getImagem() {
         return (imagens != null && !imagens.isEmpty()) ? imagens.get(0) : null;
     }
 
@@ -64,6 +69,19 @@ public class Produto implements Serializable {
         return precos;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public String getPreco() {
+        return (precos != null && !precos.isEmpty()) ? precos.get(0).getPreco() : null;
+    }
+
+    public String getMelhorPreco() {
+        return getPreco(); // ou lógica para menor preço
+    }
+
+
     public List<Float> getHistoricoPrecos() {
         return historicoPrecos;
     }
@@ -71,19 +89,4 @@ public class Produto implements Serializable {
     public void setHistoricoPrecos(List<Float> historicoPrecos) {
         this.historicoPrecos = historicoPrecos;
     }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    // Preço atual (primeiro da lista, ou null se vazio)
-    public String getPreco() {
-        return (precos != null && !precos.isEmpty()) ? precos.get(0).getPreco() : null;
-    }
-
-    // Melhor preço (pode ser lógica diferente, mas por enquanto igual ao atual)
-    public String getMelhorPreco() {
-        return getPreco(); // ou implemente uma lógica para obter o menor preço se desejar
-    }
-
 }
