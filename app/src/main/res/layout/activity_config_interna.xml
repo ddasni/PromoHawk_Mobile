@@ -24,7 +24,7 @@ android:paddingBottom="16dp">
     android:layout_width="40dp"
     android:layout_height="40dp"
     android:background="?attr/selectableItemBackgroundBorderless"
-    android:src="@drawable/flecha_esquerda_negra"
+    android:src="@drawable/ic_flecha_esquerda_negra"
     android:contentDescription="Voltar" />
 </LinearLayout>
 
@@ -51,7 +51,7 @@ android:orientation="vertical">
     <ImageView
         android:layout_width="28dp"
         android:layout_height="28dp"
-        android:src="@drawable/seguranca" />
+        android:src="@drawable/ic_seguranca" />
 
     <TextView
         android:layout_width="0dp"
@@ -66,7 +66,7 @@ android:orientation="vertical">
     <ImageView
         android:layout_width="28dp"
         android:layout_height="28dp"
-        android:src="@drawable/direira_pra_la" />
+        android:src="@drawable/ic_direira_pra_la" />
 </LinearLayout>
 
 <!-- Notificações -->
@@ -83,7 +83,7 @@ android:orientation="vertical">
     <ImageView
         android:layout_width="28dp"
         android:layout_height="28dp"
-        android:src="@drawable/notificaca" />
+        android:src="@drawable/ic_notificaca" />
 
     <TextView
         android:layout_width="0dp"
@@ -122,7 +122,7 @@ android:orientation="vertical">
         <ImageView
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@drawable/iiiiii" />
+            android:src="@drawable/ic_informacao" />
 
         <TextView
             android:layout_width="0dp"
@@ -159,7 +159,7 @@ android:orientation="vertical">
     <ImageView
         android:layout_width="28dp"
         android:layout_height="28dp"
-        android:src="@drawable/sai_fora"
+        android:src="@drawable/ic_sai_fora"
         app:tint="@android:color/holo_red_dark" />
 
     <TextView

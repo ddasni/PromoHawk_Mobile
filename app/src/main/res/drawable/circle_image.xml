@@ -4,6 +4,6 @@
             <solid android:color="#DADADA" /> <!-- cor de fundo da borda -->
         </shape>
     </item>
-    <item android:drawable="@drawable/user"
+    <item android:drawable="@drawable/ic_user"
         android:gravity="center" />
 </layer-list>

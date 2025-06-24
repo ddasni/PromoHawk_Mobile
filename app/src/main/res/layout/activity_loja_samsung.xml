@@ -23,7 +23,7 @@
             android:clipToPadding="true"
             android:padding="4dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/samsung_logo" />
+            android:src="@drawable/logo_samsung" />
 
         <!-- Card de produto -->
         <androidx.cardview.widget.CardView

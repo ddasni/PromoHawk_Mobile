@@ -85,7 +85,7 @@
                 android:id="@+id/btnEmail"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/email"
+                android:src="@drawable/ic_email"
                 android:contentDescription="Email"
                 android:layout_margin="12dp" />
 

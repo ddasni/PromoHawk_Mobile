@@ -23,7 +23,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/flecha_esquerda_negra"
+            android:src="@drawable/ic_flecha_esquerda_negra"
             android:contentDescription="Voltar" />
 
         <TextView
@@ -89,7 +89,7 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/history"
+            android:src="@drawable/ic_history"
             app:tint="#888888" />
 
         <TextView

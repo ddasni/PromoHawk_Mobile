@@ -18,5 +18,5 @@
     <item
         android:id="@+id/nav_lojas"
         android:title="Lojas"
-        android:icon="@drawable/store" />
+        android:icon="@drawable/ic_store" />
 </menu>

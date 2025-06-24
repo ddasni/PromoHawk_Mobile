@@ -23,7 +23,7 @@
             android:clipToPadding="true"
             android:padding="9dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/apple_logo" />
+            android:src="@drawable/logo_apple" />
 
         <!-- Card de produto -->
         <androidx.cardview.widget.CardView
@@ -44,11 +44,11 @@
                 <ImageView
                     android:id="@+id/imgProduto"
                     android:layout_width="180dp"
-                    android:layout_height="230dp"
+                    android:layout_height="180dp"
                     android:layout_gravity="center_horizontal"
                     android:contentDescription="@string/descricao_imagem_produto"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/produto_iphone_15_pro_max" />
+                    android:src="@drawable/produto_macbook_air_m2" />
 
                 <TextView
                     android:id="@+id/txtNomeProduto"
