@@ -1,6 +1,7 @@
 // === ApiService.java (completo e atualizado) ===
 package com.example.promohawk.api;
 
+import com.example.promohawk.Produto_Favorito;
 import com.example.promohawk.model.*;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.PUT;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -58,4 +60,7 @@ public interface ApiService {
     // ==== Histórico ====
     @GET("compra")
     Call<List<Compra>> getHistoricoCompras();
+        @GET("user-favoritos")
+        Call<List<Produto_Favorito>> getFavoritos(@Header("Authorization") String token);
+
 }

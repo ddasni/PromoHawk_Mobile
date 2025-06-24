@@ -1,8 +1,11 @@
 package com.example.promohawk;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,9 +15,9 @@ import java.util.List;
 
 public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.FavoritoViewHolder> {
 
-    private List<String> favoritos;
+    private List<Produto_Favorito> favoritos;
 
-    public FavoritosAdapter(List<String> favoritos) {
+    public FavoritosAdapter(List<Produto_Favorito> favoritos) {
         this.favoritos = favoritos;
     }
 
@@ -22,14 +25,24 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
     @Override
     public FavoritoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(android.R.layout.simple_list_item_1, parent, false);
+                .inflate(R.layout.item_favorito, parent, false);
         return new FavoritoViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FavoritoViewHolder holder, int position) {
-        String favorito = favoritos.get(position);
-        holder.tvItem.setText(favorito);
+        Produto_Favorito favorito = favoritos.get(position);
+        holder.txtNome.setText(favorito.getNome());
+
+        // Clique no botão de favoritar (teste visual por enquanto)
+        holder.btnFavoritar.setOnClickListener(v -> {
+            holder.btnFavoritar.setImageResource(R.drawable.ic_favorite_preenchido_preto); // precisa ter esse ícone
+
+            // Vai para a tela de favoritos (já está nela, então por enquanto pode só mostrar um toast ou log)
+            Context context = v.getContext();
+            Intent intent = new Intent(context, Favoritos.class);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -38,11 +51,13 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
     }
 
     static class FavoritoViewHolder extends RecyclerView.ViewHolder {
-        TextView tvItem;
+        TextView txtNome;
+        ImageButton btnFavoritar;
 
         public FavoritoViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvItem = itemView.findViewById(android.R.id.text1);
+            txtNome = itemView.findViewById(R.id.txtNomeFavorito);
+            btnFavoritar = itemView.findViewById(R.id.btnFavoritar);
         }
     }
 }

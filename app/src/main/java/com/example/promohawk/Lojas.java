@@ -106,23 +106,23 @@ public class Lojas extends AppCompatActivity {
 
     private List<LojaCard> getStoreList() {
         return Arrays.asList(
-                new LojaCard(getString(R.string.amazon), R.drawable.seta_ama, Amazon.class),
-                new LojaCard(getString(R.string.centauro), R.drawable.sapato, Centauro.class),
-                new LojaCard(getString(R.string.kabum), R.drawable.ka_bum, Kabum.class),
-                new LojaCard(getString(R.string.pichau), R.drawable.p, Pichau.class),
-                new LojaCard(getString(R.string.magazine), R.drawable.mege_lu, Magazine.class),
-                new LojaCard(getString(R.string.mercado_livre), R.drawable.maodemercado, Mercado_Livre.class),
+                new LojaCard(getString(R.string.amazon), R.drawable.logo_seta_amazon, Amazon.class),
+                new LojaCard(getString(R.string.centauro), R.drawable.logo_centauro, Centauro.class),
+                new LojaCard(getString(R.string.kabum), R.drawable.logo_kabum, Kabum.class),
+                new LojaCard(getString(R.string.pichau), R.drawable.logo_pichau, Pichau.class),
+                new LojaCard(getString(R.string.magazine), R.drawable.logo_magazine, Magazine.class),
+                new LojaCard(getString(R.string.mercado_livre), R.drawable.logo_mercadolivre, Mercado_Livre.class),
 
                 // Novas lojas adicionadas
-                new LojaCard(getString(R.string.kz), R.drawable.kz_logo, Kz.class),
-                new LojaCard(getString(R.string.nike), R.drawable.nike_logo, Nike.class),
-                new LojaCard(getString(R.string.dolce_gusto), R.drawable.dolce_gusto_logo, DolceGusto.class),
-                new LojaCard(getString(R.string.gopro), R.drawable.gopro_logo, GoPro.class),
-                new LojaCard(getString(R.string.apple), R.drawable.apple_logo, AppleStore.class),
-                new LojaCard(getString(R.string.submarino), R.drawable.submarino_logo, Submarino.class),
-                new LojaCard("samsung", R.drawable.samsung_logo, samsung.class),
-                new LojaCard("Sony", R.drawable.sony_logo, Sony.class),
-                new LojaCard(getString(R.string.lg), R.drawable.lg_logo, LG.class));
+                new LojaCard(getString(R.string.kz), R.drawable.logo_kz, Kz.class),
+                new LojaCard(getString(R.string.nike), R.drawable.logo_nike, Nike.class),
+                new LojaCard(getString(R.string.dolce_gusto), R.drawable.logo_dolce_gusto, DolceGusto.class),
+                new LojaCard(getString(R.string.gopro), R.drawable.logo_gopro, GoPro.class),
+                new LojaCard(getString(R.string.apple), R.drawable.logo_apple, AppleStore.class),
+                new LojaCard(getString(R.string.submarino), R.drawable.logo_submarino, Submarino.class),
+                new LojaCard("samsung", R.drawable.logo_samsung, samsung.class),
+                new LojaCard("Sony", R.drawable.logo_sony, Sony.class),
+                new LojaCard(getString(R.string.lg), R.drawable.logo_lg, LG.class));
 
             }
 

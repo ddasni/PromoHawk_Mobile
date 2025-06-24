@@ -23,7 +23,7 @@
             android:clipToPadding="true"
             android:padding="4dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/nike_logo" />
+            android:src="@drawable/logo_nike" />
 
         <!-- Card de produto -->
         <androidx.cardview.widget.CardView
@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="KZ ZS10 PRO X"
+                    android:text="Tênis Nike Air Max SC Masculino"
                     android:textAlignment="center"
                     android:textColor="#333333"
                     android:textSize="20sp"
@@ -66,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="R$ 0,00"
+                    android:text="R$ 1.044,99"
                     android:textAlignment="center"
                     android:textColor="#4CAF50"
                     android:textSize="18sp"

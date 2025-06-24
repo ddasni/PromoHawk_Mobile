@@ -12,6 +12,16 @@
         android:padding="24dp"
         android:gravity="center_horizontal">
 
+        <ImageView
+            android:id="@+id/btnVoltar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_flecha_esquerda_negra"
+            android:contentDescription="Voltar"
+            android:layout_marginBottom="8dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +95,7 @@
                 android:id="@+id/btnEmail"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/email"
+                android:src="@drawable/ic_email"
                 android:contentDescription="Email"
                 android:layout_margin="12dp" />
 

@@ -19,18 +19,23 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/produto"/>
+            android:src="@drawable/produto"
+            android:layout_alignParentStart="true"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/imagemProduto"
             android:layout_marginStart="16dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_alignTop="@id/imagemProduto"
+            android:layout_alignBottom="@id/imagemProduto"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@id/btnFavoritar">
 
             <TextView
-                android:id="@+id/nomeProduto"
-                android:layout_width="match_parent"
+                android:id="@+id/txtNomeFavorito"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nome do Produto"
                 android:textSize="16sp"
@@ -41,31 +46,24 @@
 
             <TextView
                 android:id="@+id/precoProduto"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="R$ 999,99"
                 android:textSize="18sp"
                 android:textColor="@android:color/holo_green_dark"
                 android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/lojaProduto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Loja: Amazon"
-                android:textSize="14sp"
-                android:textColor="#666666"/>
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/botaoRemoverFavorito"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:id="@+id/btnFavoritar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_favorite_border"
-            app:tint="@android:color/holo_red_dark"/>
+            android:contentDescription="Favoritar"
+            app:tint="@color/black"/>
     </RelativeLayout>
 </LinearLayout>

@@ -98,7 +98,7 @@ public class Login extends AppCompatActivity {
                         boolean manterConectado = checkBox.isChecked();
 
                         if (manterConectado) {
-                            editor.putString("token", login.getAccessToken());
+                            editor.putString("token", "Bearer "+ login.getAccessToken());
                             editor.putString("email", login.getEmail());
                             editor.putString("nome", login.getNome());
 

@@ -14,19 +14,29 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Suporte extends AppCompatActivity {
 
     private EditText edtNome, edtMensagem;
+    private ImageView botaoVoltar; // Declare aqui, mas não inicialize com findViewById ainda
     private Button btnEnviar;
     private ImageView btnEmail, btnWhatsapp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_suporte);
+        setContentView(R.layout.activity_suporte); // Primeiro defina o layout
 
+        // Agora inicialize as views
         edtNome = findViewById(R.id.edtNome);
         edtMensagem = findViewById(R.id.edtMensagem);
         btnEnviar = findViewById(R.id.btnEnviar);
         btnEmail = findViewById(R.id.btnEmail);
         btnWhatsapp = findViewById(R.id.btnWhatsapp);
+        botaoVoltar = findViewById(R.id.btnVoltar); // Inicialize aqui, depois do setContentView
+
+        // Configurar o clique do botãoVoltar (fora do btnEnviar)
+        botaoVoltar.setOnClickListener(v -> {
+            Intent intent = new Intent(Suporte.this, Config.class);
+            startActivity(intent);
+            finish();
+        });
 
         btnEnviar.setOnClickListener(v -> {
             String nome = edtNome.getText().toString().trim();

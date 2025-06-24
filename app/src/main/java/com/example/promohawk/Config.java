@@ -44,7 +44,6 @@ import retrofit2.Response;
 public class Config extends AppCompatActivity {
 
     private ImageView imgPerfil;
-    private ImageView btnVoltar;
     private LinearLayout btnFavoritos, btnConta, btnHistorico, btnSuporte;
 
     private BottomNavigationView bottomNavigationView;
@@ -64,7 +63,6 @@ public class Config extends AppCompatActivity {
         email = getSharedPreferences("usuario_prefs", MODE_PRIVATE).getString("email", "");
 
         imgPerfil = findViewById(R.id.imgPerfil);
-        btnVoltar = findViewById(R.id.btnVoltar);
         btnFavoritos = findViewById(R.id.btnFavoritos);
         btnConta = findViewById(R.id.btnConta);
         btnHistorico = findViewById(R.id.btnHistorico);
@@ -73,10 +71,7 @@ public class Config extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         configurarBottomNavigation();
 
-        btnVoltar.setOnClickListener(v -> {
-            startActivity(new Intent(this, Home.class));
-            finish();
-        });
+
 
         imgPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);

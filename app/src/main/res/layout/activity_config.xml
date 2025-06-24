@@ -25,16 +25,8 @@
                 android:orientation="vertical"
                 android:paddingBottom="80dp">
 
-                <!-- Botão de voltar -->
-                <ImageView
-                    android:id="@+id/btnVoltar"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="start"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/flecha_esquerda_negra"
-                    android:contentDescription="Voltar"
-                    android:layout_marginBottom="8dp" />
+
+
 
                 <!-- Foto do perfil -->
                 <ImageView
@@ -46,7 +38,7 @@
                     android:background="@drawable/circle_mask"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/user"
+                    android:src="@drawable/ic_user"
                     android:contentDescription="Foto de Perfil" />
 
                 <!-- Botão Favoritos -->
@@ -67,7 +59,7 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/favorite_24" />
+                        android:src="@drawable/ic_favorite_24" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -82,7 +74,7 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/direira_pra_la" />
+                        android:src="@drawable/ic_direira_pra_la" />
                 </LinearLayout>
 
                 <!-- Botão Conta -->
@@ -102,7 +94,7 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/configu" />
+                        android:src="@drawable/ic_configu" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -117,7 +109,7 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/direira_pra_la" />
+                        android:src="@drawable/ic_direira_pra_la" />
                 </LinearLayout>
 
                 <!-- Botão Histórico -->
@@ -137,7 +129,7 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/historico_1" />
+                        android:src="@drawable/ic_historico" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -152,7 +144,7 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/direira_pra_la" />
+                        android:src="@drawable/ic_direira_pra_la" />
                 </LinearLayout>
 
                 <!-- Botão Suporte -->
@@ -172,7 +164,7 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/ajuda" />
+                        android:src="@drawable/ic_ajuda" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -187,7 +179,7 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/direira_pra_la" />
+                        android:src="@drawable/ic_direira_pra_la" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
