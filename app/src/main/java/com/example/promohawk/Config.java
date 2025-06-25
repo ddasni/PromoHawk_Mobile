@@ -44,7 +44,7 @@ import retrofit2.Response;
 public class Config extends AppCompatActivity {
 
     private ImageView imgPerfil;
-    private LinearLayout btnFavoritos, btnConta, btnHistorico, btnSuporte;
+    private LinearLayout btnFavoritos, btnConta, btnSuporte;
 
     private BottomNavigationView bottomNavigationView;
 
@@ -65,7 +65,6 @@ public class Config extends AppCompatActivity {
         imgPerfil = findViewById(R.id.imgPerfil);
         btnFavoritos = findViewById(R.id.btnFavoritos);
         btnConta = findViewById(R.id.btnConta);
-        btnHistorico = findViewById(R.id.btnHistorico);
         btnSuporte = findViewById(R.id.btnSuporte);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -81,7 +80,6 @@ public class Config extends AppCompatActivity {
 
         btnFavoritos.setOnClickListener(v -> startActivity(new Intent(this, Favoritos.class)));
         btnConta.setOnClickListener(v -> startActivity(new Intent(this, Config_interna.class)));
-        btnHistorico.setOnClickListener(v -> startActivity(new Intent(this, Historico.class)));
         btnSuporte.setOnClickListener(v -> startActivity(new Intent(this, Suporte.class)));
 
         carregarFotoPerfil();
