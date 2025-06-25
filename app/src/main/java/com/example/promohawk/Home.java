@@ -93,7 +93,7 @@ public class Home extends AppCompatActivity {
     }
 
     private void carregarCategorias() {
-        apiService.getCategoria().enqueue(new Callback<CategoriaListResponse>() {
+        apiService.listarCategorias().enqueue(new Callback<CategoriaListResponse>() {
             @Override
             public void onResponse(Call<CategoriaListResponse> call, Response<CategoriaListResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -134,7 +134,7 @@ public class Home extends AppCompatActivity {
 
     private void carregarProdutos() {
         progressBarProdutos.setVisibility(View.VISIBLE);
-        apiService.getProduto().enqueue(new Callback<ProdutoListResponse>() {
+        apiService.listarProdutos().enqueue(new Callback<ProdutoListResponse>() {
             @Override
             public void onResponse(Call<ProdutoListResponse> call, Response<ProdutoListResponse> response) {
                 progressBarProdutos.setVisibility(View.GONE);
@@ -166,7 +166,7 @@ public class Home extends AppCompatActivity {
 
     private void carregarCupons() {
         progressBarCupons.setVisibility(View.VISIBLE);
-        apiService.getCupom().enqueue(new Callback<CupomListResponse>() {
+        apiService.listarCupons().enqueue(new Callback<CupomListResponse>() {
             @Override
             public void onResponse(Call<CupomListResponse> call, Response<CupomListResponse> response) {
                 progressBarCupons.setVisibility(View.GONE);

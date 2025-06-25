@@ -82,7 +82,7 @@ public class ProdutosActivity extends AppCompatActivity {
 
 
     private void carregarProdutos() {
-        apiService.getProduto().enqueue(new Callback<ProdutoListResponse>() {
+        apiService.listarProdutos().enqueue(new Callback<ProdutoListResponse>() {
             @Override
             public void onResponse(Call<ProdutoListResponse> call, Response<ProdutoListResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {

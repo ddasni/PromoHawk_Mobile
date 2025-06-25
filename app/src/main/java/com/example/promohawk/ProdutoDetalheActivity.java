@@ -83,7 +83,7 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
     }
 
     private void carregarProduto(int idProduto) {
-        apiService.getProduto(idProduto).enqueue(new Callback<Produto>() {
+        apiService.buscarProdutoPorId(idProduto).enqueue(new Callback<Produto>() {
             @Override
             public void onResponse(Call<Produto> call, Response<Produto> response) {
                 if (response.isSuccessful() && response.body() != null) {
