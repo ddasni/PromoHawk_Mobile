@@ -52,6 +52,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
+
         linearLayoutCategorias = findViewById(R.id.linearLayoutCategorias);
         recyclerViewProdutos = findViewById(R.id.recyclerViewProdutos);
         recyclerViewCupons = findViewById(R.id.recyclerViewCupons);
@@ -112,6 +113,7 @@ public class Home extends AppCompatActivity {
                         Glide.with(context)
                                 .load(categoria.getImagem())
                                 .placeholder(R.drawable.placeholder)
+                                .circleCrop() // borda redonda
                                 .into(imagem);
 
                         view.setOnClickListener(v -> {
