@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,12 +22,14 @@ import com.example.promohawk.api.RetrofitClient;
 import com.example.promohawk.model.Preco;
 import com.example.promohawk.model.Produto;
 import com.example.promohawk.model.ProdutoResponse;
+import com.example.promohawk.model.ProdutoUnicoResponse;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -83,18 +87,21 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
     }
 
     private void carregarProduto(int idProduto) {
-        apiService.buscarProdutoPorId(idProduto).enqueue(new Callback<Produto>() {
+        apiService.buscarProdutoPorId(idProduto).enqueue(new Callback<ProdutoUnicoResponse>() {
             @Override
-            public void onResponse(Call<Produto> call, Response<Produto> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    atualizarUI(response.body());
+            public void onResponse(Call<ProdutoUnicoResponse> call, Response<ProdutoUnicoResponse> response) {
+                Log.d("ProdutoDetalhe", "Código da resposta: " + response.code());
+                if (response.isSuccessful() && response.body() != null && response.body().getProduto() != null) {
+                    Produto produto = response.body().getProduto();
+                    Log.d("ProdutoDetalhe", "Produto: " + produto.getNome());
+                    atualizarUI(produto);
                 } else {
                     Toast.makeText(ProdutoDetalheActivity.this, "Produto não encontrado", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Produto> call, Throwable t) {
+            public void onFailure(Call<ProdutoUnicoResponse> call, Throwable t) {
                 Toast.makeText(ProdutoDetalheActivity.this, "Erro: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -116,31 +123,48 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         textQtdAvaliacoes.setText(String.format("(%.1f estrelas)", produto.getAvaliacao()));
 
         if (produto.getImagens() != null && !produto.getImagens().isEmpty()) {
-            viewPager.setAdapter(new ImagemAdapter(produto.getImagens()));
+            // Configuração otimizada do ViewPager2
+            viewPager.setOffscreenPageLimit(1); // Reduz o consumo de memória
+            viewPager.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
+
+            ImagemAdapter adapter = new ImagemAdapter(produto.getImagens());
+            viewPager.setAdapter(adapter);
+
+            // Adiciona margem interna para os indicadores (opcional)
+            int paddingPx = (int) (16 * getResources().getDisplayMetrics().density);
+            viewPager.setPadding(paddingPx, 0, paddingPx, 0);
+            viewPager.setClipToPadding(false);
+        } else {
+            // Caso não haja imagens, exibe uma imagem padrão
+            viewPager.setAdapter(new ImagemAdapter(Collections.singletonList("URL_IMAGEM_PADRAO")));
         }
 
-        if (produto.getUrlLoja() != null && !produto.getUrlLoja().isEmpty()) {
-            btnIrLoja.setOnClickListener(v -> {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(produto.getUrlLoja()));
-                startActivity(intent);
-            });
-        }
-
-        // Se futuramente quiser usar histórico de preços
-        // Aqui está um exemplo (pode ser populado por uma lógica futura)
+        // grafico com o historico de preços
         if (produto.getHistoricoPrecos() != null && !produto.getHistoricoPrecos().isEmpty()) {
             List<Entry> entries = new ArrayList<>();
+
             for (int i = 0; i < produto.getHistoricoPrecos().size(); i++) {
-                entries.add(new Entry(i, produto.getHistoricoPrecos().get(i)));
+                float preco = produto.getHistoricoPrecos().get(i);
+                entries.add(new Entry(i, preco));
             }
 
             LineDataSet dataSet = new LineDataSet(entries, "Histórico de Preço (R$)");
-            dataSet.setColor(Color.BLUE);
+            dataSet.setColor(Color.parseColor("#1E88E5")); // Azul
             dataSet.setValueTextColor(Color.BLACK);
+            dataSet.setLineWidth(2f);
+            dataSet.setCircleRadius(4f);
+            dataSet.setDrawFilled(true);
+            dataSet.setFillColor(Color.parseColor("#BBDEFB")); // azul claro
+            dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER); // Curvas suaves
+
             LineData lineData = new LineData(dataSet);
 
             graficoPreco.setData(lineData);
-            graficoPreco.invalidate();
+            graficoPreco.getDescription().setEnabled(false); // remove legenda de descrição
+            graficoPreco.getAxisRight().setEnabled(false); // remove eixo direito
+            graficoPreco.getXAxis().setDrawGridLines(false);
+            graficoPreco.getAxisLeft().setDrawGridLines(false);
+            graficoPreco.invalidate(); // renderiza o gráfico
         }
 
         // Reviews
