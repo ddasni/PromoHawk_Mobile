@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@drawable/bg_gradient_rounded"
-    tools:context=".item_favorito">
+    tools:context=".Favoritos">
 
     <!-- Topo com título e botão voltar -->
     <LinearLayout
@@ -41,32 +41,20 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFavoritos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="8dp"
         android:clipToPadding="false"
-        android:paddingBottom="16dp"/>
+        android:paddingBottom="16dp" />
 
     <!-- Mensagem quando não há favoritos -->
     <LinearLayout
         android:id="@+id/emptyFavoritos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_favorite_border"
-            app:tint="#888888" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Nenhum produto favoritado"
-            android:textSize="18sp"
-            android:textColor="#666666"/>
     </LinearLayout>
-</LinearLayout>
+    </LinearLayout>

@@ -13,12 +13,15 @@
 
         <!-- Card 1 -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardProduto11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
             android:background="@android:color/white"
-            android:elevation="4dp">
+            android:elevation="4dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -27,7 +30,7 @@
                 android:background="@color/white">
 
                 <ImageView
-                    android:id="@+id/btnFavoritar1"
+                    android:id="@+id/btnFavoritar11"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
@@ -38,7 +41,7 @@
                     app:tint="@color/black" />
 
                 <ImageView
-                    android:id="@+id/imgProduto1"
+                    android:id="@+id/imgProduto11"
                     android:layout_width="160dp"
                     android:layout_height="160dp"
                     android:layout_centerHorizontal="true"
@@ -48,10 +51,10 @@
                     android:src="@drawable/playstation_5" />
 
                 <TextView
-                    android:id="@+id/tvNomeProduto1"
+                    android:id="@+id/tvNomeProduto11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/imgProduto1"
+                    android:layout_below="@id/imgProduto11"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="PlayStation 5 Slim Edição Digital"
@@ -62,10 +65,10 @@
                     android:ellipsize="end" />
 
                 <TextView
-                    android:id="@+id/tvPrecoAtual1"
+                    android:id="@+id/tvPrecoAtual11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvNomeProduto1"
+                    android:layout_below="@id/tvNomeProduto11"
                     android:layout_marginTop="4dp"
                     android:gravity="center"
                     android:text="R$ 3.999,99"
@@ -73,10 +76,10 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvMediaNota1"
+                    android:id="@+id/tvMediaNota11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvPrecoAtual1"
+                    android:layout_below="@id/tvPrecoAtual11"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="6dp"
                     android:text="★ 4,5"
@@ -87,12 +90,15 @@
 
         <!-- Card 2 -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardProduto12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
             android:background="@android:color/white"
-            android:elevation="4dp">
+            android:elevation="4dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -101,7 +107,7 @@
                 android:background="@color/white">
 
                 <ImageView
-                    android:id="@+id/btnFavoritar2"
+                    android:id="@+id/btnFavoritar12"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
@@ -112,7 +118,7 @@
                     app:tint="@color/black" />
 
                 <ImageView
-                    android:id="@+id/imgProduto2"
+                    android:id="@+id/imgProduto12"
                     android:layout_width="160dp"
                     android:layout_height="160dp"
                     android:layout_centerHorizontal="true"
@@ -122,10 +128,10 @@
                     android:src="@drawable/produto_watch6_classic" />
 
                 <TextView
-                    android:id="@+id/tvNomeProduto2"
+                    android:id="@+id/tvNomeProduto12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/imgProduto2"
+                    android:layout_below="@id/imgProduto12"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="Samsung Galaxy Watch6 Classic"
@@ -136,10 +142,10 @@
                     android:ellipsize="end" />
 
                 <TextView
-                    android:id="@+id/tvPrecoAtual2"
+                    android:id="@+id/tvPrecoAtual12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvNomeProduto2"
+                    android:layout_below="@id/tvNomeProduto12"
                     android:layout_marginTop="4dp"
                     android:gravity="center"
                     android:text="R$ 1.399,90"
@@ -147,10 +153,10 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvMediaNota2"
+                    android:id="@+id/tvMediaNota12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvPrecoAtual2"
+                    android:layout_below="@id/tvPrecoAtual12"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="6dp"
                     android:text="★ 4,8"
@@ -161,12 +167,15 @@
 
         <!-- Card 3 -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardProduto3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
             android:background="@android:color/white"
-            android:elevation="4dp">
+            android:elevation="4dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -235,12 +244,15 @@
 
         <!-- Card 4 -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardProduto4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
             android:background="@android:color/white"
-            android:elevation="4dp">
+            android:elevation="4dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -307,15 +319,5 @@
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Card 5 -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
-            android:background="@android:color/white"
-            android:elevation="4dp">
-
-        </androidx.cardview.widget.CardView>
     </LinearLayout>
 </ScrollView>

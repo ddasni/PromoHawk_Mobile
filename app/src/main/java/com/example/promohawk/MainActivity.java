@@ -28,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (token != null && !token.isEmpty()) {
                 // Token existe, pode ir direto pra tela principal (Config, Home etc)
-                startActivity(new Intent(MainActivity.this, Config.class));
+                startActivity(new Intent(MainActivity.this, Login.class));
             } else {
                 // Não tem token, vai para login
-                startActivity(new Intent(MainActivity.this, Config.class));
+                startActivity(new Intent(MainActivity.this, Login.class));
             }
             finish();
 

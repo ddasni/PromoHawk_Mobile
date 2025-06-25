@@ -1,76 +1,89 @@
 package com.example.promohawk;
 
 import android.content.SharedPreferences;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.promohawk.api.ApiService;
-import com.example.promohawk.api.RetrofitClient;
-
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.Iterator;
 
 public class Favoritos extends AppCompatActivity {
 
-    private RecyclerView rvFavoritos;
-    private FavoritosAdapter adapter;
-    private ArrayList<Produto_Favorito> listaFavoritos;
-    private ImageView botaoVoltar; // Adicionado
+    private RecyclerView recyclerFavoritos;
+    private FavoritoAdapter adapter;
+    private ArrayList<ProdutoLocal> todosProdutos;
+    private ArrayList<ProdutoLocal> produtosFavoritos;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoritos);
 
-        // Inicializa as views
-        rvFavoritos = findViewById(R.id.recyclerViewFavoritos);
-        botaoVoltar = findViewById(R.id.botaoVoltarFavoritos); // Adicionado
+        prefs = getSharedPreferences("favoritos_prefs", MODE_PRIVATE);
 
-        // Configura o RecyclerView
-        listaFavoritos = new ArrayList<>();
-        adapter = new FavoritosAdapter(listaFavoritos);
-        rvFavoritos.setLayoutManager(new LinearLayoutManager(this));
-        rvFavoritos.setAdapter(adapter);
+        recyclerFavoritos = findViewById(R.id.recyclerViewFavoritos);
+        recyclerFavoritos.setLayoutManager(new LinearLayoutManager(this));
 
-        // Configura o botão de voltar
-        botaoVoltar.setOnClickListener(v -> {
-            Intent intent = new Intent(Favoritos.this, Config.class); // Ou para a Activity apropriada
-            startActivity(intent);
-            finish();
-        });
+        todosProdutos = new ArrayList<>();
+        todosProdutos.add(new ProdutoLocal(11, "PlayStation 5 Slim Edição Digital", "R$ 3.999,99", "★ 4,5", false, R.drawable.playstation_5));
+        todosProdutos.add(new ProdutoLocal(12, "Samsung Galaxy Watch6 Classic", "R$ 1.399,90", "★ 4,8", false, R.drawable.produto_watch6_classic));
+        // adicione mais produtos se quiser
 
         carregarFavoritos();
+
+        adapter = new FavoritoAdapter(this, produtosFavoritos, this::atualizarFavoritos);
+        recyclerFavoritos.setAdapter(adapter);
+
+        mostrarMensagemVazio();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregarFavoritos();
+        adapter.notifyDataSetChanged();
+        mostrarMensagemVazio();
     }
 
     private void carregarFavoritos() {
-        ApiService apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
-        SharedPreferences prefs = getSharedPreferences("usuario_prefs", MODE_PRIVATE);
-        String token = prefs.getString("token", null);
+        produtosFavoritos = new ArrayList<>();
+        for (ProdutoLocal p : todosProdutos) {
+            boolean fav = prefs.getBoolean("favorito_" + p.id, false);
+            if (fav) {
+                p.favorito = true;
+                produtosFavoritos.add(p);
+            }
+        }
+    }
 
-        Call<List<Produto_Favorito>> call = apiService.getFavoritos(token);
-        call.enqueue(new Callback<List<Produto_Favorito>>() {
-            @Override
-            public void onResponse(Call<List<Produto_Favorito>> call, Response<List<Produto_Favorito>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    listaFavoritos.clear();
-                    listaFavoritos.addAll(response.body());
-                    adapter.notifyDataSetChanged();
+    private void mostrarMensagemVazio() {
+        View vazio = findViewById(R.id.emptyFavoritos);
+        if (produtosFavoritos.isEmpty()) {
+            vazio.setVisibility(View.VISIBLE);
+            recyclerFavoritos.setVisibility(View.GONE);
+        } else {
+            vazio.setVisibility(View.GONE);
+            recyclerFavoritos.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void atualizarFavoritos(ProdutoLocal produto) {
+        if (!produto.favorito) {
+            Iterator<ProdutoLocal> it = produtosFavoritos.iterator();
+            while (it.hasNext()) {
+                ProdutoLocal p = it.next();
+                if (p.id == produto.id) {
+                    it.remove();
+                    break;
                 }
             }
-
-            @Override
-            public void onFailure(Call<List<Produto_Favorito>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+            adapter.notifyDataSetChanged();
+            mostrarMensagemVazio();
+        }
     }
 }

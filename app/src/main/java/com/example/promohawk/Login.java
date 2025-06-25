@@ -47,7 +47,7 @@ public class Login extends AppCompatActivity {
 
         if (manterConectado && token != null && !token.isEmpty()) {
             // Usuário quer manter conectado e tem token salvo, vai direto para a tela principal
-            Intent intent = new Intent(Login.this, Config.class);
+            Intent intent = new Intent(Login.this, Home.class);
             startActivity(intent);
             finish();
             return; // Evita continuar carregando tela de login

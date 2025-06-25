@@ -7,6 +7,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.PUT;
@@ -59,7 +60,16 @@ public interface ApiService {
     // ==== Histórico ====
     @GET("compra")
     Call<List<Compra>> getHistoricoCompras();
-        @GET("user-favoritos")
-        Call<List<Produto_Favorito>> getFavoritos(@Header("Authorization") String token);
+
+
+    @GET("user-favoritos")
+    Call<List<Produto_Favorito>> getFavoritos(@Header("Authorization") String token);
+
+    @POST("favorito")
+    Call<Void> adicionarAosFavoritos(@Header("Authorization") String token, @Body FavoritoRequest favoritoRequest);
+
+    @DELETE("favorito/{id}")
+    Call<Void> removerDosFavoritos(@Header("Authorization") String token, @Path("id") int favoritoId);
+
 
 }

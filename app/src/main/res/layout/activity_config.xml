@@ -112,40 +112,6 @@
                         android:src="@drawable/ic_direira_pra_la" />
                 </LinearLayout>
 
-                <!-- Botão Histórico -->
-                <LinearLayout
-                    android:id="@+id/btnHistorico"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="20dp"
-                    android:background="@drawable/card_background"
-                    android:elevation="6dp"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_historico" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingStart="20dp"
-                        android:text="Histórico"
-                        android:textSize="18sp"
-                        android:textColor="#222222"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_direira_pra_la" />
-                </LinearLayout>
 
                 <!-- Botão Suporte -->
                 <LinearLayout
