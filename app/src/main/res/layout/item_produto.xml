@@ -1,51 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="16dp"
-    android:background="@android:color/white"
-    android:elevation="4dp">
+    app:cardElevation="4dp"
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp">
 
-        <!-- Ícone de favoritar -->
+        <!-- Botão Favoritar -->
         <ImageView
             android:id="@+id/btnFavoritar"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
             android:src="@drawable/ic_favorite_border"
             android:contentDescription="@string/descricao_favoritar"
             app:tint="@color/black" />
 
-        <!-- Imagem do produto -->
+        <!-- Imagem do Produto -->
         <ImageView
             android:id="@+id/imgProduto"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:layout_marginTop="8dp"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             android:contentDescription="@string/descricao_imagem_produto" />
 
-        <!-- Nome do produto -->
+        <!-- Nome do Produto -->
         <TextView
             android:id="@+id/tvNomeProduto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/imgProduto"
             android:layout_marginTop="8dp"
-            android:gravity="center"
             android:text="Nome do Produto"
-            android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
+            android:textColor="#000000"
+            android:gravity="center"
             android:maxLines="2"
             android:ellipsize="end" />
 
@@ -56,21 +55,22 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvNomeProduto"
             android:layout_marginTop="4dp"
-            android:gravity="center"
             android:text="R$ 0,00"
+            android:textSize="14sp"
             android:textColor="#444444"
-            android:textSize="14sp" />
+            android:gravity="center" />
 
-        <!-- Média da nota -->
+        <!-- Média da Nota -->
         <TextView
             android:id="@+id/tvMediaNota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvPrecoAtual"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:text="★ 4,5"
             android:textColor="#FFA000"
             android:textSize="14sp" />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
