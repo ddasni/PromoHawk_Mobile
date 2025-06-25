@@ -12,11 +12,11 @@
         android:title="Cupons"
         android:icon="@drawable/ic_cupom" />
     <item
-        android:id="@+id/nav_config"
-        android:title="Config"
-        android:icon="@drawable/ic_config" />
-    <item
         android:id="@+id/nav_lojas"
         android:title="Lojas"
         android:icon="@drawable/ic_store" />
+    <item
+        android:id="@+id/nav_config"
+        android:title="Config"
+        android:icon="@drawable/ic_config" />
 </menu>

@@ -1,4 +1,3 @@
-// === ApiService.java (completo e atualizado) ===
 package com.example.promohawk.api;
 
 import com.example.promohawk.Produto_Favorito;
@@ -35,26 +34,26 @@ public interface ApiService {
 
     // ==== Produtos ====
     @GET("produto")
-    Call<ProdutoListResponse> getProduto();
+    Call<ProdutoListResponse> listarProdutos(); // Renomeado para evitar duplicação
 
     @GET("produto/{id}")
-    Call<Produto> getProduto(@Path("id") int id);
+    Call<Produto> buscarProdutoPorId(@Path("id") int id);
 
 
     // ==== Cupons ====
     @GET("cupom")
-    Call<CupomListResponse> getCupom();
+    Call<CupomListResponse> listarCupons();
 
     @GET("cupom/{id}")
-    Call<CupomResponse> getCupom(@Path("id") int id); // ✅ Novo método
+    Call<CupomResponse> buscarCupomPorId(@Path("id") int id);
 
 
     // ==== Categorias ====
     @GET("categoria")
-    Call<CategoriaListResponse> getCategoria();
+    Call<CategoriaListResponse> listarCategorias();
 
     @GET("categoria/{id}")
-    Call<CategoriaResponse> getCategoria(@Path("id") int id); // ✅ Novo método
+    Call<CategoriaResponse> buscarCategoriaPorId(@Path("id") int id);
 
 
     // ==== Histórico ====

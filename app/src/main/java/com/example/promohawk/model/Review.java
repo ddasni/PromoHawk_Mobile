@@ -6,15 +6,15 @@ public class Review {
     private int id;
 
     @SerializedName("usuario")
-    private String nomeUsuario;
+    private Usuario usuario;
 
-    @SerializedName("comentario")
+    @SerializedName("comentario_produto")
     private String comentario;
 
-    @SerializedName("nota")
+    @SerializedName("avaliacao_produto")
     private float nota;
 
-    @SerializedName("data")
+    @SerializedName("created_at")
     private String data;
 
     // Getters
@@ -22,8 +22,8 @@ public class Review {
         return id;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public String getComentario() {
@@ -44,7 +44,7 @@ public class Review {
     }
 
     public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+        this.usuario = usuario;
     }
 
     public void setComentario(String comentario) {

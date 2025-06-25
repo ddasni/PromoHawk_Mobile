@@ -42,8 +42,8 @@
                     android:text="Categorias em destaque"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:layout_marginEnd="8dp"
-                    android:textColor="#D8D8D8"/>
+                    android:textColor="#D8D8D8"
+                    android:layout_marginEnd="8dp"/>
 
                 <TextView
                     android:id="@+id/verMaisCategorias"
@@ -57,9 +57,9 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:importantForAccessibility="noHideDescendants"
                 android:overScrollMode="never"
-                android:scrollbars="none">
+                android:scrollbars="none"
+                android:contentDescription="Lista horizontal de categorias em destaque">
 
                 <LinearLayout
                     android:id="@+id/linearLayoutCategorias"
@@ -85,8 +85,8 @@
                     android:text="Produtos em Destaque"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:layout_marginEnd="8dp"
-                    android:textColor="#D8D8D8"/>
+                    android:textColor="#D8D8D8"
+                    android:layout_marginEnd="8dp"/>
 
                 <TextView
                     android:id="@+id/verMaisProdutos"
@@ -140,8 +140,8 @@
                     android:text="Cupons em Destaque"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:layout_marginEnd="8dp"
-                    android:textColor="#D8D8D8"/>
+                    android:textColor="#D8D8D8"
+                    android:layout_marginEnd="8dp"/>
 
                 <TextView
                     android:id="@+id/verMaisCupons"
@@ -176,7 +176,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:scrollbars="none" />
         </LinearLayout>
     </ScrollView>
 
