@@ -48,7 +48,7 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
 
         if (produto.getPrecos() != null && !produto.getPrecos().isEmpty()) {
             Preco preco = produto.getPrecos().get(0);
-            holder.tvPrecoAtual.setText(String.format("R$ %.2f", preco.getPreco()));
+            holder.tvPrecoAtual.setText("R$ " + produto.getPreco());
         } else {
             holder.tvPrecoAtual.setText("Preço indisponível");
         }
