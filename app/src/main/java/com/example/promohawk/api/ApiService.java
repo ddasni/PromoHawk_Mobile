@@ -37,7 +37,7 @@ public interface ApiService {
     Call<ProdutoListResponse> listarProdutos(); // Renomeado para evitar duplicação
 
     @GET("produto/{id}")
-    Call<Produto> buscarProdutoPorId(@Path("id") int id);
+    Call<ProdutoUnicoResponse> buscarProdutoPorId(@Path("id") int id);
 
 
     // ==== Cupons ====
