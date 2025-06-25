@@ -79,6 +79,7 @@
         <activity
             android:name=".Home"
             android:exported="false" />
+        <activity android:name=".ProdutoDetalheActivity" />
         <activity
             android:name=".Cadastro"
             android:exported="false" />
