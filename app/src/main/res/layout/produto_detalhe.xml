@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:fillViewport="true"
-    tools:context=".ProdutoDetalheActivity">
+    android:padding="16dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <!-- Botão de voltar -->
+        <ImageView
+            android:id="@+id/btnVoltar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Voltar" />
 
         <!-- Imagens do produto -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerImagemProduto"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:layout_alignParentTop="true"
-            android:clipToPadding="false"
-            android:paddingHorizontal="16dp"
-            android:contentDescription="@string/descricao_slider_produto" />
+            android:layout_below="@id/btnVoltar"
+            android:layout_marginTop="8dp" />
 
         <!-- Botão de favoritar -->
         <ImageView
@@ -40,8 +47,8 @@
             android:layout_below="@id/viewPagerImagemProduto"
             android:layout_marginTop="12dp"
             android:text="Nome do Produto"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@android:color/black"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <!-- Preço atual -->
@@ -110,6 +117,7 @@
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
+        <!-- Reviews -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewReviews"
             android:layout_width="match_parent"

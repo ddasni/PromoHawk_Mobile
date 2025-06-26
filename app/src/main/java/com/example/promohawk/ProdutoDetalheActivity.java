@@ -21,7 +21,6 @@ import com.example.promohawk.api.ApiService;
 import com.example.promohawk.api.RetrofitClient;
 import com.example.promohawk.model.Preco;
 import com.example.promohawk.model.Produto;
-import com.example.promohawk.model.ProdutoResponse;
 import com.example.promohawk.model.ProdutoUnicoResponse;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -40,7 +39,7 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
 
     private ViewPager2 viewPager;
     private TextView textNome, textPreco, textMelhorPreco, textQtdAvaliacoes;
-    private ImageView imgFavorito;
+    private ImageView imgFavorito, btnVoltar;
     private Button btnIrLoja;
     private LineChart graficoPreco;
     private RatingBar ratingBar;
@@ -61,6 +60,7 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         textMelhorPreco = findViewById(R.id.textMelhorPreco);
         textQtdAvaliacoes = findViewById(R.id.textQtdAvaliacoes);
         imgFavorito = findViewById(R.id.imgFavorito);
+        btnVoltar = findViewById(R.id.btnVoltar); // botão de voltar
         ratingBar = findViewById(R.id.ratingBar);
         btnIrLoja = findViewById(R.id.btnIrLoja);
         graficoPreco = findViewById(R.id.graficoPreco);
@@ -70,10 +70,10 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
 
         imgFavorito.setOnClickListener(v -> {
             favorito = !favorito;
-            imgFavorito.setImageResource(favorito ?
-                    R.drawable.ic_favorite_filled :
-                    R.drawable.ic_favorite_border);
+            imgFavorito.setImageResource(favorito ? R.drawable.ic_favorite_filled : R.drawable.ic_favorite_border);
         });
+
+        btnVoltar.setOnClickListener(v -> finish());
 
         String idProdutoStr = getIntent().getStringExtra("idProduto");
         if (idProdutoStr != null) {
@@ -90,10 +90,8 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         apiService.buscarProdutoPorId(idProduto).enqueue(new Callback<ProdutoUnicoResponse>() {
             @Override
             public void onResponse(Call<ProdutoUnicoResponse> call, Response<ProdutoUnicoResponse> response) {
-                Log.d("ProdutoDetalhe", "Código da resposta: " + response.code());
                 if (response.isSuccessful() && response.body() != null && response.body().getProduto() != null) {
                     Produto produto = response.body().getProduto();
-                    Log.d("ProdutoDetalhe", "Produto: " + produto.getNome());
                     atualizarUI(produto);
                 } else {
                     Toast.makeText(ProdutoDetalheActivity.this, "Produto não encontrado", Toast.LENGTH_SHORT).show();
@@ -123,55 +121,50 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         textQtdAvaliacoes.setText(String.format("(%.1f estrelas)", produto.getAvaliacao()));
 
         if (produto.getImagens() != null && !produto.getImagens().isEmpty()) {
-            // Configuração otimizada do ViewPager2
-            viewPager.setOffscreenPageLimit(1); // Reduz o consumo de memória
+            viewPager.setOffscreenPageLimit(1);
             viewPager.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
-
             ImagemAdapter adapter = new ImagemAdapter(produto.getImagens());
             viewPager.setAdapter(adapter);
-
-            // Adiciona margem interna para os indicadores (opcional)
             int paddingPx = (int) (16 * getResources().getDisplayMetrics().density);
             viewPager.setPadding(paddingPx, 0, paddingPx, 0);
             viewPager.setClipToPadding(false);
         } else {
-            // Caso não haja imagens, exibe uma imagem padrão
             viewPager.setAdapter(new ImagemAdapter(Collections.singletonList("URL_IMAGEM_PADRAO")));
         }
 
-        // grafico com o historico de preços
         if (produto.getHistoricoPrecos() != null && !produto.getHistoricoPrecos().isEmpty()) {
             List<Entry> entries = new ArrayList<>();
-
             for (int i = 0; i < produto.getHistoricoPrecos().size(); i++) {
-                float preco = produto.getHistoricoPrecos().get(i);
-                entries.add(new Entry(i, preco));
+                entries.add(new Entry(i, produto.getHistoricoPrecos().get(i)));
             }
 
             LineDataSet dataSet = new LineDataSet(entries, "Histórico de Preço (R$)");
-            dataSet.setColor(Color.parseColor("#1E88E5")); // Azul
+            dataSet.setColor(Color.parseColor("#1E88E5"));
             dataSet.setValueTextColor(Color.BLACK);
             dataSet.setLineWidth(2f);
             dataSet.setCircleRadius(4f);
             dataSet.setDrawFilled(true);
-            dataSet.setFillColor(Color.parseColor("#BBDEFB")); // azul claro
-            dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER); // Curvas suaves
-
-            LineData lineData = new LineData(dataSet);
-
-            graficoPreco.setData(lineData);
-            graficoPreco.getDescription().setEnabled(false); // remove legenda de descrição
-            graficoPreco.getAxisRight().setEnabled(false); // remove eixo direito
+            dataSet.setFillColor(Color.parseColor("#BBDEFB"));
+            dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+            graficoPreco.setData(new LineData(dataSet));
+            graficoPreco.getDescription().setEnabled(false);
+            graficoPreco.getAxisRight().setEnabled(false);
             graficoPreco.getXAxis().setDrawGridLines(false);
             graficoPreco.getAxisLeft().setDrawGridLines(false);
-            graficoPreco.invalidate(); // renderiza o gráfico
+            graficoPreco.invalidate();
         }
 
-        // Reviews
         if (produto.getReviews() != null && !produto.getReviews().isEmpty()) {
             recyclerViewReviews.setLayoutManager(new LinearLayoutManager(this));
             reviewAdapter = new ReviewAdapter(produto.getReviews());
             recyclerViewReviews.setAdapter(reviewAdapter);
+        }
+
+        if (produto.getUrlLoja() != null && !produto.getUrlLoja().isEmpty()) {
+            btnIrLoja.setOnClickListener(v -> {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(produto.getUrlLoja()));
+                startActivity(intent);
+            });
         }
     }
 }

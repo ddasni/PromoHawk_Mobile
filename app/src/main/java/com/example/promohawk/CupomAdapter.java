@@ -23,10 +23,13 @@ public class CupomAdapter extends RecyclerView.Adapter<CupomAdapter.CupomViewHol
     private final Context context;
     private final List<Cupom> listaCupons;
 
-    public CupomAdapter(Context context, List<Cupom> listaCupons) {
+    public CupomAdapter(Context context, List<Cupom> listaCupons, boolean limitarSeis) {
         this.context = context;
-        // Exibe no máximo 6 cupons
-        this.listaCupons = listaCupons.size() > 6 ? listaCupons.subList(0, 6) : listaCupons;
+        this.listaCupons = limitarSeis && listaCupons.size() > 6 ? listaCupons.subList(0, 6) : listaCupons;
+    }
+
+    public CupomAdapter(Context context, List<Cupom> listaCupons) {
+        this(context, listaCupons, false);
     }
 
     @NonNull
@@ -43,19 +46,16 @@ public class CupomAdapter extends RecyclerView.Adapter<CupomAdapter.CupomViewHol
         holder.tvData.setText(cupom.getData());
         holder.tvDesconto.setText(cupom.getDesconto());
         holder.tvDescricao.setText(cupom.getDescricao());
-        holder.tvCodigo.setText(cupom.getCodigo()); // Garante que sempre exista o texto no campo
+        holder.tvCodigo.setText(cupom.getCodigo());
 
-        // Resetar visibilidades para evitar reuso de view com estado errado
         holder.layoutCodigo.setVisibility(View.GONE);
         holder.tvVerCodigo.setVisibility(View.VISIBLE);
 
-        // Ver código
         holder.tvVerCodigo.setOnClickListener(v -> {
             holder.layoutCodigo.setVisibility(View.VISIBLE);
             holder.tvVerCodigo.setVisibility(View.GONE);
         });
 
-        // Botão copiar
         holder.btnCopiar.setOnClickListener(v -> {
             ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("Cupom", cupom.getCodigo());
