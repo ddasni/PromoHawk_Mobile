@@ -167,7 +167,7 @@
 
         <!-- Card 3 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardProduto3"
+            android:id="@+id/cardProduto13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -184,7 +184,7 @@
                 android:background="@color/white">
 
                 <ImageView
-                    android:id="@+id/btnFavoritar3"
+                    android:id="@+id/btnFavoritar13"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
@@ -195,7 +195,7 @@
                     app:tint="@color/black" />
 
                 <ImageView
-                    android:id="@+id/imgProduto3"
+                    android:id="@+id/imgProduto13"
                     android:layout_width="160dp"
                     android:layout_height="160dp"
                     android:layout_centerHorizontal="true"
@@ -205,10 +205,10 @@
                     android:src="@drawable/xbox_series_x" />
 
                 <TextView
-                    android:id="@+id/tvNomeProduto3"
+                    android:id="@+id/tvNomeProduto13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/imgProduto3"
+                    android:layout_below="@id/imgProduto13"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="Xbox Series X"
@@ -219,10 +219,10 @@
                     android:ellipsize="end" />
 
                 <TextView
-                    android:id="@+id/tvPrecoAtual3"
+                    android:id="@+id/tvPrecoAtual13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvNomeProduto3"
+                    android:layout_below="@id/tvNomeProduto13"
                     android:layout_marginTop="4dp"
                     android:gravity="center"
                     android:text="R$ 4.099,90"
@@ -230,10 +230,10 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvMediaNota3"
+                    android:id="@+id/tvMediaNota13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvPrecoAtual3"
+                    android:layout_below="@id/tvPrecoAtual13"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="6dp"
                     android:text="★ 4,7"
@@ -244,7 +244,7 @@
 
         <!-- Card 4 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardProduto4"
+            android:id="@+id/cardProduto14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -261,7 +261,7 @@
                 android:background="@color/white">
 
                 <ImageView
-                    android:id="@+id/btnFavoritar4"
+                    android:id="@+id/btnFavoritar14"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
@@ -272,7 +272,7 @@
                     app:tint="@color/black" />
 
                 <ImageView
-                    android:id="@+id/imgProduto4"
+                    android:id="@+id/imgProduto14"
                     android:layout_width="160dp"
                     android:layout_height="160dp"
                     android:layout_centerHorizontal="true"
@@ -282,10 +282,10 @@
                     android:src="@drawable/produto_asus_rog" />
 
                 <TextView
-                    android:id="@+id/tvNomeProduto4"
+                    android:id="@+id/tvNomeProduto14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/imgProduto4"
+                    android:layout_below="@id/imgProduto14"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="ASUS ROG Zephyrus G16"
@@ -296,10 +296,10 @@
                     android:ellipsize="end" />
 
                 <TextView
-                    android:id="@+id/tvPrecoAtual4"
+                    android:id="@+id/tvPrecoAtual14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvNomeProduto4"
+                    android:layout_below="@id/tvNomeProduto14"
                     android:layout_marginTop="4dp"
                     android:gravity="center"
                     android:text="R$ 15.342,10"
@@ -307,10 +307,10 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvMediaNota4"
+                    android:id="@+id/tvMediaNota14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvPrecoAtual4"
+                    android:layout_below="@id/tvPrecoAtual14"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="6dp"
                     android:text="★ 4,9"

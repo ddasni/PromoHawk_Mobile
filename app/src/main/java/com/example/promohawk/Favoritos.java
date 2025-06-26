@@ -19,6 +19,7 @@ public class Favoritos extends AppCompatActivity {
     private ArrayList<ProdutoLocal> produtosFavoritos;
     private SharedPreferences prefs;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +30,15 @@ public class Favoritos extends AppCompatActivity {
         recyclerFavoritos = findViewById(R.id.recyclerViewFavoritos);
         recyclerFavoritos.setLayoutManager(new LinearLayoutManager(this));
 
+        // ← Aqui adiciona o clique na seta de voltar
+        findViewById(R.id.botaoVoltarFavoritos).setOnClickListener(v -> finish());
+
         todosProdutos = new ArrayList<>();
         todosProdutos.add(new ProdutoLocal(11, "PlayStation 5 Slim Edição Digital", "R$ 3.999,99", "★ 4,5", false, R.drawable.playstation_5));
         todosProdutos.add(new ProdutoLocal(12, "Samsung Galaxy Watch6 Classic", "R$ 1.399,90", "★ 4,8", false, R.drawable.produto_watch6_classic));
-        // adicione mais produtos se quiser
+        todosProdutos.add(new ProdutoLocal(13, "Xbox Series X", "R$ 4.099,90", "★ 4,7", false, R.drawable.xbox_series_x));
+        todosProdutos.add(new ProdutoLocal(14, "ASUS ROG Zephyrus G16", "R$ 15.342,10", "★ 4,9", false, R.drawable.produto_asus_rog));
+
 
         carregarFavoritos();
 
@@ -41,6 +47,7 @@ public class Favoritos extends AppCompatActivity {
 
         mostrarMensagemVazio();
     }
+
 
     @Override
     protected void onResume() {
