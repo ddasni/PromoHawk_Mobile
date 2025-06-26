@@ -14,13 +14,16 @@ import com.bumptech.glide.Glide;
 import com.example.promohawk.model.Preco;
 import com.example.promohawk.model.Produto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoViewHolder> {
 
     private final Context context;
-    private final List<Produto> listaProdutos;
     private final ProdutoClickListener listener;
+
+    private final List<Produto> listaOriginal;
+    private final List<Produto> listaProdutos;
 
     public interface ProdutoClickListener {
         void onProdutoClick(Produto produto);
@@ -28,8 +31,9 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
 
     public ProdutoAdapter(Context context, List<Produto> produtos, ProdutoClickListener listener) {
         this.context = context;
-        this.listaProdutos = produtos; // <<< REMOVIDO O LIMITE DE 6
         this.listener = listener;
+        this.listaOriginal = new ArrayList<>(produtos);
+        this.listaProdutos = new ArrayList<>(produtos);
     }
 
     @NonNull
@@ -48,14 +52,7 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
 
         if (produto.getPrecos() != null && !produto.getPrecos().isEmpty()) {
             Preco preco = produto.getPrecos().get(0);
-
-            try {
-                float valor = Float.parseFloat(preco.getPreco());
-                holder.tvPrecoAtual.setText(String.format("R$ %.2f", valor));
-            } catch (Exception e) {
-                holder.tvPrecoAtual.setText("Preço inválido");
-            }
-
+            holder.tvPrecoAtual.setText("R$ " + preco.getPreco());
         } else {
             holder.tvPrecoAtual.setText("Preço indisponível");
         }
@@ -71,6 +68,21 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
     @Override
     public int getItemCount() {
         return listaProdutos.size();
+    }
+
+    public void filtrarPorNome(String texto) {
+        listaProdutos.clear();
+        if (texto == null || texto.trim().isEmpty()) {
+            listaProdutos.addAll(listaOriginal);
+        } else {
+            String query = texto.toLowerCase();
+            for (Produto produto : listaOriginal) {
+                if (produto.getNome().toLowerCase().contains(query)) {
+                    listaProdutos.add(produto);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     public static class ProdutoViewHolder extends RecyclerView.ViewHolder {

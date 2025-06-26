@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,26 +6,25 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- Título da tela -->
-    <TextView
-        android:id="@+id/tituloProdutos"
+    <!-- Toolbar com SearchView -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarProdutos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Produtos"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:paddingVertical="16dp"
-        android:textColor="#000000" />
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Produtos"
+        app:titleTextColor="@android:color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <!-- Lista de produtos -->
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProdutos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
-        android:padding="8dp"
+        android:paddingBottom="8dp"
         android:scrollbars="vertical"
         android:contentDescription="Lista de produtos disponíveis"/>
 
