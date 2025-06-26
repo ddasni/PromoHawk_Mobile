@@ -46,13 +46,14 @@ public class Home extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private Context context = this;
 
+    private TextView verMaisCategorias, verMaisProdutos, verMaisCupons;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         apiService = RetrofitClient.getPromoHawkInstance().create(ApiService.class);
-
         linearLayoutCategorias = findViewById(R.id.linearLayoutCategorias);
         recyclerViewProdutos = findViewById(R.id.recyclerViewProdutos);
         recyclerViewCupons = findViewById(R.id.recyclerViewCupons);
@@ -62,7 +63,12 @@ public class Home extends AppCompatActivity {
         progressBarCupons = findViewById(R.id.progressBarCupons);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        verMaisCategorias = findViewById(R.id.verMaisCategorias);
+        verMaisProdutos = findViewById(R.id.verMaisProdutos);
+        verMaisCupons = findViewById(R.id.verMaisCupons);
+
         configurarBottomNavigation();
+        configurarVerMais();
         carregarSlider();
         carregarCategorias();
         carregarProdutos();
@@ -84,12 +90,28 @@ public class Home extends AppCompatActivity {
         });
     }
 
+    private void configurarVerMais() {
+        verMaisCategorias.setOnClickListener(v -> {
+            startActivity(new Intent(context, TodasCategoriasActivity.class));
+        });
+
+        verMaisProdutos.setOnClickListener(v -> {
+            startActivity(new Intent(context, ProdutosActivity.class));
+        });
+
+        verMaisCupons.setOnClickListener(v -> {
+            startActivity(new Intent(context, CuponsActivity.class));
+        });
+    }
+
     private void carregarSlider() {
         ImageSlider slider = findViewById(R.id.slider);
         List<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel("https://link-imagem-1.png", ScaleTypes.FIT));
-        slideModels.add(new SlideModel("https://link-imagem-2.png", ScaleTypes.FIT));
-        slideModels.add(new SlideModel("https://link-imagem-3.png", ScaleTypes.FIT));
+
+        slideModels.add(new SlideModel(R.drawable.img1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.img3, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.img2, ScaleTypes.FIT));
+
         slider.setImageList(slideModels, ScaleTypes.FIT);
     }
 
@@ -113,7 +135,6 @@ public class Home extends AppCompatActivity {
                         Glide.with(context)
                                 .load(categoria.getImagem())
                                 .placeholder(R.drawable.placeholder)
-                                .circleCrop() // borda redonda
                                 .into(imagem);
 
                         view.setOnClickListener(v -> {
@@ -178,7 +199,7 @@ public class Home extends AppCompatActivity {
                         txtCuponsVazio.setVisibility(View.VISIBLE);
                     } else {
                         txtCuponsVazio.setVisibility(View.GONE);
-                        cupomAdapter = new CupomAdapter(context, lista.subList(0, Math.min(6, lista.size())));
+                        cupomAdapter = new CupomAdapter(context, lista, true);
                         recyclerViewCupons.setLayoutManager(new GridLayoutManager(context, 2));
                         recyclerViewCupons.setAdapter(cupomAdapter);
                     }

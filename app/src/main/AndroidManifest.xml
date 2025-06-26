@@ -17,90 +17,61 @@
         <activity
             android:name=".seg_priv"
             android:exported="false" />
-        <activity
-            android:name=".samsung"
-            android:exported="false" />
-        <activity
-            android:name=".Sony"
-            android:exported="false" />
+
+        <!-- Telas principais e seções -->
+        <activity android:name=".Home" android:exported="false" />
         <activity android:name=".ProdutosActivity" />
-        <activity
-            android:name=".LG"
-            android:exported="false" />
-        <activity
-            android:name=".Submarino"
-            android:exported="false" />
-        <activity
-            android:name=".AppleStore"
-            android:exported="false" />
-        <activity
-            android:name=".GoPro"
-            android:exported="false" />
-        <activity
-            android:name=".DolceGusto"
-            android:exported="false" />
-        <activity
-            android:name=".Nike"
-            android:exported="false" />
-        <activity
-            android:name=".Kz"
-            android:exported="false" />
-        <activity
-            android:name=".Lojas"
-            android:exported="false" />
-        <activity android:name=".Centauro" />
+        <activity android:name=".CuponsActivity" />
+        <activity android:name=".ProdutoDetalheActivity" />
+        <activity android:name=".TodasCategoriasActivity" /> <!-- ✅ Adicionado aqui -->
+        <activity android:name=".ProdutosPorCategoriaActivity" />
+
+        <!-- Configurações e extras -->
+        <activity android:name=".Config" android:exported="false" />
+        <activity android:name=".Favoritos" android:exported="false" />
+        <activity android:name=".Config_interna" android:exported="false" />
+        <activity android:name=".Historico" android:exported="false" />
+        <activity android:name=".Suporte" android:exported="false" />
+
+        <!-- Cadastro e login -->
+        <activity android:name=".Cadastro" android:exported="false" />
+        <activity android:name=".Login" android:exported="false" />
+        <activity android:name=".RecuperarSenha" android:exported="false" />
+
+        <!-- Produtos por loja -->
         <activity android:name=".Amazon" />
         <activity android:name=".Kabum" />
-        <activity android:name=".Mercado_Livre" />
         <activity android:name=".Magazine" />
+        <activity android:name=".Mercado_Livre" />
         <activity android:name=".Pichau" />
-        <activity android:name=".ProdutosDestaque" />
-        <activity
-            android:name=".item_produto"
-            android:exported="false" />
-        <activity
-            android:name=".item_favorito"
-            android:exported="false" />
-        <activity
-            android:name=".Suporte"
-            android:exported="false" />
-        <activity
-            android:name=".Historico"
-            android:exported="false" />
-        <activity
-            android:name=".Config_interna"
-            android:exported="false" />
-        <activity
-            android:name=".Favoritos"
-            android:exported="false" />
-        <activity
-            android:name=".Config"
-            android:exported="false" />
-        <activity
-            android:name=".RecuperarSenha"
-            android:exported="false" />
-        <activity
-            android:name=".Home"
-            android:exported="false" />
-        <activity android:name=".ProdutoDetalheActivity" />
-        <activity
-            android:name=".Cadastro"
-            android:exported="false" />
-        <activity
-            android:name=".Login"
-            android:exported="false" />
+        <activity android:name=".Centauro" />
+        <activity android:name=".AppleStore" android:exported="false" />
+        <activity android:name=".Nike" android:exported="false" />
+        <activity android:name=".Sony" android:exported="false" />
+        <activity android:name=".LG" android:exported="false" />
+        <activity android:name=".Kz" android:exported="false" />
+        <activity android:name=".DolceGusto" android:exported="false" />
+        <activity android:name=".GoPro" android:exported="false" />
+        <activity android:name=".Submarino" android:exported="false" />
+        <activity android:name=".samsung" android:exported="false" />
+        <activity android:name=".Lojas" android:exported="false" />
+
+        <!-- Outros layouts vinculados -->
+        <activity android:name=".item_produto" android:exported="false" />
+        <activity android:name=".item_favorito" android:exported="false" />
+
+        <!-- UCrop -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+
+        <!-- Activity principal -->
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+    </application>
 </manifest>

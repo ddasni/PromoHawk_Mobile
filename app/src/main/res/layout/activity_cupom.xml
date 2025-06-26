@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
-    <ScrollView
+    <!-- Conteúdo Principal -->
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:paddingBottom="16dp">
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-        <LinearLayout
-            android:padding="16dp"
-            android:orientation="vertical"
+        <TextView
+            android:id="@+id/textTituloCupons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cupons Disponíveis"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/txtCuponsVazio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:text="Nenhum cupom disponível."
+            android:textColor="#888888"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp" />
 
-            <TextView
-                android:text="Cupons Disponíveis"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        <ProgressBar
+            android:id="@+id/progressBarCupons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp" />
 
-            <GridLayout
-                android:id="@+id/gridCupons"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:orientation="horizontal"
-                android:useDefaultMargins="true"
-                android:alignmentMode="alignMargins" />
-
-        </LinearLayout>
-    </ScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gridCupons"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:nestedScrollingEnabled="false"
+            android:scrollbars="none" />
+    </LinearLayout>
 
     <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -53,4 +61,4 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu"
         style="@style/BottomNavStyle" />
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

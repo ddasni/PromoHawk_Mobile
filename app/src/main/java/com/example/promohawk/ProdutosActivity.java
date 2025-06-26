@@ -3,11 +3,10 @@ package com.example.promohawk;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.promohawk.api.ApiService;
@@ -44,11 +43,10 @@ public class ProdutosActivity extends AppCompatActivity {
     }
 
     private void configurarBottomNavigation() {
-        bottomNavigationView.setSelectedItemId(R.id.nav_produtos); // Marcando produtos como selecionado
+        bottomNavigationView.setSelectedItemId(R.id.nav_produtos);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-            Context context = this;
 
             if (id == R.id.nav_home) {
                 startActivity(new Intent(context, Home.class));
@@ -56,7 +54,7 @@ public class ProdutosActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (id == R.id.nav_produtos) {
-                return true; // Já está na tela de produtos
+                return true;
             } else if (id == R.id.nav_cupons) {
                 startActivity(new Intent(context, CuponsActivity.class));
                 overridePendingTransition(0, 0);
@@ -78,9 +76,6 @@ public class ProdutosActivity extends AppCompatActivity {
         });
     }
 
-
-
-
     private void carregarProdutos() {
         apiService.listarProdutos().enqueue(new Callback<ProdutoListResponse>() {
             @Override
@@ -98,7 +93,8 @@ public class ProdutosActivity extends AppCompatActivity {
                         startActivity(intent);
                     });
 
-                    rvProdutos.setLayoutManager(new LinearLayoutManager(context));
+                    // ⬇️ Layout com 2 colunas
+                    rvProdutos.setLayoutManager(new GridLayoutManager(context, 2));
                     rvProdutos.setAdapter(produtoAdapter);
                 } else {
                     Toast.makeText(context, "Erro ao obter produtos", Toast.LENGTH_SHORT).show();

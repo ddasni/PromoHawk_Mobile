@@ -28,7 +28,7 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
 
     public ProdutoAdapter(Context context, List<Produto> produtos, ProdutoClickListener listener) {
         this.context = context;
-        this.listaProdutos = produtos.size() > 6 ? produtos.subList(0, 6) : produtos;
+        this.listaProdutos = produtos; // <<< REMOVIDO O LIMITE DE 6
         this.listener = listener;
     }
 
@@ -47,7 +47,15 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
         holder.tvMediaNota.setText("★ " + String.format("%.1f", produto.getAvaliacao()));
 
         if (produto.getPrecos() != null && !produto.getPrecos().isEmpty()) {
-            holder.tvPrecoAtual.setText("R$ " + produto.getPreco());
+            Preco preco = produto.getPrecos().get(0);
+
+            try {
+                float valor = Float.parseFloat(preco.getPreco());
+                holder.tvPrecoAtual.setText(String.format("R$ %.2f", valor));
+            } catch (Exception e) {
+                holder.tvPrecoAtual.setText("Preço inválido");
+            }
+
         } else {
             holder.tvPrecoAtual.setText("Preço indisponível");
         }
