@@ -113,7 +113,7 @@ public class Login extends AppCompatActivity {
 
                         Log.d("TOKEN_SALVO", "Token: " + login.getAccessToken());
 
-                        Intent intent = new Intent(Login.this, Config.class);
+                        Intent intent = new Intent(Login.this, Home.class);
                         startActivity(intent);
                         finish();
                     } else {
