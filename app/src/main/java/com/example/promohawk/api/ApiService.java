@@ -23,6 +23,10 @@ public interface ApiService {
     @POST("auth/login")
     Call<LoginResponse> login(@Body LoginRequest request);
 
+    @POST("auth/forgot-password")
+    Call<Void> esqueceuSenha(@Body EsqueceuSenhaRequest request);
+
+
     @PUT("perfil")
     Call<Void> atualizarPerfil(@Body PerfilRequest perfilRequest);
 
